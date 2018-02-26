@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		22AD9DF92044A08A00342A56 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22AD9DF82044A08A00342A56 /* main.cpp */; };
+		22AD9E012044A15800342A56 /* HelloWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22AD9DFF2044A15800342A56 /* HelloWorld.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		22AD9DF52044A08A00342A56 /* Cpp.TDD */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cpp.TDD; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AD9DF82044A08A00342A56 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		22AD9DFF2044A15800342A56 /* HelloWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelloWorld.cpp; sourceTree = "<group>"; };
+		22AD9E002044A15800342A56 /* HelloWorld.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HelloWorld.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				22AD9DF82044A08A00342A56 /* main.cpp */,
+				22AD9DFF2044A15800342A56 /* HelloWorld.cpp */,
+				22AD9E002044A15800342A56 /* HelloWorld.hpp */,
 			);
 			path = Cpp.TDD;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22AD9DF92044A08A00342A56 /* main.cpp in Sources */,
+				22AD9E012044A15800342A56 /* HelloWorld.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +224,7 @@
 		22AD9DFD2044A08A00342A56 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -225,6 +232,7 @@
 		22AD9DFE2044A08A00342A56 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
