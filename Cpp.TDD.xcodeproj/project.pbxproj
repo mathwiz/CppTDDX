@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2253E70B20458E1B00226385 /* FrameInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2253E70920458E1B00226385 /* FrameInput.cpp */; };
 		22AD9DF92044A08A00342A56 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22AD9DF82044A08A00342A56 /* main.cpp */; };
 		22AD9E012044A15800342A56 /* HelloWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22AD9DFF2044A15800342A56 /* HelloWorld.cpp */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2253E70920458E1B00226385 /* FrameInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FrameInput.cpp; path = Accelerated/FrameInput.cpp; sourceTree = "<group>"; };
+		2253E70A20458E1B00226385 /* FrameInput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = FrameInput.hpp; path = Accelerated/FrameInput.hpp; sourceTree = "<group>"; };
 		22AD9DF52044A08A00342A56 /* Cpp.TDD */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cpp.TDD; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AD9DF82044A08A00342A56 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		22AD9DFF2044A15800342A56 /* HelloWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelloWorld.cpp; sourceTree = "<group>"; };
@@ -63,6 +66,8 @@
 				22AD9DF82044A08A00342A56 /* main.cpp */,
 				22AD9DFF2044A15800342A56 /* HelloWorld.cpp */,
 				22AD9E002044A15800342A56 /* HelloWorld.hpp */,
+				2253E70920458E1B00226385 /* FrameInput.cpp */,
+				2253E70A20458E1B00226385 /* FrameInput.hpp */,
 			);
 			path = Cpp.TDD;
 			sourceTree = "<group>";
@@ -125,6 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22AD9DF92044A08A00342A56 /* main.cpp in Sources */,
+				2253E70B20458E1B00226385 /* FrameInput.cpp in Sources */,
 				22AD9E012044A15800342A56 /* HelloWorld.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,6 +262,7 @@
 				22AD9DFE2044A08A00342A56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

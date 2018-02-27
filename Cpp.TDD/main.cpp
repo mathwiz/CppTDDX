@@ -7,7 +7,9 @@
 //
 
 #include "HelloWorld.hpp"
+#include "FrameInput.hpp"
 
 int main(int argc, const char * argv[]) {
-    return hello();
+//    return hello();
+    return FrameInput();
 }
