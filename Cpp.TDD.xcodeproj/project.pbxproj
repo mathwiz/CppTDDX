@@ -7,12 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		224EC74D20B1E90400406DDB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 224EC74C20B1E90400406DDB /* main.c */; };
+		224EC75320B1ED7100406DDB /* kr1.c in Sources */ = {isa = PBXBuildFile; fileRef = 224EC75120B1ED7100406DDB /* kr1.c */; };
 		2253E70B20458E1B00226385 /* FrameInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2253E70920458E1B00226385 /* FrameInput.cpp */; };
 		22AD9DF92044A08A00342A56 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22AD9DF82044A08A00342A56 /* main.cpp */; };
 		22AD9E012044A15800342A56 /* HelloWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22AD9DFF2044A15800342A56 /* HelloWorld.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		224EC74820B1E90400406DDB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		22AD9DF32044A08A00342A56 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -25,6 +36,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		224EC74A20B1E90400406DDB /* KR */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KR; sourceTree = BUILT_PRODUCTS_DIR; };
+		224EC74C20B1E90400406DDB /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		224EC75120B1ED7100406DDB /* kr1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kr1.c; sourceTree = "<group>"; };
+		224EC75220B1ED7100406DDB /* kr1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kr1.h; sourceTree = "<group>"; };
 		2253E70920458E1B00226385 /* FrameInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FrameInput.cpp; path = Accelerated/FrameInput.cpp; sourceTree = "<group>"; };
 		2253E70A20458E1B00226385 /* FrameInput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = FrameInput.hpp; path = Accelerated/FrameInput.hpp; sourceTree = "<group>"; };
 		22AD9DF52044A08A00342A56 /* Cpp.TDD */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cpp.TDD; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,6 +49,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		224EC74720B1E90400406DDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22AD9DF22044A08A00342A56 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -44,10 +66,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		224EC74B20B1E90400406DDB /* KR */ = {
+			isa = PBXGroup;
+			children = (
+				224EC74C20B1E90400406DDB /* main.c */,
+				224EC75120B1ED7100406DDB /* kr1.c */,
+				224EC75220B1ED7100406DDB /* kr1.h */,
+			);
+			path = KR;
+			sourceTree = "<group>";
+		};
 		22AD9DEC2044A08A00342A56 = {
 			isa = PBXGroup;
 			children = (
 				22AD9DF72044A08A00342A56 /* Cpp.TDD */,
+				224EC74B20B1E90400406DDB /* KR */,
 				22AD9DF62044A08A00342A56 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				22AD9DF52044A08A00342A56 /* Cpp.TDD */,
+				224EC74A20B1E90400406DDB /* KR */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,6 +109,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		224EC74920B1E90400406DDB /* KR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 224EC74E20B1E90400406DDB /* Build configuration list for PBXNativeTarget "KR" */;
+			buildPhases = (
+				224EC74620B1E90400406DDB /* Sources */,
+				224EC74720B1E90400406DDB /* Frameworks */,
+				224EC74820B1E90400406DDB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KR;
+			productName = KR;
+			productReference = 224EC74A20B1E90400406DDB /* KR */;
+			productType = "com.apple.product-type.tool";
+		};
 		22AD9DF42044A08A00342A56 /* Cpp.TDD */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22AD9DFC2044A08A00342A56 /* Build configuration list for PBXNativeTarget "Cpp.TDD" */;
@@ -101,6 +152,10 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Yohan Lee";
 				TargetAttributes = {
+					224EC74920B1E90400406DDB = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+					};
 					22AD9DF42044A08A00342A56 = {
 						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
@@ -120,11 +175,21 @@
 			projectRoot = "";
 			targets = (
 				22AD9DF42044A08A00342A56 /* Cpp.TDD */,
+				224EC74920B1E90400406DDB /* KR */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		224EC74620B1E90400406DDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				224EC75320B1ED7100406DDB /* kr1.c in Sources */,
+				224EC74D20B1E90400406DDB /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22AD9DF12044A08A00342A56 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -138,6 +203,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		224EC74F20B1E90400406DDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		224EC75020B1E90400406DDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		22AD9DFA2044A08A00342A56 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -246,6 +327,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		224EC74E20B1E90400406DDB /* Build configuration list for PBXNativeTarget "KR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				224EC74F20B1E90400406DDB /* Debug */,
+				224EC75020B1E90400406DDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		22AD9DF02044A08A00342A56 /* Build configuration list for PBXProject "Cpp.TDD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

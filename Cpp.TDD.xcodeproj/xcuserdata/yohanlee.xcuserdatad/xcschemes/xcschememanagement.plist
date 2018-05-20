@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>KR.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>224EC74920B1E90400406DDB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>22AD9DF42044A08A00342A56</key>
 		<dict>
 			<key>primary</key>
