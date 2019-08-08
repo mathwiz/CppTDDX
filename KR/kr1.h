@@ -11,6 +11,6 @@
 
 #include <stdio.h>
 
-int hello_world();
+int hello_world(void);
 
 #endif /* kr1_h */
