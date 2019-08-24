@@ -7,9 +7,11 @@
 //
 #include <iostream>
 
-#include "HelloWorld.hpp"
-
 int hello() {
     std::cout << "Hello, Sucker!\n";
     return 0;
+}
+
+int main(int argc, const char * argv[]) {
+    return hello();
 }
