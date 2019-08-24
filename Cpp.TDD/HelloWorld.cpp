@@ -13,5 +13,6 @@ int hello() {
 }
 
 int main(int argc, const char * argv[]) {
-    return hello();
+    hello();
+    return 0;
 }
