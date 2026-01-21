@@ -13,14 +13,22 @@ void ex2_1() {
     printf("%hu\n", a);
     int b = 0123;
     printf("%d\n", b);
-    unsigned long long d = 0xFFFFFFFFFFFFFFFF;
+    unsigned long long d = 0xFFFF'FFFF'FFFF'FFFF; // commenting quote marks
     printf("%llu\n", d);
 }
 
 
 void ex2_2() {
-    unsigned int a = 3669732608;
+    unsigned int a = 3'669'732'608;
     printf("Yabba %x!\n", a);
     unsigned int b = 69;
     printf("There are %u, %o leaves here.\n", b, b);
+}
+
+
+void ex2_3() {
+    double a = 6.022'140'76e23;
+    printf("Avogadro's number: %le %lf %lg\n", a, a, a);
+    float b = 22.0/7;
+    printf("Nearly Pi: %e %f %g\n", b, b, b);
 }
