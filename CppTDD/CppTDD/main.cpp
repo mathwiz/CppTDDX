@@ -10,7 +10,7 @@
 #include "ch02.h"
 
 int main(int argc, const char * argv[]) {
-    ex2_2();
-    std::cout << "Exiting...\n";
+    ex2_1();
+    std::cout << "Exiting...";
     return EXIT_SUCCESS;
 }
