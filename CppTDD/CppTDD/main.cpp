@@ -7,8 +7,10 @@
 
 #include <iostream>
 
+#include "ch02.h"
+
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    ex2_2();
+    std::cout << "Exiting...\n";
     return EXIT_SUCCESS;
 }
