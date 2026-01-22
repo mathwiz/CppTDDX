@@ -32,3 +32,10 @@ void ex2_3() {
     float b = 22.0/7;
     printf("Nearly Pi: %e %f %g\n", b, b, b);
 }
+
+
+void ex2_4() {
+    char a = 'M';
+    wchar_t b = L'Z';
+    printf("Chars surrounded by single quote: '%c' '%lc'\n", a, b);
+}
