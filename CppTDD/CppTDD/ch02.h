@@ -91,9 +91,20 @@ void void_return() {
     return ex2_8();
 }
 
+
 void ex2_9() {
     int arr[] = {1,2,3,4};
     printf("The third element is %d\n", arr[2]);
     arr[2] = (int)'T';
     printf("The third element is %d\n", arr[2]);
+}
+
+
+void ex2_10() {
+    int arr[] = { 10, 20, 13, 4, 0 };
+    unsigned int max = 0;
+    for(size_t i=0; i<5; i++) {
+        if (arr[i] > max) max = arr[i];
+    }
+    printf("The max element is %d\n", max);
 }
