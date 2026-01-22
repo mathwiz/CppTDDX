@@ -58,3 +58,14 @@ void ex2_6() {
     printf("%d\n", a >= b);
     printf("%d\n", a > b);
 }
+
+
+void ex2_7() {
+    bool a = true;
+    bool b = false;
+    printf("%d\n", ! b);
+    printf("%d\n", a && b);
+    printf("%d\n", a && !b);
+    printf("%d\n", a || b);
+    printf("%d\n", !a || b);
+}
