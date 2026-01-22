@@ -46,3 +46,15 @@ void ex2_5() {
     bool b = false;
     printf("Booleans: %d %d\n", a, b);
 }
+
+
+void ex2_6() {
+    int a = 10;
+    int b = 20;
+    printf("%d\n", a == b);
+    printf("%d\n", a != b);
+    printf("%d\n", a <= b);
+    printf("%d\n", a < b);
+    printf("%d\n", a >= b);
+    printf("%d\n", a > b);
+}
