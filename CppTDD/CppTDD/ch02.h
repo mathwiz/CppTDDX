@@ -39,3 +39,10 @@ void ex2_4() {
     wchar_t b = L'Z';
     printf("Chars surrounded by single quote: '%c' '%lc'\n", a, b);
 }
+
+
+void ex2_5() {
+    bool a = true;
+    bool b = false;
+    printf("Booleans: %d %d\n", a, b);
+}
