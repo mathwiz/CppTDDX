@@ -108,3 +108,13 @@ void ex2_10() {
     }
     printf("The max element is %d\n", max);
 }
+
+
+void ex2_11() {
+    unsigned long arr[] = { 10, 20, 13, 40, 100 };
+    unsigned long max = 0;
+    for(unsigned long i : arr) {
+        if (i > max) max = i;
+    }
+    printf("The max element is %lu\n", max);
+}
