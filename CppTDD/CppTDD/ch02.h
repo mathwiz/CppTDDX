@@ -101,9 +101,11 @@ void ex2_9() {
 
 
 void ex2_10() {
-    int arr[] = { 10, 20, 13, 4, 0 };
-    unsigned int max = 0;
-    for(size_t i=0; i<5; i++) {
+    short arr[] = { 10, 20, 13, 4, 0 };
+    unsigned short max = 0;
+    size_t n = sizeof(arr) / sizeof(short);
+    printf("elements: %lu\n", n);
+    for(size_t i=0; i<n; i++) {
         if (arr[i] > max) max = arr[i];
     }
     printf("The max element is %d\n", max);
