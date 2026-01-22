@@ -86,9 +86,14 @@ void ex2_8() {
 }
 
 
-void void_return() {}
+void void_return() {
+    printf("No return type\n");
+    return ex2_8();
+}
 
 void ex2_9() {
-    printf("No return type\n");
-    return void_return();
+    int arr[] = {1,2,3,4};
+    printf("The third element is %d\n", arr[2]);
+    arr[2] = (int)'T';
+    printf("The third element is %d\n", arr[2]);
 }
