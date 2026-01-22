@@ -84,3 +84,11 @@ void ex2_8() {
     size_type = sizeof(long long);
     printf("llong: %zd\n", size_type);
 }
+
+
+void void_return() {}
+
+void ex2_9() {
+    printf("No return type\n");
+    return void_return();
+}
