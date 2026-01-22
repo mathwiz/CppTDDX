@@ -69,3 +69,18 @@ void ex2_7() {
     printf("%d\n", a || b);
     printf("%d\n", !a || b);
 }
+
+
+void ex2_8() {
+    size_t size_type;
+    size_type = sizeof(char);
+    printf(" char: %zd\n", size_type);
+    size_type = sizeof(short);
+    printf("short: %zd\n", size_type);
+    size_type = sizeof(int);
+    printf("  int: %zd\n", size_type);
+    size_type = sizeof(long);
+    printf(" long: %zd\n", size_type);
+    size_type = sizeof(long long);
+    printf("llong: %zd\n", size_type);
+}
