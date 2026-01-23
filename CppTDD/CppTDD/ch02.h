@@ -176,3 +176,22 @@ void ex2_15() {
     printf("\n");
 }
 
+
+struct Book {
+    char name[256];
+    int year;
+    int pages;
+    bool hardcover;
+};
+
+void ex2_16() {
+    Book b;
+    b.name[0] = 'X';
+    b.name[1] = 'O';
+    b.pages = 271;
+    b.hardcover = false;
+    printf("%s is a %d page book which is a hardcover (Y=1, N=0): %d\n",
+           b.name,
+           b.pages,
+           b.hardcover);
+}
