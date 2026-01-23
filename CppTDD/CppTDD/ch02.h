@@ -211,3 +211,19 @@ void ex2_18() {
     printf("Union floating_point: %f\n", v.floating_point);
     printf("Union integer: %d\n", v.integer);
 }
+
+
+struct ClockOfTheLongNow {
+    void add_year() {
+        year++;
+    }
+    int year;
+};
+
+void ex2_19() {
+    ClockOfTheLongNow clock;
+    clock.year = 2026;
+    printf("year: %d\n", clock.year);
+    clock.add_year();
+    printf("year: %d\n", clock.year);
+}
