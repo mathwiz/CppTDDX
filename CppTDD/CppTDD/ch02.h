@@ -217,13 +217,26 @@ struct ClockOfTheLongNow {
     void add_year() {
         year++;
     }
+    
+    bool set_year(int new_year) {
+        if (new_year < 2026) return false;
+        year = new_year;
+        return true;
+    }
+    
+    int get_year() {
+        return year;
+    }
+private:
     int year;
 };
 
 void ex2_19() {
     ClockOfTheLongNow clock;
-    clock.year = 2026;
-    printf("year: %d\n", clock.year);
+    clock.set_year(2026);
+    printf("year: %d\n", clock.get_year());
+    clock.set_year(2025);
+    printf("year: %d\n", clock.get_year());
     clock.add_year();
-    printf("year: %d\n", clock.year);
+    printf("year: %d\n", clock.get_year());
 }
