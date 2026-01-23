@@ -195,3 +195,19 @@ void ex2_16() {
            b.pages,
            b.hardcover);
 }
+
+
+union Variant {
+    char string[10];
+    int integer;
+    double floating_point;
+};
+
+void ex2_18() {
+    Variant v;
+    v.integer = 42;
+    printf("Union integer: %d\n", v.integer);
+    v.floating_point = 1.0 / 11;
+    printf("Union floating_point: %f\n", v.floating_point);
+    printf("Union integer: %d\n", v.integer);
+}
