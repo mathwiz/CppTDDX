@@ -134,3 +134,45 @@ void ex2_12() {
     }
     printf("%s\n", alphabet);
 }
+
+
+enum class Race {
+    Dinan,
+    Teklan,
+    Ivyn,
+    Moiran,
+    Camite,
+    Julian,
+    Aidan
+};
+
+
+void ex2_15() {
+    Race race = Race::Aidan;
+    switch(race) {
+        case Race::Dinan: {
+            printf("Dinan");
+        } break;
+        case Race::Teklan: {
+            printf("Teklan");
+        } break;
+        case Race::Ivyn: {
+            printf("Ivyn");
+        } break;
+        case Race::Moiran: {
+            printf("Mairan");
+        } break;
+        case Race::Camite: {
+            printf("Camite");
+        } break;
+        case Race::Julian:
+        case Race::Aidan: {
+            printf("%d", race);
+        } break;
+        default: {
+            printf("Error: unknown race!");
+        }
+    }
+    printf("\n");
+}
+
