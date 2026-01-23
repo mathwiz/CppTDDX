@@ -218,7 +218,7 @@ struct ClockOfTheLongNow {
     }
     ClockOfTheLongNow(int y) {
         if(!set_year(y)) {
-            year = DEFAULT;
+            year = DEFAULT * -1;
         }
     }
     void add_year() {
@@ -278,18 +278,45 @@ void ex2_23() {
 
 
 struct PodStruct {
-    uint64_t a;
-    char b[256];
-    bool c;
+    int a{-1};
+    char b[256]{'a', 'b', 'c'};
+    bool c{true};
 };
 
 void ex2_24() {
     PodStruct pod1{};
     PodStruct pod2 = {};
-    PodStruct pod3{ 42, "Hi"};
-    PodStruct pod4{ 43, "Hello", true};
+    PodStruct pod3{ 42, "Hi" };
+    PodStruct pod4{ 43, "Hello", false };
     printf("POD %d '%s' %d\n", pod1.a, pod1.b, pod1.c);
     printf("POD %d '%s' %d\n", pod2.a, pod2.b, pod2.c);
     printf("POD %d '%s' %d\n", pod3.a, pod3.b, pod3.c);
     printf("POD %d '%s' %d\n", pod4.a, pod4.b, pod4.c);
+}
+
+
+struct Taxonomist {
+    Taxonomist() {
+        printf("(no arg)\n");
+    }
+    Taxonomist(char x) {
+        printf(" char: %c\n", x);
+    }
+    Taxonomist(int x) {
+        printf("  int: %d\n", x);
+    }
+    Taxonomist(float x) {
+        printf("float: %f\n", x);
+    }
+};
+
+void ex2_25() {
+    Taxonomist tax1;
+    Taxonomist tax2 = { 'c' };
+    Taxonomist tax3{ 42 };
+    Taxonomist tax4{ 6.02e23f };
+    Taxonomist tax5{ 'g' };
+    Taxonomist tax6{ 'l' };
+    Taxonomist tax7{};
+    Taxonomist tax8();
 }
