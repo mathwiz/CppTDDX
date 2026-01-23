@@ -240,3 +240,14 @@ void ex2_19() {
     clock.add_year();
     printf("year: %d\n", clock.get_year());
 }
+
+
+void ex2_21() {
+    ClockOfTheLongNow clock;
+    if(!clock.set_year(2025)) {
+        clock.set_year(2026);
+    }
+    printf("year: %d\n", clock.get_year());
+    clock.add_year();
+    printf("year: %d\n", clock.get_year());
+}
