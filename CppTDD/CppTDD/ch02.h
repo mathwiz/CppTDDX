@@ -214,21 +214,27 @@ void ex2_18() {
 
 
 struct ClockOfTheLongNow {
+    ClockOfTheLongNow() {
+    }
+    ClockOfTheLongNow(int y) {
+        if(!set_year(y)) {
+            year = DEFAULT;
+        }
+    }
     void add_year() {
         year++;
     }
-    
     bool set_year(int new_year) {
         if (new_year < 2026) return false;
         year = new_year;
         return true;
     }
-    
     int get_year() {
         return year;
     }
 private:
-    int year;
+    int DEFAULT = 2000;
+    int year = DEFAULT;
 };
 
 void ex2_19() {
@@ -250,4 +256,40 @@ void ex2_21() {
     printf("year: %d\n", clock.get_year());
     clock.add_year();
     printf("year: %d\n", clock.get_year());
+}
+
+
+void ex2_22() {
+    ClockOfTheLongNow clock;
+    printf("year: %d\n", clock.get_year());
+}
+
+
+void ex2_23() {
+    ClockOfTheLongNow clock;
+    printf("year: %d\n", clock.get_year());
+    ClockOfTheLongNow clock1{2020};
+    printf("year: %d\n", clock1.get_year());
+    ClockOfTheLongNow clock2{2026};
+    printf("year: %d\n", clock2.get_year());
+    ClockOfTheLongNow clock3(2027);
+    printf("year: %d\n", clock3.get_year());
+}
+
+
+struct PodStruct {
+    uint64_t a;
+    char b[256];
+    bool c;
+};
+
+void ex2_24() {
+    PodStruct pod1{};
+    PodStruct pod2 = {};
+    PodStruct pod3{ 42, "Hi"};
+    PodStruct pod4{ 43, "Hello", true};
+    printf("POD %d '%s' %d\n", pod1.a, pod1.b, pod1.c);
+    printf("POD %d '%s' %d\n", pod2.a, pod2.b, pod2.c);
+    printf("POD %d '%s' %d\n", pod3.a, pod3.b, pod3.c);
+    printf("POD %d '%s' %d\n", pod4.a, pod4.b, pod4.c);
 }
