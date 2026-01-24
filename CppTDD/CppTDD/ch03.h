@@ -85,3 +85,35 @@ void ex3_5() {
     College best_colleges[] = { "Magdalen", "Nuffield", "Kellogg" };
     print_names(best_colleges, sizeof(best_colleges) / sizeof(College));
 }
+
+
+void ex3_6() {
+    char lower[] = "abc?e";
+    char upper[] = "ABC?E";
+    char* upper_ptr = upper;
+    
+    lower[3] = 'd';
+    upper_ptr[3] = 'D';
+    
+    char letter_d = lower[3];
+    char letter_D = upper_ptr[3];
+    
+    printf("lower: %s, upper: %s\n", lower, upper);
+    printf("lower[3]: %c, upper_ptr[3]: %c\n", letter_d, letter_D);
+}
+
+
+void ex3_7() {
+    char lower[] = "abc?e";
+    char upper[] = "ABC?E";
+    char* upper_ptr = upper;
+    
+    *(lower + 3) = 'd';
+    *(upper_ptr + 3) = 'D';
+    
+    char letter_d = *(lower + 4);
+    char letter_D = *(upper_ptr + 4);
+    
+    printf("lower: %s, upper: %s\n", lower, upper);
+    printf("lower[4]: %c, upper_ptr[4]: %c\n", letter_d, letter_D);
+}

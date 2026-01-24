@@ -10,7 +10,7 @@
 #include "ch03.h"
 
 int main(int argc, const char * argv[]) {
-    ex3_5();
+    ex3_7();
     std::cout << "Exiting...";
     return EXIT_SUCCESS;
 }
