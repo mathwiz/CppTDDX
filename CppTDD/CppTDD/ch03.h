@@ -26,7 +26,6 @@ void ex3_2() {
 }
 
 
-
 struct ClockOfTheLongNow {
     ClockOfTheLongNow() {
     }
@@ -58,4 +57,31 @@ void ex3_3() {
     printf("Clock year: %d\n", clock_ptr->get_year());
     clock_ptr->set_year(2026);
     printf("Clock year: %d\n", clock_ptr->get_year());
+}
+
+
+struct College {
+    char name[256];
+};
+
+void print_name(College* college_ptr) {
+    printf("%s College\n", college_ptr->name);
+}
+
+void print_names(College* colleges, size_t n_colleges) {
+    for (size_t i=0; i < n_colleges; i++)
+        printf("%s College\n", colleges[i].name);
+}
+
+void ex3_4() {
+    College best_colleges[] = { "Magdalen", "Nuffield", "Kellogg" };
+    print_name(best_colleges);
+    print_name(&best_colleges[1]);
+    print_name(&best_colleges[2]);
+}
+
+
+void ex3_5() {
+    College best_colleges[] = { "Magdalen", "Nuffield", "Kellogg" };
+    print_names(best_colleges, sizeof(best_colleges) / sizeof(College));
 }
