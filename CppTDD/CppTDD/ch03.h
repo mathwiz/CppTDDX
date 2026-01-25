@@ -29,7 +29,7 @@ void ex3_2() {
 struct ClockOfTheLongNow {
     ClockOfTheLongNow() {
     }
-    ClockOfTheLongNow(int y) {
+    ClockOfTheLongNow(long y) {
         if(!set_year(y)) {
             this->year = DEFAULT * -1;
         }
@@ -37,26 +37,32 @@ struct ClockOfTheLongNow {
     void add_year() {
         this->year++;
     }
-    bool set_year(int new_year) {
+    bool set_year(long new_year) {
         if (new_year < 2026) return false;
         this->year = new_year;
         return true;
     }
-    int get_year() {
+    long get_year() const {
         return this->year;
     }
+    bool is_leap_year() {
+        if (this->get_year() % 4 > 0) return false;
+        if (this->get_year() % 100 > 0) return true;
+        if (this->get_year() % 400 > 0) return false;
+        return true;
+    }
 private:
-    int DEFAULT = 2000;
-    int year = DEFAULT;
+    long DEFAULT = 2000;
+    long year = DEFAULT;
 };
 
 void ex3_3() {
     ClockOfTheLongNow clock{};
     ClockOfTheLongNow* clock_ptr = &clock;
     printf("Clock address: %p\n", clock_ptr);
-    printf("Clock year: %d\n", clock_ptr->get_year());
+    printf("Clock year: %lu\n", clock_ptr->get_year());
     clock_ptr->set_year(2026);
-    printf("Clock year: %d\n", clock_ptr->get_year());
+    printf("Clock year: %lu\n", clock_ptr->get_year());
 }
 
 
@@ -125,9 +131,9 @@ void add_year_to_clock(ClockOfTheLongNow& clock) {
 
 void ex3_8() {
     ClockOfTheLongNow clock{2026};
-    printf("The year is %d.\n", clock.get_year());
+    printf("The year is %lu.\n", clock.get_year());
     add_year_to_clock(clock);
-    printf("The year is %d.\n", clock.get_year());
+    printf("The year is %lu.\n", clock.get_year());
 }
 
 
@@ -175,4 +181,25 @@ void ex3_11() {
     printf("Original:   %d\n", original);
     printf("New Value:  %d\n", new_value);
     printf("Reference:  %d\n", original_ref);
+}
+
+
+struct Avout {
+    Avout(const char* name, long year_of_apert)
+    : name { name }, apert { year_of_apert } {
+    }
+    void announce() const {
+        printf("My name is %s and my next apert is %lu.\n", name, apert.get_year());
+    }
+private:
+    const char* name;
+    ClockOfTheLongNow apert;
+};
+
+
+void ex3_18() {
+    Avout raz{ "Erasmus", 3010 };
+    Avout jaz{ "Jad", 4400 };
+    raz.announce();
+    jaz.announce();
 }
