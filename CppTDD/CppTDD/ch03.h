@@ -117,3 +117,15 @@ void ex3_7() {
     printf("lower: %s, upper: %s\n", lower, upper);
     printf("lower[4]: %c, upper_ptr[4]: %c\n", letter_d, letter_D);
 }
+
+
+void add_year_to_clock(ClockOfTheLongNow& clock) {
+    clock.set_year(clock.get_year() + 1);
+}
+
+void ex3_8() {
+    ClockOfTheLongNow clock{2026};
+    printf("The year is %d.\n", clock.get_year());
+    add_year_to_clock(clock);
+    printf("The year is %d.\n", clock.get_year());
+}
