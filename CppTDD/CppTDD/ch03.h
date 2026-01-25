@@ -31,19 +31,19 @@ struct ClockOfTheLongNow {
     }
     ClockOfTheLongNow(int y) {
         if(!set_year(y)) {
-            year = DEFAULT * -1;
+            this->year = DEFAULT * -1;
         }
     }
     void add_year() {
-        year++;
+        this->year++;
     }
     bool set_year(int new_year) {
         if (new_year < 2026) return false;
-        year = new_year;
+        this->year = new_year;
         return true;
     }
     int get_year() {
-        return year;
+        return this->year;
     }
 private:
     int DEFAULT = 2000;
@@ -135,7 +135,7 @@ struct Element {
     Element* next{};
     void insert_after(Element* new_elem) {
         new_elem->next = next;
-        next = new_elem;
+        this->next = new_elem;
     }
     char prefix[2];
     short operating_number;
@@ -161,4 +161,18 @@ void ex3_10() {
                cursor->prefix[1],
                cursor->operating_number);
     }
+}
+
+
+void ex3_11() {
+    int original = 100;
+    int& original_ref = original;
+    printf("Original:   %d\n", original);
+    printf("Reference:  %d\n", original_ref);
+    
+    int new_value = 200;
+    original_ref = new_value;
+    printf("Original:   %d\n", original);
+    printf("New Value:  %d\n", new_value);
+    printf("Reference:  %d\n", original_ref);
 }
