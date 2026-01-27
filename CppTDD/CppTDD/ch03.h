@@ -203,3 +203,28 @@ void ex3_18() {
     raz.announce();
     jaz.announce();
 }
+
+
+struct Dwarf {
+    char name[256];
+};
+
+Dwarf dwarves[13];
+
+struct Contract {
+    void add(const Dwarf& d){
+        this->dwarf = d;
+    }
+    Dwarf dwarf;
+};
+
+void form_company(Contract &contract) {
+    for (const auto& dwarf : dwarves) {
+        contract.add(dwarf);
+    }
+}
+
+void ex3_19() {
+    Contract contract;
+    form_company(contract);
+}
