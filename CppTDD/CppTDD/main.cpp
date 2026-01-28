@@ -7,10 +7,10 @@
 
 #include <iostream>
 
-#include "ch03.h"
+#include "ch04.h"
 
 int main(int argc, const char * argv[]) {
-    ex3_19();
+    ex4_2();
     std::cout << "Exiting...";
     return EXIT_SUCCESS;
 }
