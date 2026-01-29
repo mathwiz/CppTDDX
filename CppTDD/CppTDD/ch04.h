@@ -61,3 +61,27 @@ void ex4_4() {
     RatThing::power_up_rat_thing(100);
     RatThing::power_up_rat_thing(500);
 }
+
+
+struct Tracer {
+    Tracer(const char* n) : name{n} {
+        printf("%s constructed.\n", name);
+    }
+    ~Tracer() {
+        printf("%s destructed.\n", name);
+    }
+private:
+    const char* const name;
+};
+
+static Tracer t1{"Static variable"};
+thread_local Tracer t2{"Thread-local variable"};
+
+void ex4_5() {
+    printf("A\n");
+    Tracer t3{"Automatic variable"};
+    printf("B\n");
+    const auto* t4 = new Tracer{"Dynamic variable"};
+    //No delete
+    printf("C\n");
+}
