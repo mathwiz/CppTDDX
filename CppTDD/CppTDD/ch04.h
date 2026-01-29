@@ -6,6 +6,7 @@
 //
 
 #include <cstdio>
+#include <stdexcept>
 
 static int rat_things_power = 200;
 
@@ -77,11 +78,32 @@ private:
 static Tracer t1{"Static variable"};
 thread_local Tracer t2{"Thread-local variable"};
 
-void ex4_5() {
+void ex4_6() {
     printf("A\n");
     Tracer t3{"Automatic variable"};
     printf("B\n");
     const auto* t4 = new Tracer{"Dynamic variable"};
-    //No delete
     printf("C\n");
+    delete t4;
+}
+
+
+struct Groucho {
+    void forget(int x) {
+        if (x == 0xFACE) {
+            throw std::runtime_error("I saw a 0xFACE!\n");
+        }
+        printf("Forgot 0x%x\n", x);
+    }
+};
+
+void ex4_9() {
+    Groucho groucho;
+    try {
+        groucho.forget(0xC0DE);
+        groucho.forget(0xFACE);
+        groucho.forget(0xC0FFEE);
+    } catch (const std::runtime_error& e) {
+        printf("runtime exception: %s \n", e.what());
+    }
 }
