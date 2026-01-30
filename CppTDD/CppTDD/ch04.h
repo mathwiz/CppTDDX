@@ -219,3 +219,37 @@ void ex4_21() {
         printf("Caught at top of stack: %s\n", e.what());
     }
 }
+
+
+struct HumptyDumpty {
+    HumptyDumpty() {}
+    bool is_together_again() {
+        return is_together;
+    }
+    bool is_together;
+};
+
+struct Result {
+    HumptyDumpty hd;
+    bool success;
+};
+
+Result make_humpty() {
+    HumptyDumpty hd{};
+    bool is_valid{true};
+    // Check that hd is valid and set is_valid
+    return { hd, is_valid };
+}
+
+bool send_kings_horses_and_men() {
+    auto [hd, success] = make_humpty();
+    if (!success) return false;
+    //Class invariants of hd are now guaranteed.
+    hd.is_together = true;
+    printf("HumptyDumpty is together again: %d\n", hd.is_together_again());
+    return true;
+}
+
+void ex4_22() {
+    send_kings_horses_and_men();
+}
