@@ -195,3 +195,27 @@ void ex4_19() {
     printf("x is alive\n");
 }
 
+
+void fn_c() {
+    try {
+        SimpleStringOwner c{ "cccccccccc" };
+    } catch(const std::exception& e) {
+        printf("Caught in fc_c: %s\n", e.what());
+        throw e;
+    }
+}
+
+void fn_b() {
+    SimpleStringOwner b{ "b" };
+    fn_c();
+}
+
+void ex4_21() {
+    try {
+        SimpleStringOwner a{ "a" };
+        fn_b();
+        SimpleStringOwner d{ "d" };
+    } catch(const std::exception& e) {
+        printf("Caught at top of stack: %s\n", e.what());
+    }
+}
