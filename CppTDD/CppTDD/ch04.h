@@ -253,3 +253,27 @@ bool send_kings_horses_and_men() {
 void ex4_22() {
     send_kings_horses_and_men();
 }
+
+
+int add_one_to(int x) {
+    x++;
+    return x;
+}
+
+void ex4_23() {
+    auto original = 1;
+    auto result = add_one_to(original);
+    printf("Original: %d; Result: %d\n", original, result);
+}
+
+
+struct Point {
+    int x, y;
+};
+
+Point make_transpose(Point p) {
+    int tmp = p.x;
+    p.x = p.y;
+    p.y = tmp;
+    return p;
+}
