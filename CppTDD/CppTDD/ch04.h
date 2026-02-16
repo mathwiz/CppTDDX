@@ -307,3 +307,13 @@ void ex4_27() {
     invoke_copy_constructor(a);
     a.print("Still empty");
 }
+
+
+void ex4_28() {
+    SimpleString a{ 50 };
+    a.append_line("Bad use of copy assignment.");
+    SimpleString b{ 50 };
+    b.append_line("My buffer is not deleted when I'm clobbered.");
+    b = a;
+    b.print("b");
+}
