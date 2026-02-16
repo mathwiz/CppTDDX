@@ -8,6 +8,7 @@
 #include <cstdio>
 #include <cstring>
 #include <stdexcept>
+#include <utility>
 
 
 static int rat_things_power = 200;
@@ -354,6 +355,16 @@ void ex4_33() {
     ref_type(x);
     ref_type(2);
     ref_type(y);
+    ref_type(x + 2);
+    ref_type(x + y);
+}
+
+void ex4_34() {
+    auto x = 1;
+    auto y = 2;
+    ref_type(std::move(x));
+    ref_type(2);
+    ref_type(std::move(y));
     ref_type(x + 2);
     ref_type(x + y);
 }
