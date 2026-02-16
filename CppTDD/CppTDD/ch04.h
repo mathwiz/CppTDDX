@@ -148,6 +148,16 @@ struct SimpleString {
         std::strncpy(buffer, other.buffer, max_size);
     }
     
+    SimpleString& operator=(const SimpleString& other) {
+        if (this == &other) return *this;
+        const auto new_buffer = new char[other.max_size];
+        delete[] buffer;
+        length = other.length;
+        max_size = other.max_size;
+        std::strncpy(buffer, other.buffer, max_size);
+        return *this;
+    }
+
     ~SimpleString() {
         delete[] buffer;
     }
@@ -316,4 +326,16 @@ void ex4_28() {
     b.append_line("My buffer is not deleted when I'm clobbered.");
     b = a;
     b.print("b");
+}
+
+void ex4_31() {
+    SimpleString a{ 50 };
+    a.append_line("We apologize for the");
+    SimpleString b{ 50 };
+    b.append_line("Last message.");
+    a.print("a");
+    b.print("b");
+    b = a;
+    a.print("a after copy assignment");
+    b.print("b after copy assignment");
 }
