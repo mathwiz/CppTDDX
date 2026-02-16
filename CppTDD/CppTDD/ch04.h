@@ -149,13 +149,35 @@ struct SimpleString {
         std::strncpy(buffer, other.buffer, max_size);
     }
     
+    SimpleString(SimpleString&& other) noexcept
+    : max_size{ other.max_size },
+      buffer{ other.buffer },
+      length { other.length } {
+          other.length = 0;
+          other.buffer = nullptr;
+          other.max_size = 0;
+    }
+
     SimpleString& operator=(const SimpleString& other) {
         if (this == &other) return *this;
         const auto new_buffer = new char[other.max_size];
         delete[] buffer;
+        buffer = new_buffer;
         length = other.length;
         max_size = other.max_size;
         std::strncpy(buffer, other.buffer, max_size);
+        return *this;
+    }
+
+    SimpleString& operator=(SimpleString&& other) noexcept {
+        if (this == &other) return *this;
+        delete[] buffer;
+        buffer = other.buffer;
+        length = other.length;
+        max_size = other.max_size;
+        other.length = 0;
+        other.buffer = nullptr;
+        other.max_size = 0;
         return *this;
     }
 
@@ -164,7 +186,11 @@ struct SimpleString {
     }
     
     void print(const char* tag) const {
-        printf("%s: %s", tag, buffer);
+        if (buffer == nullptr) {
+            printf("%s: \n", tag);
+        } else {
+            printf("%s: %s", tag, buffer);
+        }
     }
     
     bool append_line(const char* x) {
@@ -204,6 +230,9 @@ struct SimpleStringOwner {
         }
         string.print("Constructed: ");
     }
+    
+    SimpleStringOwner(SimpleString&& x) : string{ std::move(x) } {}
+    
     ~SimpleStringOwner() {
         string.print("About to destroy: ");
     }
@@ -367,4 +396,16 @@ void ex4_34() {
     ref_type(std::move(y));
     ref_type(x + 2);
     ref_type(x + y);
+}
+
+void ex4_37() {
+    SimpleString a{ 50 };
+    a.append_line("We apologize for the");
+    SimpleString b{ 50 };
+    b.append_line("Last message.");
+    a.print("a");
+    b.print("b");
+    b = std::move(a);
+    a.print("a after move assignment");
+    b.print("b after move assignment");
 }
