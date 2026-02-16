@@ -297,3 +297,13 @@ void ex4_26() {
     a.print("a");
     a_copy.print("a_copy");
 }
+
+void invoke_copy_constructor(SimpleString s) {
+    s.append_line("This change is lost");
+}
+
+void ex4_27() {
+    SimpleString a{ 20 };
+    invoke_copy_constructor(a);
+    a.print("Still empty");
+}
