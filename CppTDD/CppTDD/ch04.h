@@ -339,3 +339,21 @@ void ex4_31() {
     a.print("a after copy assignment");
     b.print("b after copy assignment");
 }
+
+void ref_type(int &x) {
+    printf("lvalue reference: %d\n", x);
+}
+
+void ref_type(int &&x) {
+    printf("rvalue reference: %d\n", x);
+}
+
+void ex4_33() {
+    auto x = 1;
+    auto y = 2;
+    ref_type(x);
+    ref_type(2);
+    ref_type(y);
+    ref_type(x + 2);
+    ref_type(x + y);
+}
