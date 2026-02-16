@@ -131,21 +131,31 @@ void ex4_13() {
 
 
 struct SimpleString {
-    SimpleString(size_t max) :
-    max_size{ max },
-    length{} {
+    SimpleString(size_t max)
+    : max_size{ max },
+      length{} {
         if (max_size == 0) {
             throw std::runtime_error{ "Max size must be at least 1." };
         }
         buffer = new char[max_size];
         buffer[0] = 0;
     }
+    
+    SimpleString(const SimpleString& other)
+    : max_size{ other.max_size },
+      buffer{ new char[other.max_size] },
+    length { other.length } {
+        std::strncpy(buffer, other.buffer, max_size);
+    }
+    
     ~SimpleString() {
         delete[] buffer;
     }
+    
     void print(const char* tag) const {
         printf("%s: %s", tag, buffer);
     }
+    
     bool append_line(const char* x) {
         const auto x_len = strlen(x);
         if (x_len + length + 2 > max_size) return false;
@@ -276,4 +286,14 @@ Point make_transpose(Point p) {
     p.x = p.y;
     p.y = tmp;
     return p;
+}
+
+void ex4_26() {
+    SimpleString a{ 50 };
+    a.append_line("We apologize for the");
+    SimpleString a_copy{ a };
+    a.append_line("inconvenience.");
+    a_copy.append_line("ignorance.");
+    a.print("a");
+    a_copy.print("a_copy");
 }
