@@ -10,15 +10,19 @@
 #include <stdexcept>
 #include <utility>
 
+struct Logger {
+    virtual ~Logger() = default;
+    virtual void log_transaction(long from, long to, double amount) = 0;
+};
 
-struct ConsoleLogger {
-    void log_transaction(long from, long to, double amount) {
+struct ConsoleLogger : Logger {
+    void log_transaction(long from, long to, double amount) override {
         printf("[cons] %ld -> %ld: %f\n", from, to, amount);
     }
 };
 
-struct FileLogger {
-    void log_transaction(long from, long to, double amount) {
+struct FileLogger : Logger {
+    void log_transaction(long from, long to, double amount) override {
         printf("[file] %ld,%ld,%f\n", from, to, amount);
     }
 };
@@ -56,6 +60,7 @@ private:
     ConsoleLogger consoleLogger;
 };
 
+
 void ex5_1() {
     Bank bank;
     bank.make_transfer(1000, 2000, 49.95);
@@ -69,4 +74,26 @@ void ex5_2() {
     bank.make_transfer(2000, 4000, 20.40);
     bank.set_logger(LoggerType::File);
     bank.make_transfer(3000, 2000, 75.00);
+}
+
+
+struct BaseClass {
+    int the_answer() const { return 42; }
+    
+    const char* member = "gold";
+private:
+    const char* holistic_detective = "Dirk Gently";
+};
+
+struct DerivedClass : BaseClass {
+    
+};
+
+
+void ex5_6() {
+    DerivedClass x;
+    printf("The answer: %d\n", x.the_answer());
+    printf("The member: %s\n", x.member);
+    //does not compile
+    //printf("The holistic_detective: %s\n", x.holistic_detective);
 }
