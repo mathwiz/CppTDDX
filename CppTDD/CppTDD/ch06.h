@@ -37,5 +37,29 @@ void ex6_4() {
 
 void ex6_5() {
     auto timer = reinterpret_cast<const unsigned long*>(0x1000);
-    printf("Timer is %lu\n", *timer); //expect a crash unless 0x1000 is readable
+    //expect a crash unless 0x1000 is readable
+    //printf("Timer is %lu\n", *timer);
+}
+
+
+template <typename To, typename From>
+To narrow_cast(From value) {
+    const auto converted = static_cast<To>(value);
+    const auto backwards = static_cast<From>(converted);
+    if (value != backwards) throw std::runtime_error{ "Narrowed!" };
+    return converted;
+}
+
+
+void ex6_7() {
+    int perfect{ 496 };
+    const auto perfect_short = narrow_cast<short>(perfect);
+    printf("perfect_short: %d\n", perfect_short);
+    try {
+        int cyclic{ 142857 };
+        const auto cyclic_short = narrow_cast<short>(cyclic);
+        printf("cyclic_short: %d\n", cyclic_short);
+    } catch (const std::runtime_error& e) {
+        printf("Exception: %s\n", e.what());
+    }
 }
