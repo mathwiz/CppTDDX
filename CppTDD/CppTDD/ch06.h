@@ -191,5 +191,25 @@ void ex6_15() {
     auto ptr_a = SimpleUniquePointer(new Tracer{ "ptr_a" });
     printf("(main) ptr_a: 0x%p\n", ptr_a.get());
     consumer(std::move(ptr_a));
+    printf("Now a nullptr after destruction.\n");
     printf("(main) ptr_a: 0x%p\n", ptr_a.get());
+}
+
+
+template <typename T>
+T square(T x) {
+    return x * x;
+}
+
+void ex6_17() {
+    double d{ 67.0 };
+    auto result1 = square(d);
+    printf("Square: %f\n", result1);
+    int i{ 6 };
+    auto result2 = square(i);
+    printf("Square: %d\n", result2);
+    char c{ 'Q' };
+    printf("No way! Must support operator '*'\n");
+//    auto result3 = square(&c);
+//    printf("Square: %s\n", result3);
 }
