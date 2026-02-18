@@ -79,6 +79,9 @@ void ex5_2() {
 
 struct BaseClass {
     int the_answer() const { return 42; }
+    virtual const char* message() const {
+        return "I am the BaseClass";
+    }
     
     const char* member = "gold";
 private:
@@ -86,7 +89,9 @@ private:
 };
 
 struct DerivedClass : BaseClass {
-    
+    const char* message() const override {
+        return "I am the DerivedClass";
+    }
 };
 
 
@@ -96,4 +101,14 @@ void ex5_6() {
     printf("The member: %s\n", x.member);
     //does not compile
     //printf("The holistic_detective: %s\n", x.holistic_detective);
+}
+
+
+void ex5_7() {
+    BaseClass base;
+    DerivedClass derived;
+    BaseClass& baseRef = derived;
+    printf("BaseClass: %s\n", base.message());
+    printf("DerivedClass: %s\n", derived.message());
+    printf("BaseClass ref: %s\n", baseRef.message());
 }
