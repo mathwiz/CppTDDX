@@ -138,3 +138,47 @@ void ex5_8() {
     printf("DerivedClass2: %s\n", derived.message());
     printf("BaseClass2 ref: %s\n", baseRef.message());
 }
+
+
+struct BaseClass3 {
+};
+
+struct DerivedClass3 : BaseClass3 {
+    DerivedClass3() {
+        printf("DerivedClass3() invoked\n");
+    }
+    ~DerivedClass3() {
+        printf("~DerivedClass3() invoked\n");
+    }
+};
+
+
+void ex5_9() {
+    printf("Constructing DerievedClass3\n");
+    BaseClass3* baseRef{ new DerivedClass3() };
+    printf("Deleting as a BaseClass3*\n");
+    delete baseRef;
+    printf("No destructor call\n");
+}
+
+
+struct BaseClass4 {
+    virtual ~BaseClass4() = default;
+};
+
+struct DerivedClass4 : BaseClass4 {
+    DerivedClass4() {
+        printf("DerivedClass4() invoked\n");
+    }
+    ~DerivedClass4() {
+        printf("~DerivedClass4() invoked\n");
+    }
+};
+
+
+void ex5_10() {
+    printf("Constructing DerievedClass4\n");
+    BaseClass4* baseRef{ new DerivedClass4() };
+    printf("Deleting as a BaseClass4*\n");
+    delete baseRef;
+}
