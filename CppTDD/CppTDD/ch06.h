@@ -103,3 +103,19 @@ void ex6_11() {
     const auto result3 = mean<size_t>(nums_c, 6);
     printf("size_t: %zd\n", result3);
 }
+
+
+void ex6_13() {
+    printf("Using type inference\n");
+    const double nums_d[] { 1.1, 2.2, 3.3, 4.4, 5.5, 6.6 };
+    const auto result1 = mean(nums_d, 6);
+    printf("double: %f\n", result1);
+    
+    const float nums_f[] { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f };
+    const auto result2 = mean(nums_f, 6);
+    printf("float: %f\n", result2);
+
+    const size_t nums_c[] { 1, 2, 3, 4, 5, 6 };
+    const auto result3 = mean(nums_c, 6);
+    printf("size_t: %zd\n", result3);
+}
