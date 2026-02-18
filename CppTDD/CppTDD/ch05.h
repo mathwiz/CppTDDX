@@ -209,3 +209,30 @@ void ex5_11() {
     bank2.make_transfer(1000, 2000, 49.95);
     bank2.make_transfer(2000, 4000, 20.40);
 }
+
+
+
+
+struct Bank3 {
+    Bank3(Logger* logger) : logger{ logger } { }
+    
+    void set_logger(Logger* new_logger) {
+        logger = new_logger;
+    }
+    
+    void make_transfer(long from, long to, double amount) {
+        logger->log_transaction(from, to, amount);
+    }
+private:
+    Logger* logger;
+};
+
+
+void ex5_13() {
+    ConsoleLogger cons;
+    FileLogger file;
+    Bank3 bank{ &cons };
+    bank.make_transfer(1000, 2000, 49.95);
+    bank.set_logger(&file);
+    bank.make_transfer(2000, 4000, 20.40);
+}
