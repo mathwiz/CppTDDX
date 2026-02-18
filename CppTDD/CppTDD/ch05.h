@@ -112,3 +112,29 @@ void ex5_7() {
     printf("DerivedClass: %s\n", derived.message());
     printf("BaseClass ref: %s\n", baseRef.message());
 }
+
+
+struct BaseClass2 {
+    int the_answer() const { return 42; }
+    virtual const char* message() const = 0;
+    
+    const char* member = "gold";
+private:
+    const char* holistic_detective = "Dirk Gently";
+};
+
+struct DerivedClass2 : BaseClass2 {
+    const char* message() const override {
+        return "I am the DerivedClass2";
+    }
+};
+
+
+void ex5_8() {
+    // Not instantiable
+    //BaseClass2 base;
+    DerivedClass2 derived;
+    BaseClass2& baseRef = derived;
+    printf("DerivedClass2: %s\n", derived.message());
+    printf("BaseClass2 ref: %s\n", baseRef.message());
+}
