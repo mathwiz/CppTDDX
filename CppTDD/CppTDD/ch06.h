@@ -11,6 +11,15 @@
 #include <stdexcept>
 #include <utility>
 
+
+template <typename X, typename Y, typename Z>
+struct MyTemplateClass {
+    X foo(Y&);
+private:
+    Z* member;
+};
+
+
 int carbon_thaw(const int& encased_solo) {
     //encased_solo++;
     auto& hibernation_sick_solo = const_cast<int&>(encased_solo);
@@ -119,3 +128,41 @@ void ex6_13() {
     const auto result3 = mean(nums_c, 6);
     printf("size_t: %zd\n", result3);
 }
+
+
+template <typename T>
+struct SimpleUniquePointer {
+    SimpleUniquePointer() = default;
+    
+    SimpleUniquePointer(T* pointer)
+      : pointer{ pointer } {}
+    
+    ~SimpleUniquePointer() {
+        if(pointer)
+            delete pointer;
+    }
+  
+    SimpleUniquePointer(const SimpleUniquePointer&) = delete;
+  
+    SimpleUniquePointer& operator=(const SimpleUniquePointer&) = delete;
+  
+    SimpleUniquePointer(SimpleUniquePointer&& other) noexcept
+      : pointer{ other.pointer } {
+          other.pointer = nullptr;
+    }
+  
+    SimpleUniquePointer& operator=(SimpleUniquePointer&& other) noexcept {
+        if(pointer)
+            delete pointer;
+        pointer = other.pointer;
+        other.pointer = nullptr;
+        return *this;
+    }
+
+    T* get() {
+        return pointer;
+    }
+
+private:
+    T* pointer;
+};
