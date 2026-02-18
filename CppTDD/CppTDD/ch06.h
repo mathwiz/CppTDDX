@@ -5,6 +5,7 @@
 //  Created by Yohan Lee on 2/18/26.
 //
 
+#include <cstddef>
 #include <cstdio>
 #include <cstring>
 #include <stdexcept>
@@ -62,4 +63,43 @@ void ex6_7() {
     } catch (const std::runtime_error& e) {
         printf("Exception: %s\n", e.what());
     }
+}
+
+
+double double_mean(const double* values, size_t length) {
+    double result{};
+    for(size_t i{}; i<length; i++) {
+        result += values[i];
+    }
+    return result / length;
+}
+
+void ex6_8() {
+    const double vals[] = { 1.5, 2, 3, 4, 5, 6 };
+    printf("Mean is: %f\n", double_mean(vals, 6));
+}
+
+
+template<typename T>
+T mean(const T* values, size_t length) {
+    T result{};
+    for(size_t i{}; i<length; i++) {
+        result += values[i];
+    }
+    return result / length;
+}
+
+
+void ex6_11() {
+    const double nums_d[] { 1.1, 2.2, 3.3, 4.4, 5.5, 6.6 };
+    const auto result1 = mean<double>(nums_d, 6);
+    printf("double: %f\n", result1);
+    
+    const float nums_f[] { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f };
+    const auto result2 = mean<float>(nums_f, 6);
+    printf("float: %f\n", result2);
+
+    const size_t nums_c[] { 1, 2, 3, 4, 5, 6 };
+    const auto result3 = mean<size_t>(nums_c, 6);
+    printf("size_t: %zd\n", result3);
 }
