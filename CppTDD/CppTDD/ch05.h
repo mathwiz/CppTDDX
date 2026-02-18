@@ -186,3 +186,26 @@ void ex5_10() {
     printf("Deleting as a BaseClass4*\n");
     delete baseRef;
 }
+
+
+struct Bank2 {
+    Bank2(Logger& logger) : logger{ logger } { }
+    
+    void make_transfer(long from, long to, double amount) {
+        logger.log_transaction(from, to, amount);
+    }
+private:
+    Logger& logger;
+};
+
+
+void ex5_11() {
+    ConsoleLogger cons;
+    FileLogger file;
+    Bank2 bank{ cons };
+    bank.make_transfer(1000, 2000, 49.95);
+    bank.make_transfer(2000, 4000, 20.40);
+    Bank2 bank2{ file };
+    bank2.make_transfer(1000, 2000, 49.95);
+    bank2.make_transfer(2000, 4000, 20.40);
+}
