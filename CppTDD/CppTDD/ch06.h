@@ -166,3 +166,30 @@ struct SimpleUniquePointer {
 private:
     T* pointer;
 };
+
+
+struct Tracer {
+    Tracer(const char* name) : name{ name } {
+        printf("%s constructed.\n", name);
+    }
+
+    ~Tracer() {
+        printf("%s destructed.\n", name);
+    }
+    
+private:
+    const char* const name;
+};
+
+
+void consumer(SimpleUniquePointer<Tracer> consumer_ptr) {
+    printf("(cons) consumer_ptr: 0x%p\n", consumer_ptr.get());
+}
+
+
+void ex6_15() {
+    auto ptr_a = SimpleUniquePointer(new Tracer{ "ptr_a" });
+    printf("(main) ptr_a: 0x%p\n", ptr_a.get());
+    consumer(std::move(ptr_a));
+    printf("(main) ptr_a: 0x%p\n", ptr_a.get());
+}
