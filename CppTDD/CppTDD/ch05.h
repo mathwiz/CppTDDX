@@ -159,6 +159,10 @@ void ex5_9() {
     printf("Deleting as a BaseClass3*\n");
     delete baseRef;
     printf("No destructor call\n");
+    printf("Constructing another DerievedClass3\n");
+    DerivedClass3* derivedRef{ new DerivedClass3() };
+    printf("Deleting as a DerivedClass3*\n");
+    delete derivedRef;
 }
 
 
