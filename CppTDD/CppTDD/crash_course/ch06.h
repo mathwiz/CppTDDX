@@ -229,3 +229,18 @@ void ex6_18() {
     printf("%s\n", as_str(std::is_integral<int*>::value));
     printf("%s\n", as_str(std::is_integral<float>::value));
 }
+
+
+/*
+ * Usage: template <Averageable T>
+ *        T mean(const T* values, size_t length) {
+ *
+ template <typename T>
+ concept Averageable =
+     std::is_default_constructible<T>::value &&
+     std::is_copy_constructible<T>::value &&
+     requires(T a, T b) {
+     { a + b } -> T;
+     { a / b } -> T;
+   };
+*/
