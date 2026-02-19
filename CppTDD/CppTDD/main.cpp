@@ -7,11 +7,10 @@
 
 #include <iostream>
 
-#include "ch06.h"
-#include "accelerated/ch00.h"
+#include "acc00.h"
 
 int main(int argc, const char * argv[]) {
-    ch00_1();
+    ex0_1();
     std::cout << "Exiting...";
     return EXIT_SUCCESS;
 }
