@@ -10,6 +10,7 @@
 #include <cstring>
 #include <stdexcept>
 #include <utility>
+#include <type_traits>
 
 
 template <typename X, typename Y, typename Z>
@@ -212,4 +213,19 @@ void ex6_17() {
     printf("No way! Must support operator '*'\n");
 //    auto result3 = square(&c);
 //    printf("Square: %s\n", result3);
+}
+
+
+constexpr const char* as_str(bool x) {
+    return x ? "True" : "False";
+}
+
+void ex6_18() {
+    printf("%s\n", as_str(std::is_integral<int>::value));
+    printf("%s\n", as_str(std::is_integral<const int>::value));
+    printf("%s\n", as_str(std::is_integral<char>::value));
+    printf("%s\n", as_str(std::is_integral<uint64_t>::value));
+    printf("%s\n", as_str(std::is_integral<int&>::value));
+    printf("%s\n", as_str(std::is_integral<int*>::value));
+    printf("%s\n", as_str(std::is_integral<float>::value));
 }
