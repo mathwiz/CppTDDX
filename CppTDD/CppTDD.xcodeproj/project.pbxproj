@@ -22,9 +22,22 @@
 		22A919AD2F1F1735009D8236 /* CppTDD */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CppTDD; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		22F2143B2F4793A800218F85 /* Exceptions for "CppTDD" folder in "Compile Sources" phase from "CppTDD" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 22A919A92F1F1735009D8236 /* Sources */;
+			membershipExceptions = (
+				accelerated/ch00.h,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		22A919AF2F1F1735009D8236 /* CppTDD */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				22F2143B2F4793A800218F85 /* Exceptions for "CppTDD" folder in "Compile Sources" phase from "CppTDD" target */,
+			);
 			path = CppTDD;
 			sourceTree = "<group>";
 		};
@@ -93,6 +106,7 @@
 				TargetAttributes = {
 					22A919AC2F1F1735009D8236 = {
 						CreatedOnToolsVersion = 26.2;
+						LastSwiftMigration = 2620;
 					};
 				};
 			};
@@ -244,16 +258,21 @@
 		22A919B52F1F1735009D8236 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
 		22A919B62F1F1735009D8236 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};

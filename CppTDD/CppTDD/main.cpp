@@ -8,9 +8,10 @@
 #include <iostream>
 
 #include "ch06.h"
+#include "accelerated/ch00.h"
 
 int main(int argc, const char * argv[]) {
-    ex6_18();
+    ch00_1();
     std::cout << "Exiting...";
     return EXIT_SUCCESS;
 }

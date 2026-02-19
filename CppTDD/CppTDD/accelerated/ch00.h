@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-int c00_1()
+int ch00_1()
 {
     std::cout << "Hello, world!" << std::endl;
     return 0;
