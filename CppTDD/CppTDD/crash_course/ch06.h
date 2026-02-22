@@ -314,3 +314,9 @@ void ex6_33() {
     //Static assertion failed due to requirement '4UL < 4UL': Out-of-bounds access
     //printf("%d", get<4>(fib));
 }
+
+
+template <typename T, typename... Arguments>
+SimpleUniquePointer<T> make_simple_unique(Arguments... arguments) {
+    return SimpleUniquePointer{ new T{ arguments... } };
+}
