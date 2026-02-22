@@ -296,3 +296,21 @@ void ex6_28() {
     //does not compile
     //auto conor_copy = get_copy(conor_ptr);
 }
+
+
+template <size_t Index, typename T, size_t Length>
+T& get(T (&arr)[Length]) {
+    static_assert(Index < Length, "Out-of-bounds access");
+    return arr[Index];
+}
+
+
+void ex6_33() {
+    int fib[]{ 10, 11, 12, 13 };
+    printf("get<3>: %d\n", get<3>(fib));
+    printf("0 1 2: %d %d %d\n", get<0>(fib), get<1>(fib), get<2>(fib));
+    get<3>(fib) = get<1>(fib) + get<2>(fib);
+    printf("get<3>: %d\n", get<3>(fib));
+    //Static assertion failed due to requirement '4UL < 4UL': Out-of-bounds access
+    //printf("%d", get<4>(fib));
+}
