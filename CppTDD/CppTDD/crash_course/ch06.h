@@ -274,3 +274,25 @@ void concept_example() {
     std::vector ints { 1, 2, 3, 4, 5, 6, 17};
     std::cout << Average(ints) << '\n';
 }
+
+
+template<typename T>
+requires std::is_copy_constructible_v<T>
+T get_copy(T* pointer) {
+    if(!pointer) throw new std::runtime_error("Null pointer");
+    return *pointer;
+}
+
+struct Highlander {
+    Highlander() = default;
+    Highlander(const Highlander&) = delete;
+};
+
+
+void ex6_28() {
+    Highlander conor;
+    auto conor_ptr = &conor;
+    printf("Pointer: %d\n", conor_ptr);
+    //does not compile
+    //auto conor_copy = get_copy(conor_ptr);
+}
