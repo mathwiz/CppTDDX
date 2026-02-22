@@ -11,6 +11,10 @@
 #include <stdexcept>
 #include <utility>
 #include <type_traits>
+#include <numeric>
+#include <vector>
+#include <iostream>
+#include <concepts>
 
 
 template <typename X, typename Y, typename Z>
@@ -244,3 +248,29 @@ void ex6_18() {
      { a / b } -> T;
    };
 */
+
+/*
+ * Examples from https://www.cppstories.com/2021/concepts-intro/
+ */
+template <class T>
+concept integral = std::is_integral_v<T>;
+
+
+template <typename T>
+concept ILabel = requires(T v)
+{
+    {v.buildHtml()} -> std::convertible_to<std::string>;
+};
+
+
+template <typename T>
+requires std::integral<T> || std::floating_point<T>
+constexpr double Average(std::vector<T> const &vec) {
+    const double sum = std::accumulate(vec.begin(), vec.end(), 0.0);
+    return sum / vec.size();
+}
+
+void concept_example() {
+    std::vector ints { 1, 2, 3, 4, 5, 6, 17};
+    std::cout << Average(ints) << '\n';
+}
