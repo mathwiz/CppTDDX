@@ -163,3 +163,19 @@ void ex7_10() {
     print_addr(&x);
     print_addr(nullptr);
 }
+
+
+void ex7_11() {
+    int32_t a = 100;
+    int64_t b{ a };
+    if (a == b) printf("Non-narrowing conversion.\n");
+    //int32_t c{ b }; //compiler complains
+}
+
+
+void ex7_12() {
+    int64_t b = std::numeric_limits<int64_t>::max();
+    int32_t c(b); //narrowing conversion
+    if (c != b) printf("Narrowing conversion.\n");
+    printf("%lld\n%u\n", b, c);
+}
