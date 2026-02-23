@@ -151,3 +151,15 @@ void ex7_9() {
     float z = std::numeric_limits<long double>::max();
     printf("x: %g \ny: %Lg \nz: %g\n", x, y, z);
 }
+
+
+void print_addr(void* x) {
+    printf("%p\n", x);
+}
+
+
+void ex7_10() {
+    int x{};
+    print_addr(&x);
+    print_addr(nullptr);
+}
