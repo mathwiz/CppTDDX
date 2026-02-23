@@ -7,6 +7,7 @@
 
 #include <stdexcept>
 #include <cstddef>
+#include <cstdint>
 #include <cstdio>
 #include <new>
 
@@ -130,4 +131,14 @@ void ex7_7() {
     point1->~Point();
     point2->~Point();
     point3->~Point();
+}
+
+
+void ex7_8() {
+    //0b1111'1111'1 = 511
+    unsigned int w = 0b1111'1111'1;
+    printf("%d\n", w);
+    uint8_t x = w; //255
+    int8_t y = w;  //Implementation dependent
+    printf("x = %u; y = %d\n", x, y);
 }
