@@ -9,6 +9,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstdio>
+#include <limits>
 #include <new>
 
 
@@ -141,4 +142,12 @@ void ex7_8() {
     uint8_t x = w; //255
     int8_t y = w;  //Implementation dependent
     printf("x = %u; y = %d\n", x, y);
+}
+
+
+void ex7_9() {
+    double x = std::numeric_limits<float>::max();
+    long double y = std::numeric_limits<double>::max();
+    float z = std::numeric_limits<long double>::max();
+    printf("x: %g \ny: %Lg \nz: %g\n", x, y, z);
 }
