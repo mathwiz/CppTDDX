@@ -179,3 +179,34 @@ void ex7_12() {
     if (c != b) printf("Narrowing conversion.\n");
     printf("%lld\n%u\n", b, c);
 }
+
+
+void trainwreck(const char* read_only) {
+    auto as_unsigned = (unsigned char*) read_only;
+    *as_unsigned = 'b'; //Crash
+}
+
+
+void trainwreck2(const char* read_only) {
+    //Does not compile
+//    auto as_unsigned = reinterpret_cast<unsigned char*>(read_only);
+//    *as_unsigned = 'b';
+}
+
+
+void ex7_13() {
+    auto ezra = "Ezra";
+    printf("Before trainwreck: %s\n", ezra);
+    trainwreck(ezra);
+    printf("After trainwreck: %s\n", ezra);
+}
+
+
+void ex7_14() {
+    auto ezra = "Ezra";
+    printf("Before trainwreck: %s\n", ezra);
+    trainwreck2(ezra);
+    printf("After trainwreck: %s\n", ezra);
+}
+
+
