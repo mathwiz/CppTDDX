@@ -11,6 +11,7 @@
 #include <cstdio>
 #include <limits>
 #include <new>
+#include <string>
 
 
 struct CheckedInteger {
@@ -224,4 +225,78 @@ void ex7_15() {
     ReadOnlyInt answer{ 42 };
     auto ten_answer = static_cast<int>(answer) * 10;
     printf("Ten answers = %d\n", ten_answer);
+}
+
+
+struct Color {
+    std::string value() {
+        return std::format("H={} S={} V={}", H, S, V);
+    }
+    float H, S, V;
+};
+
+
+constexpr uint8_t max(uint8_t a, uint8_t b) {
+    return a > b ? a : b;
+}
+
+constexpr uint8_t max(uint8_t a, uint8_t b, uint8_t c) {
+    return max(max(a, b), c);
+}
+
+constexpr uint8_t min(uint8_t a, uint8_t b) {
+    return a < b ? a : b;
+}
+
+constexpr uint8_t min(uint8_t a, uint8_t b, uint8_t c) {
+    return min(min(a, b), c);
+}
+
+constexpr float modulo(float dividend, float divisor) {
+    const auto quotient = dividend / divisor;
+    return divisor * (quotient - static_cast<uint8_t>(quotient));
+}
+
+
+constexpr Color rgb_to_hsv(uint8_t r, uint8_t g, uint8_t b) {
+    Color c{};
+    const float full = 255.0f;
+    const auto c_max = max(r, g, b);
+    c.V = c_max / full;
+    
+    const auto c_min = min(r, g, b);
+    const auto delta = c.V - c_min / full;
+    c.S = c_max == 0 ? 0 : delta / c.V;
+    
+    if (c_max == c_min) {
+        c.H = 0;
+        return c;
+    }
+    if (c_max == r) {
+        c.H = (g / full - b / full) / delta;
+    } else if (c_max == g) {
+        c.H = (b / full - r / full) / delta + 2.0f;
+    } else if (c_max == b) {
+        c.H = (r / full - g / full) / delta + 4.0f;
+    }
+    c.H *= 60.0f;
+    c.H = c.H >= 0.0f ? c.H : c.H + 360.0f;
+    c.H = modulo(c.H, 360.0f);
+
+    return c;
+}
+
+
+void ex7_17() {
+    auto black   = rgb_to_hsv(0, 0, 0);
+    auto white   = rgb_to_hsv(255, 255, 255);
+    auto red     = rgb_to_hsv(255, 0, 0);
+    auto green   = rgb_to_hsv(0, 255, 0);
+    auto blue    = rgb_to_hsv(0, 0, 255);
+    
+    std::cout << black.value() << std::endl;
+    std::cout << white.value() << std::endl;
+    std::cout << red.value() << std::endl;
+    std::cout << green.value() << std::endl;
+    std::cout << blue.value() << std::endl;
 }
