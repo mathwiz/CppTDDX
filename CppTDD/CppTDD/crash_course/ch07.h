@@ -300,3 +300,18 @@ void ex7_17() {
     std::cout << green.value() << std::endl;
     std::cout << blue.value() << std::endl;
 }
+
+
+int foo(volatile int& x) {
+    x = 10;
+    x = 20;
+    auto y = x;
+    y = x;
+    return y;
+}
+
+
+void ex7_18() {
+    int a{ 0 };
+    printf("%d\n", foo(a));
+}
