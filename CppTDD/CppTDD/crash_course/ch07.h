@@ -210,3 +210,18 @@ void ex7_14() {
 }
 
 
+struct ReadOnlyInt {
+    ReadOnlyInt(int val) : val{ val } { }
+    explicit operator int() const {
+        return val;
+    }
+private:
+    const int val;
+};
+
+
+void ex7_15() {
+    ReadOnlyInt answer{ 42 };
+    auto ten_answer = static_cast<int>(answer) * 10;
+    printf("Ten answers = %d\n", ten_answer);
+}
