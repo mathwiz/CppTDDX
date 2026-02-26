@@ -106,7 +106,7 @@ enum class Homo {
 
 
 void ex8_5() {
-    const auto specimen{ Primate::Hominid::Homo::sapiens };
+    const auto specimen{ Primate::Hominid::Homo::erectus };
     printf("Homo: %d\n", specimen);
     const auto specimen2{ Primate::Hominid::Australopithicus::animensis };
     printf("Australopithicus: %d\n", specimen2);
@@ -114,8 +114,18 @@ void ex8_5() {
 
 
 void ex8_6() {
+    using Primate::Hominid::Homo;
+    using Primate::Hominid::Australopithicus;
+    const auto specimen{ Homo::habilis };
+    printf("Homo: %d\n", specimen);
+    const auto specimen2{ Australopithicus::afarensis };
+    printf("Australopithicus: %d\n", specimen2);
+}
+
+
+void ex8_7() {
     using namespace Primate::Hominid;
-    const auto specimen{ Homo::erectus };
+    const auto specimen{ Homo::sapiens };
     printf("Homo: %d\n", specimen);
     const auto specimen2{ Australopithicus::africanus };
     printf("Australopithicus: %d\n", specimen2);
