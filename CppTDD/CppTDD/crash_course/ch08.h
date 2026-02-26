@@ -41,3 +41,20 @@ void ex8_2() {
         Tracer second{ "b2" };
     }
 }
+
+
+void randomize(uint32_t&);
+
+void ex8_3() {
+    size_t iterations{};
+    uint32_t number{ 0x4c4347 };
+    while (number != 0x474343 ) {
+        randomize(number);
+        ++iterations;
+    }
+    printf("%zd iterations\n", iterations);
+}
+
+void randomize(uint32_t& x) {
+    x = 0x3fffffff & (0x41c64e6d * x + 12345) % 0x80000000;
+}
