@@ -111,3 +111,13 @@ void ex8_5() {
     const auto specimen2{ Primate::Hominid::Australopithicus::animensis };
     printf("Australopithicus: %d\n", specimen2);
 }
+
+
+void ex8_6() {
+    using namespace Primate::Hominid;
+    const auto specimen{ Homo::erectus };
+    printf("Homo: %d\n", specimen);
+    const auto specimen2{ Australopithicus::africanus };
+    printf("Australopithicus: %d\n", specimen2);
+}
+
