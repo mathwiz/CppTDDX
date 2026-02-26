@@ -88,3 +88,26 @@ uint16_t RandomNumberGenerator::next() {
 size_t RandomNumberGenerator::get_iterations() const {
     return iterations;
 }
+
+
+namespace Primate::Hominid {
+enum class Australopithicus {
+    animensis,
+    afarensis,
+    africanus,
+    garhi,
+};
+enum class Homo {
+    erectus,
+    habilis,
+    sapiens
+};
+}
+
+
+void ex8_5() {
+    const auto specimen{ Primate::Hominid::Homo::sapiens };
+    printf("Homo: %d\n", specimen);
+    const auto specimen2{ Primate::Hominid::Australopithicus::animensis };
+    printf("Australopithicus: %d\n", specimen2);
+}
