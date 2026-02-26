@@ -6,6 +6,7 @@
 //
 
 #include <cstdio>
+#include <cstdint>
 
 
 void ex8_1() {
@@ -57,4 +58,33 @@ void ex8_3() {
 
 void randomize(uint32_t& x) {
     x = 0x3fffffff & (0x41c64e6d * x + 12345) % 0x80000000;
+}
+
+
+struct RandomNumberGenerator {
+    explicit RandomNumberGenerator(uint16_t seed)
+    : iterations{}, number{ seed } {}
+    uint16_t next();
+    size_t get_iterations() const;
+private:
+    size_t iterations;
+    uint16_t number;
+};
+
+void ex8_4() {
+    RandomNumberGenerator rng{ 0752 };
+    while (rng.next() != 0) {
+        //do nothing
+    }
+    printf("%zd\n", rng.get_iterations());
+}
+
+uint16_t RandomNumberGenerator::next() {
+    ++iterations;
+    number = 0177 & (055 * number + 0123) % 256;
+    return number;
+}
+
+size_t RandomNumberGenerator::get_iterations() const {
+    return iterations;
 }
