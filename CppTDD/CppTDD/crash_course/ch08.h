@@ -14,3 +14,30 @@ void ex8_1() {
     42;
     printf("%d\n", x);
 }
+
+
+struct Tracer {
+    Tracer(const char* name) : name{ name } {
+        printf("Tracer %s constructed.\n", name);
+    }
+    ~Tracer() {
+        printf("Tracer %s destructed.\n", name);
+    }
+private:
+    const char* const name;
+};
+
+
+void ex8_2() {
+    Tracer main{ "main" };
+    {
+        printf("Block a\n");
+        Tracer first{ "a1" };
+        Tracer second{ "a2" };
+    }
+    {
+        printf("Block b\n");
+        Tracer first{ "b1" };
+        Tracer second{ "b2" };
+    }
+}
