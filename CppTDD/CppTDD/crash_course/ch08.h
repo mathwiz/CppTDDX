@@ -131,3 +131,15 @@ void ex8_7() {
     printf("Australopithicus: %d\n", specimen2);
 }
 
+
+using String = const char[255];
+using HominidH = Primate::Hominid::Homo;
+using HominidA = Primate::Hominid::Australopithicus;
+
+void ex8_8() {
+    const auto my_specimen{ HominidA::afarensis };
+    if (my_specimen == HominidA::afarensis) {
+        String linean_name{ "Australopithicus afarensis" };
+        printf("My specimen: %s\n", linean_name);
+    }
+}
