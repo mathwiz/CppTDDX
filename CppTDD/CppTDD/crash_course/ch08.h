@@ -328,3 +328,12 @@ void ex8_21() {
     while (!double_return_overflow(x));
     printf("\n");
 }
+
+
+void ex8_23() {
+    const int x[]{ 1,1,2,3,5,8,13,21,34,55,89 };
+    printf("i: x[i]\n");
+    for (int i{}; i < 11; i++) {
+        printf("%d: %d\n", i, x[i]);
+    }
+}
