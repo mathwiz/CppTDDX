@@ -195,3 +195,17 @@ void ex8_11() {
         printf("How did you get here?");
     }
 }
+
+
+[[roreturn]] void attribute_test() {
+    throw std::runtime_error{ "Use of [[noreturn]]" };
+}
+
+
+void ex8_12() {
+    try {
+        attribute_test();
+    } catch (const std::exception& e) {
+        printf("exception: %s\n", e.what());
+    }
+}
