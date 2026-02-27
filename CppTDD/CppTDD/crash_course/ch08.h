@@ -179,7 +179,7 @@ struct TextFile {
 
 
 TextFile read_text_file(const char* path) {
-    const static char contents[]{ "Sometimes the goat is you." };
+    const static char contents[]{ "Structured bindings are cool." };
     return TextFile{
         true,
         contents,
