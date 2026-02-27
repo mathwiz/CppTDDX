@@ -10,7 +10,7 @@
 #include "ch08.h"
 
 int main(int argc, const char * argv[]) {
-    ex8_27();
+    ex8_32();
     std::cout << "Exiting...";
     return EXIT_SUCCESS;
 }

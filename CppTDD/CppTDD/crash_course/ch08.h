@@ -401,3 +401,39 @@ void ex8_28() {
     }
     printf("\n");
 }
+
+
+void ex8_29() {
+    for (auto i : FibonacciRange{ 5000 }) {
+        if (i == 34) {
+            printf("*** ");
+            break;
+        }
+        printf("%d ", i);
+    }
+    printf("\n");
+}
+
+
+void ex8_30() {
+    for (auto i : FibonacciRange{ 5000 }) {
+        if (i == 34) {
+            printf("*** ");
+            continue;
+        }
+        printf("%d ", i);
+    }
+    printf("\n");
+}
+
+
+void ex8_32() {
+    goto silent_bob;
+    luke:
+    printf("I'm not afraid.\n");
+    goto yoda;
+    silent_bob:
+    goto luke;
+    yoda:
+    printf("You will be if you use goto.\n");
+}
