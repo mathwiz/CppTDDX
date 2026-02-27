@@ -169,3 +169,29 @@ void ex8_9() {
         printf("Exception: %s\n", e.what());
     }
 }
+
+
+struct TextFile {
+    bool success;
+    const char* data;
+    size_t n_bytes;
+};
+
+
+TextFile read_text_file(const char* path) {
+    const static char contents[]{ "Sometimes the goat is you." };
+    return TextFile{
+        true,
+        contents,
+        sizeof(contents)
+    };
+}
+
+void ex8_11() {
+    const auto [success, contents, length] = read_text_file("README.md");
+    if (success) {
+        printf("Read %zd bytes: %s\n", length, contents);
+    } else {
+        printf("How did you get here?");
+    }
+}
