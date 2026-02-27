@@ -209,3 +209,24 @@ void ex8_12() {
         printf("exception: %s\n", e.what());
     }
 }
+
+
+template <typename T>
+constexpr const char* sign(const T& x) {
+    const char* result{};
+    if (x == 0) {
+        result = "zero";
+    } else if (x > 0) {
+        result = "positive";
+    } else {
+        result = "negative";
+    }
+    return result;
+}
+
+
+void ex8_14() {
+    printf("float 0.001 is %s\n", sign(0.001f));
+    printf("int   -2000 is %s\n", sign(-2000));
+    printf("char      0 is %s\n", sign(char{}));
+}
