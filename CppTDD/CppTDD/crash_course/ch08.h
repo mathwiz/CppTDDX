@@ -337,3 +337,13 @@ void ex8_23() {
         printf("%d: %d\n", i, x[i]);
     }
 }
+
+
+void ex8_24() {
+    const int x[]{ 1,1,2,3,5,8,13,21,34,55,89 };
+    printf("i: x[i]\n");
+    int i{};
+    for (const auto elem : x) {
+        printf("%d: %d\n", i++, elem);
+    }
+}
