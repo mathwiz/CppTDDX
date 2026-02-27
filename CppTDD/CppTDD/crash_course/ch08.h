@@ -347,3 +347,57 @@ void ex8_24() {
         printf("%d: %d\n", i++, elem);
     }
 }
+
+
+struct FibonacciIterator {
+    bool operator!=(int x) const {
+        return x >= current;
+    }
+    
+    FibonacciIterator& operator++() {
+        const auto tmp = current;
+        current += last;
+        last = tmp;
+        return *this;
+    }
+    
+    int operator*() {
+        return current;
+    }
+private:
+    int current{ 1 }, last{ 1 };
+};
+
+
+struct FibonacciRange {
+    explicit FibonacciRange(int max) : max{ max } { }
+    
+    FibonacciIterator begin() const {
+        return FibonacciIterator{};
+    }
+    
+    int end() const {
+        return max;
+    }
+private:
+    const int max;
+};
+
+
+void ex8_27() {
+    for (const auto elem : FibonacciRange{ 5000 }) {
+        printf("%d ", elem);
+    }
+    printf("\n");
+}
+
+
+void ex8_28() {
+    FibonacciRange range{ 5000 };
+    const auto end = range.end();
+    for (auto elem = range.begin(); elem != end; ++elem ) {
+        const auto i = *elem;
+        printf("%d ", i);
+    }
+    printf("\n");
+}
