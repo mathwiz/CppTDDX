@@ -259,3 +259,44 @@ void ex8_18() {
         printf("Exception: %s\n", e.what());
     }
 }
+
+
+enum class Color {
+    Mauve,
+    Pink,
+    Russet
+};
+
+
+struct Result {
+    const char* name;
+    Color color;
+};
+
+
+Result observe_shrub(const char* name) {
+    return Result{ name, Color::Russet };
+}
+
+
+void ex8_19() {
+    const char* description;
+    switch (const auto result = observe_shrub("Zaphod"); result.color) {
+        case Color::Mauve: {
+            description = "mauve";
+            break;
+        }
+        case Color::Pink: {
+            description = "pink";
+            break;
+        }
+        case Color::Russet: {
+            description = "russet";
+            break;
+        }
+        default: {
+            description = "who knows?";
+        }
+    }
+    printf("The shrub has color %s\n", description);
+}
