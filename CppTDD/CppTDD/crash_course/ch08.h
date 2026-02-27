@@ -300,3 +300,20 @@ void ex8_19() {
     }
     printf("The shrub has color %s\n", description);
 }
+
+
+bool double_return_overflow(uint8_t& x) {
+    const auto original = x;
+    x *= 2;
+    return original > x;
+}
+
+
+void ex8_20() {
+    uint8_t x{ 1 };
+    printf("uint8_t:\n===\n");
+    while (!double_return_overflow(x)) {
+        printf("%u ", x);
+    }
+    printf("\n");
+}
