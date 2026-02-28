@@ -43,3 +43,19 @@ void ex9_3() {
     printf("%d Tequila\n", ethanol.apply());
     printf("Floor!\n");
 }
+
+
+template <typename X, typename Y>
+auto add(X x, Y y) -> decltype(x + y) {
+    return x + y;
+}
+
+
+void ex9_4() {
+    auto my_double = add(100., -10);
+    printf("decltype(double + int) = double: %f\n", my_double);
+    auto my_uint = add(100U, -10);
+    printf("decltype(uint + int) = uint: %u\n", my_uint);
+    auto my_ulonglong = add(char{ 100 }, 11'222'999ull);
+    printf("decltype(char + ulonglong) = ulonglong: %llu\n", my_ulonglong);
+}
