@@ -25,3 +25,21 @@ void ex9_1() {
     BostonCorbett senior;
     senior.shoot();
 }
+
+
+struct Distillate {
+    int apply() volatile {
+        return ++applications;
+    }
+private:
+    int applications{};
+};
+
+
+void ex9_3() {
+    volatile Distillate ethanol;
+    printf("%d Tequila\n", ethanol.apply());
+    printf("%d Tequila\n", ethanol.apply());
+    printf("%d Tequila\n", ethanol.apply());
+    printf("Floor!\n");
+}
