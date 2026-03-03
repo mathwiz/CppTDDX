@@ -135,3 +135,38 @@ void ex9_10() {
     printf("&sub at %p\n", op);
     printf("%g - %g = %g\n", first, second, op(first, second));
 }
+
+
+struct CountIf {
+    CountIf(char x) : x{ x } { }
+    
+    size_t operator()(const char* str) const {
+        size_t index{}, result{};
+        while (str[index]) {
+            if (str[index] == x) result++;
+            index++;
+        }
+        return result;
+    }
+private:
+    const char x;
+};
+
+
+void ex9_12() {
+    CountIf s_counter{ 's' };
+    
+    const char* sally_str = "Sally sells seashells by the seashore.";
+    auto sally = s_counter(sally_str);
+    printf("%s s_counter: %zd\n", sally_str, sally);
+    
+    const char* sailor_str = "Sailor went to the sea to see what he could see.";
+    auto sailor = s_counter(sailor_str);
+    printf("%s s_counter: %zd\n", sailor_str, sailor);
+    
+    CountIf f_counter{ 'f' };
+    const char* buffalo_str =   "Buffalo buffalo Buffalo buffalo "
+                                "Buffalo buffalo Buffalo buffalo ";
+    auto buffalo = f_counter(buffalo_str);
+    printf("%s f_counter: %zd\n", buffalo_str, buffalo);
+}
