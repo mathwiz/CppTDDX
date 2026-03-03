@@ -77,7 +77,7 @@ int sum(size_t n, ...) {
 
 
 void ex9_5() {
-    printf("Summing with explicit list size: %d.\n", sum(6, 1, 2, 3, 4, 5, 6));
+    printf("Summing with explicit list size: %d.\n", sum(7, 1, 2, 3, 4, 5, 6, 7));
 }
 
 
@@ -93,5 +93,16 @@ constexpr T sum2(T x, Args... args) {
 
 
 void ex9_8() {
-    printf("Summing with recusion: %d.\n", sum2(1, 2, 3, 4, 5, 6));
+    printf("Summing with recusion: %d.\n", sum2(1, 2, 3, 4, 5, 6, 7));
+}
+
+
+template <typename... T>
+constexpr auto sum3(T... args) {
+    return (... + args);
+}
+
+
+void ex9_9() {
+    printf("Summing with fold: %d.\n", sum3(1, 2, 3, 4, 5, 6, 7));
 }
