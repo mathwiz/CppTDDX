@@ -77,5 +77,21 @@ int sum(size_t n, ...) {
 
 
 void ex9_5() {
-    printf("The answer is %d.\n", sum(6, 1, 2, 3, 4, 5, 6) * 2);
+    printf("Summing with explicit list size: %d.\n", sum(6, 1, 2, 3, 4, 5, 6));
+}
+
+
+template <typename T>
+constexpr T sum2(T x) {
+    return x;
+}
+
+template <typename T, typename... Args>
+constexpr T sum2(T x, Args... args) {
+    return x + sum2(args...);
+}
+
+
+void ex9_8() {
+    printf("Summing with recusion: %d.\n", sum2(1, 2, 3, 4, 5, 6));
 }
