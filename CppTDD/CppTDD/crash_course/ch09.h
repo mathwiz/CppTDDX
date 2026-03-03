@@ -6,6 +6,8 @@
 //
 
 #include <cstdio>
+#include <cstdint>
+#include <cstdarg>
 
 
 struct BostonCorbett {
@@ -58,4 +60,22 @@ void ex9_4() {
     printf("decltype(uint + int) = uint: %u\n", my_uint);
     auto my_ulonglong = add(char{ 100 }, 11'222'999ull);
     printf("decltype(char + ulonglong) = ulonglong: %llu\n", my_ulonglong);
+}
+
+
+int sum(size_t n, ...) {
+    va_list args;
+    va_start(args, n);
+    int result{};
+    while (n--) {
+        auto next_element = va_arg(args, int);
+        result += next_element;
+    }
+    va_end(args);
+    return result;
+}
+
+
+void ex9_5() {
+    printf("The answer is %d.\n", sum(6, 1, 2, 3, 4, 5, 6) * 2);
 }
