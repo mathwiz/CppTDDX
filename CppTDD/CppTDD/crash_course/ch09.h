@@ -106,3 +106,32 @@ constexpr auto sum3(T... args) {
 void ex9_9() {
     printf("Summing with fold: %d.\n", sum3(1, 2, 3, 4, 5, 6, 7));
 }
+
+
+float add(float a, float b) {
+    return a + b;
+}
+
+float sub(float a, float b) {
+    return a - b;
+}
+
+
+void ex9_10() {
+    const float first{ 111 };
+    const float second{ 222 };
+    
+    float(*op)(float, float) {};
+    
+    printf("op initialized to %p\n", op);
+    
+    //using address
+    op = &add;
+    printf("&add at %p\n", op);
+    printf("%g + %g = %g\n", first, second, op(first, second));
+    
+    //using name
+    op = sub;
+    printf("&sub at %p\n", op);
+    printf("%g - %g = %g\n", first, second, op(first, second));
+}
