@@ -170,3 +170,30 @@ void ex9_12() {
     auto buffalo = f_counter(buffalo_str);
     printf("%s f_counter: %zd\n", buffalo_str, buffalo);
 }
+
+
+template <typename Fn>
+void transform_using_lambda(Fn fn, const int* in, int* out, size_t length) {
+    for (size_t i{}; i < length; i++) {
+        out[i] = fn(in[i]);
+    }
+}
+
+
+void ex9_15() {
+    const size_t len{ 3 };
+    int base[]{ 2, 4, 6 };
+    int a[len], b[len], c[len];
+    
+    auto lambda1 = [](int x) { return x; };
+    auto lambda2 = [](int x) { return 2 * x; };
+    auto lambda3 = [](int x) { return x * x; };
+
+    transform_using_lambda(lambda1, base, a, len);
+    transform_using_lambda(lambda2, base, b, len);
+    transform_using_lambda(lambda3, base, c, len);
+
+    printf("Element %d %d %d\n", a[0], b[0], c[0]);
+    printf("Element %d %d %d\n", a[1], b[1], c[1]);
+    printf("Element %d %d %d\n", a[2], b[2], c[2]);
+}
