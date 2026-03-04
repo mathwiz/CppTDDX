@@ -385,3 +385,46 @@ void ex9_23() {
     printf("%s s_counter: %zd\n", sailor_str, sailor);
     printf("Tally ref capture: %zd\n", ref_capture);
 }
+
+
+struct LambdaFactory {
+    LambdaFactory(char in) : to_count{ in }, tally{} { }
+    
+    auto make_lambda() {
+        return [this](const char* str) {
+            size_t index{}, result{};
+            while (str[index]) {
+                if (str[index] == to_count) result++;
+                index++;
+            }
+            tally += result;
+            return result;
+        };
+    }
+    
+    auto get_tally() { return tally; }
+    
+private:
+    const char to_count;
+    size_t tally;
+};
+
+
+void ex9_24() {
+    char char_to_count{ 's' };
+    printf("Capturing this.\n");
+    LambdaFactory factory{ char_to_count };
+    auto s_counter = factory.make_lambda();
+    
+    printf("Tally member variable: %zd\n", factory.get_tally());
+    
+    const char* sally_str = "Sally sells seashells by the seashore.";
+    auto sally = s_counter(sally_str);
+    printf("%s s_counter: %zd\n", sally_str, sally);
+    printf("Tally member variable: %zd\n", factory.get_tally());
+
+    const char* sailor_str = "Sailor went to the sea to see what he could see.";
+    auto sailor = s_counter(sailor_str);
+    printf("%s s_counter: %zd\n", sailor_str, sailor);
+    printf("Tally member variable: %zd\n", factory.get_tally());
+}
