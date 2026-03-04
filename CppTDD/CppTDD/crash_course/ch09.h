@@ -197,3 +197,10 @@ void ex9_15() {
     printf("Element %d %d %d\n", a[1], b[1], c[1]);
     printf("Element %d %d %d\n", a[2], b[2], c[2]);
 }
+
+
+void ex9_16() {
+    auto incr_with_default = [](auto x, int y = 1) { return y + x; };
+    printf("increment (10): %d\n", incr_with_default(10));
+    printf("increment (10, 2): %d\n", incr_with_default(10, 2));
+}
