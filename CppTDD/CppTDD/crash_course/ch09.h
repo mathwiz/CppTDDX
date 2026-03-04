@@ -193,9 +193,9 @@ void ex9_15() {
     transform_using_lambda(lambda2, base, b, len);
     transform_using_lambda(lambda3, base, c, len);
 
-    printf("Element %d %d %d\n", a[0], b[0], c[0]);
-    printf("Element %d %d %d\n", a[1], b[1], c[1]);
-    printf("Element %d %d %d\n", a[2], b[2], c[2]);
+    printf("Element 0: %d %d %d\n", a[0], b[0], c[0]);
+    printf("Element 1: %d %d %d\n", a[1], b[1], c[1]);
+    printf("Element 2: %d %d %d\n", a[2], b[2], c[2]);
 }
 
 
@@ -203,4 +203,30 @@ void ex9_16() {
     auto incr_with_default = [](auto x, int y = 1) { return y + x; };
     printf("increment (10): %d\n", incr_with_default(10));
     printf("increment (10, 2): %d\n", incr_with_default(10, 2));
+}
+
+
+template <typename Fn, typename T>
+void transform_using_generic_lambda(Fn fn, const T* in, T* out, size_t length) {
+    for (size_t i{}; i < length; i++) {
+        out[i] = fn(in[i]);
+    }
+}
+
+
+void ex9_17() {
+    const size_t len{ 3 };
+    int base_int[]{ 2, 4, 6 };
+    int a[len];
+    float base_float[]{ 10.f, 20.f, 30.f };
+    float b[len];
+
+    auto translate = [](auto x) { return 10 * x + 5; };
+
+    transform_using_generic_lambda(translate, base_int, a, len);
+    transform_using_generic_lambda(translate, base_float, b, len);
+
+    printf("Element 0: %d %f\n", a[0], b[0]);
+    printf("Element 1: %d %f\n", a[1], b[1]);
+    printf("Element 2: %d %f\n", a[2], b[2]);
 }
