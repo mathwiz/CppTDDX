@@ -357,3 +357,31 @@ void ex9_22() {
     printf("%s s_counter: %zd\n", sailor_str, sailor);
     printf("Tally ref capture: %zd\n", ref_capture);
 }
+
+
+void ex9_23() {
+    char char_to_count{ 's' };
+    size_t ref_capture{};
+    printf("Renaming capture.\n");
+    auto s_counter = [&, the_char=char_to_count](const char* str) {
+        size_t index{}, result{};
+        while (str[index]) {
+            if (str[index] == the_char) result++;
+            index++;
+        }
+        ref_capture += result;
+        return result;
+    };
+    
+    printf("Tally ref capture: %zd\n", ref_capture);
+    
+    const char* sally_str = "Sally sells seashells by the seashore.";
+    auto sally = s_counter(sally_str);
+    printf("%s s_counter: %zd\n", sally_str, sally);
+    printf("Tally ref capture: %zd\n", ref_capture);
+
+    const char* sailor_str = "Sailor went to the sea to see what he could see.";
+    auto sailor = s_counter(sailor_str);
+    printf("%s s_counter: %zd\n", sailor_str, sailor);
+    printf("Tally ref capture: %zd\n", ref_capture);
+}
