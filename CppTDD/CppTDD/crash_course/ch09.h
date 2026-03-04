@@ -230,3 +230,24 @@ void ex9_17() {
     printf("Element 1: %d %f\n", a[1], b[1]);
     printf("Element 2: %d %f\n", a[2], b[2]);
 }
+
+
+void ex9_18() {
+    char char_to_count{ 's' };
+    auto s_counter = [char_to_count](const char* str) {
+        size_t index{}, result{};
+        while (str[index]) {
+            if (str[index] == char_to_count) result++;
+            index++;
+        }
+        return result;
+    };
+    
+    const char* sally_str = "Sally sells seashells by the seashore.";
+    auto sally = s_counter(sally_str);
+    printf("%s s_counter: %zd\n", sally_str, sally);
+    
+    const char* sailor_str = "Sailor went to the sea to see what he could see.";
+    auto sailor = s_counter(sailor_str);
+    printf("%s s_counter: %zd\n", sailor_str, sailor);
+}
