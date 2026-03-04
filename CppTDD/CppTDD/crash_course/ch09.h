@@ -278,3 +278,82 @@ void ex9_19() {
     printf("%s s_counter: %zd\n", sailor_str, sailor);
     printf("Tally ref capture: %zd\n", ref_capture);
 }
+
+
+void ex9_20() {
+    char char_to_count{ 's' };
+    size_t ref_capture{};
+    printf("Default (unnamed) capture by reference.\n");
+    auto s_counter = [&](const char* str) {
+        size_t index{}, result{};
+        while (str[index]) {
+            if (str[index] == char_to_count) result++;
+            index++;
+        }
+        ref_capture += result;
+        return result;
+    };
+    
+    printf("Tally ref capture: %zd\n", ref_capture);
+    
+    const char* sally_str = "Sally sells seashells by the seashore.";
+    auto sally = s_counter(sally_str);
+    printf("%s s_counter: %zd\n", sally_str, sally);
+    printf("Tally ref capture: %zd\n", ref_capture);
+
+    const char* sailor_str = "Sailor went to the sea to see what he could see.";
+    auto sailor = s_counter(sailor_str);
+    printf("%s s_counter: %zd\n", sailor_str, sailor);
+    printf("Tally ref capture: %zd\n", ref_capture);
+}
+
+
+
+void ex9_21() {
+    char char_to_count{ 's' };
+    printf("Default (unnamed) capture by value.\n");
+    auto s_counter = [=](const char* str) {
+        size_t index{}, result{};
+        while (str[index]) {
+            if (str[index] == char_to_count) result++;
+            index++;
+        }
+        return result;
+    };
+    
+    const char* sally_str = "Sally sells seashells by the seashore.";
+    auto sally = s_counter(sally_str);
+    printf("%s s_counter: %zd\n", sally_str, sally);
+
+    const char* sailor_str = "Sailor went to the sea to see what he could see.";
+    auto sailor = s_counter(sailor_str);
+    printf("%s s_counter: %zd\n", sailor_str, sailor);
+}
+
+
+void ex9_22() {
+    char char_to_count{ 's' };
+    size_t ref_capture{};
+    printf("Default and named capture.\n");
+    auto s_counter = [&, char_to_count](const char* str) {
+        size_t index{}, result{};
+        while (str[index]) {
+            if (str[index] == char_to_count) result++;
+            index++;
+        }
+        ref_capture += result;
+        return result;
+    };
+    
+    printf("Tally ref capture: %zd\n", ref_capture);
+    
+    const char* sally_str = "Sally sells seashells by the seashore.";
+    auto sally = s_counter(sally_str);
+    printf("%s s_counter: %zd\n", sally_str, sally);
+    printf("Tally ref capture: %zd\n", ref_capture);
+
+    const char* sailor_str = "Sailor went to the sea to see what he could see.";
+    auto sailor = s_counter(sailor_str);
+    printf("%s s_counter: %zd\n", sailor_str, sailor);
+    printf("Tally ref capture: %zd\n", ref_capture);
+}
