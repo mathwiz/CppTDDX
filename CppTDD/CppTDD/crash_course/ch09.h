@@ -8,6 +8,7 @@
 #include <cstdio>
 #include <cstdint>
 #include <cstdarg>
+#include <functional>
 
 
 struct BostonCorbett {
@@ -427,4 +428,14 @@ void ex9_24() {
     auto sailor = s_counter(sailor_str);
     printf("%s s_counter: %zd\n", sailor_str, sailor);
     printf("Tally member variable: %zd\n", factory.get_tally());
+}
+
+
+void ex9_25() {
+    std::function<void()> fn;
+    try {
+        fn();
+    } catch (const std::bad_function_call& e) {
+        printf("%s\n", e.what());
+    }
 }
