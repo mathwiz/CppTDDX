@@ -25,7 +25,7 @@ int handle_args(int argc, const char * argv[]) {
     for (int i{}; i < argc; i++) {
         cout << " ";
         cout << argv[i];
-        cout << endl;
     }
+    cout << endl;
     return 0;
 }
