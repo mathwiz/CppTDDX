@@ -439,3 +439,17 @@ void ex9_25() {
         printf("%s\n", e.what());
     }
 }
+
+
+void static_function() {
+    printf("A static function.\n");
+}
+
+void ex9_26() {
+    std::function<void()> fn { [] {
+        printf("A lambda.\n");
+    } };
+    fn();
+    fn = static_function;
+    fn();
+}
