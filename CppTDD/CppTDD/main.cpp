@@ -9,8 +9,23 @@
 
 #include "ch09.h"
 
+int handle_args(int argc, const char * argv[]);
+
+
 int main(int argc, const char * argv[]) {
+    handle_args(argc, argv);
     ex9_27();
     std::cout << "Exiting...";
     return EXIT_SUCCESS;
+}
+
+int handle_args(int argc, const char * argv[]) {
+    using std::cout;
+    using std::endl;
+    for (int i{}; i < argc; i++) {
+        cout << " ";
+        cout << argv[i];
+        cout << endl;
+    }
+    return 0;
 }
