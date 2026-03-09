@@ -22,10 +22,10 @@ int main(int argc, const char * argv[]) {
 int handle_args(int argc, const char * argv[]) {
     using std::cout;
     using std::endl;
-    for (int i{}; i < argc; i++) {
-        cout << " ";
+    cout << "Arguments: " << argc << endl;
+    for (size_t i{}; i < argc; i++) {
         cout << argv[i];
+        cout << endl;
     }
-    cout << endl;
     return 0;
 }
