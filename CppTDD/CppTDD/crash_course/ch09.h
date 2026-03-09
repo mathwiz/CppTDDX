@@ -453,3 +453,34 @@ void ex9_26() {
     fn = static_function;
     fn();
 }
+
+
+size_t space_counter(const char* str) {
+    size_t index{}, result{};
+    while (str[index]) {
+        if (str[index] == ' ') result++;
+        index++;
+    }
+    return result;
+}
+
+
+void ex9_27() {
+    const char e{ 'e' };
+    
+    std::function<size_t(const char*)> funcs [] {
+        space_counter,
+        CountIf{ e },
+        [](const char* str) {
+            size_t index{};
+            while (str[index]) index++;
+            return index;
+        }
+    };
+
+    const char* sailor_str = "Sailor went to sea to see what he could see.";
+    size_t index{};
+    for (const auto& fn : funcs) {
+        printf("function #%zd: %zd\n", index++, fn(sailor_str));
+    }
+}
