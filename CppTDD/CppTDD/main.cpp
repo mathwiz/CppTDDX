@@ -14,7 +14,7 @@ int handle_args(int argc, const char * argv[]);
 
 int main(int argc, const char * argv[]) {
     handle_args(argc, argv);
-    ex9_27();
+    ex9_33();
     std::cout << "Exiting...";
     return EXIT_SUCCESS;
 }
