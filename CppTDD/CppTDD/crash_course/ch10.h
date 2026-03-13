@@ -51,6 +51,7 @@ void test_initial_speed_is_zero() {
     assert_that(auto_brake.get_speed_mps() == 0L, "speed not equal to zero");
 }
 
+
 void ex10_5() {
     assert_that(2 + 2 == 4, "so true!");
     assert_that(2 + 2 == 5, "no sir!");
@@ -58,4 +59,8 @@ void ex10_5() {
 
 void ex10_6() {
     test_initial_speed_is_zero();
+}
+
+void ex10_7() {
+    run_test(test_initial_speed_is_zero, "initial speed is zero");
 }
