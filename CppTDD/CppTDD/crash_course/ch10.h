@@ -31,9 +31,11 @@ struct AutoBrake {
     speed_mps{},
     collision_threshold_s{ 5 },
     publish{ publish } { }
+    
     void observe(const SpeedUpdate&) { }
     void observe(const CarDetected&) { }
     void set_collision_threshold_s(double s) {
+        if (s < 1) throw std::runtime_error{ "collision_threshold less than 1" };
         collision_threshold_s = s;
     }
     double get_collision_threshold_s() const {
@@ -64,9 +66,19 @@ void test_initial_sensitivity_is_five() {
     assert_that(default_auto_brake.get_collision_threshold_s() == 5L, "initial sensitivity is not 5");
 }
 
+void test_sensitivity_greater_than_one() {
+    try {
+        default_auto_brake.set_collision_threshold_s(0.5L);
+    } catch (const std::exception&) {
+        return;
+    }
+    assert_that(false, "no exception thrown");
+}
+
 void run_all_tests() {
-    run_test(test_initial_speed_is_zero, "initial speed is zero");
-    run_test(test_initial_sensitivity_is_five, "initial sensitivity is five");
+    run_test(test_initial_speed_is_zero, "initial speed is 0");
+    run_test(test_initial_sensitivity_is_five, "initial sensitivity is 5");
+    run_test(test_sensitivity_greater_than_one, "sensitivity greater than 1");
 }
 
 
