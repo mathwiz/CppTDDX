@@ -27,7 +27,10 @@ struct ServiceBus {
 
 template <typename T>
 struct AutoBrake {
-    AutoBrake(const T& publish) : speed_mps{}, publish{ publish } { }
+    AutoBrake(const T& publish) :
+    speed_mps{},
+    collision_threshold_s{ 5 },
+    publish{ publish } { }
     void observe(const SpeedUpdate&) { }
     void observe(const CarDetected&) { }
     void set_collision_threshold_s(double s) {
@@ -48,18 +51,22 @@ private:
 
 // * Test set up * //
 
-AutoBrake auto_brake{ [](const BrakeCommand&) {} };
+AutoBrake default_auto_brake{ [](const BrakeCommand&) {} };
 
 
 // * Test functions * //
 
 void test_initial_speed_is_zero() {
-    assert_that(auto_brake.get_speed_mps() == 0L, "speed not equal to 0");
+    assert_that(default_auto_brake.get_speed_mps() == 0L, "speed not equal to 0");
 }
 
+void test_initial_sensitivity_is_five() {
+    assert_that(default_auto_brake.get_collision_threshold_s() == 5L, "initial sensitivity is not 5");
+}
 
 void run_all_tests() {
     run_test(test_initial_speed_is_zero, "initial speed is zero");
+    run_test(test_initial_sensitivity_is_five, "initial sensitivity is five");
 }
 
 
