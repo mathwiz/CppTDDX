@@ -27,7 +27,7 @@ struct ServiceBus {
 
 template <typename T>
 struct AutoBrake {
-    AutoBrake(const T& publish) : publish{ publish } { }
+    AutoBrake(const T& publish) : speed_mps{}, publish{ publish } { }
     void observe(const SpeedUpdate&) { }
     void observe(const CarDetected&) { }
     void set_collision_threshold_s(double s) {
@@ -48,7 +48,12 @@ private:
 
 void test_initial_speed_is_zero() {
     AutoBrake auto_brake{ [](const BrakeCommand&) {} };
-    assert_that(auto_brake.get_speed_mps() == 0L, "speed not equal to zero");
+    assert_that(auto_brake.get_speed_mps() == 0L, "speed not equal to 0");
+}
+
+
+void run_all_tests() {
+    run_test(test_initial_speed_is_zero, "initial speed is zero");
 }
 
 
@@ -61,6 +66,6 @@ void ex10_6() {
     test_initial_speed_is_zero();
 }
 
-void ex10_7() {
-    run_test(test_initial_speed_is_zero, "initial speed is zero");
+void ex10_8() {
+    run_all_tests();
 }
