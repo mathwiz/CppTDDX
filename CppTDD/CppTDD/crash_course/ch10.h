@@ -46,8 +46,14 @@ private:
 };
 
 
+// * Test set up * //
+
+AutoBrake auto_brake{ [](const BrakeCommand&) {} };
+
+
+// * Test functions * //
+
 void test_initial_speed_is_zero() {
-    AutoBrake auto_brake{ [](const BrakeCommand&) {} };
     assert_that(auto_brake.get_speed_mps() == 0L, "speed not equal to 0");
 }
 
@@ -56,6 +62,8 @@ void run_all_tests() {
     run_test(test_initial_speed_is_zero, "initial speed is zero");
 }
 
+
+// * Examples * //
 
 void ex10_5() {
     assert_that(2 + 2 == 4, "so true!");
