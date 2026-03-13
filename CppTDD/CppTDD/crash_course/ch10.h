@@ -5,6 +5,8 @@
 //  Created by Yohan Lee on 3/12/26.
 //
 
+#include "unit_test.h"
+
 
 struct SpeedUpdate {
     double velocity_mps;
@@ -43,6 +45,17 @@ private:
     const T& publish;
 };
 
-void ex10_8() {
-    
+
+void test_initial_speed_is_zero() {
+    AutoBrake auto_brake{ [](const BrakeCommand&) {} };
+    assert_that(auto_brake.get_speed_mps() == 0L, "speed not equal to zero");
+}
+
+void ex10_5() {
+    assert_that(2 + 2 == 4, "so true!");
+    assert_that(2 + 2 == 5, "no sir!");
+}
+
+void ex10_6() {
+    test_initial_speed_is_zero();
 }
