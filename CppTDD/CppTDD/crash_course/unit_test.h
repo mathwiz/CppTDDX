@@ -11,6 +11,11 @@ constexpr void assert_that(bool stmt, const char* msg) {
     if (!stmt) throw std::runtime_error{ msg };
 }
 
+constexpr void assert_value(double val, double expected, double epsilon, const char* msg) {
+    double diff = std::abs(val - expected);
+    if (diff > epsilon) throw std::runtime_error{ msg };
+}
+
 
 void run_test(void(*unit_test)(), const char* name) {
     try {
