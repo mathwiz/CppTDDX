@@ -25,25 +25,34 @@ struct ServiceBus {
     void publish(const BrakeCommand&);
 };
 
-template <typename T>
+
+using SpeedUpdateCallback = std::function<void(const SpeedUpdate&)>;
+using CarDetectedCallback = std::function<void(const CarDetected&)>;
+
+struct IServiceBus {
+    virtual ~IServiceBus() = default;
+    virtual void publish(const BrakeCommand&) = 0;
+    virtual void subscribe(SpeedUpdateCallback) = 0;
+    virtual void subscribe(CarDetectedCallback) = 0;
+};
+
+
 struct AutoBrake {
-    AutoBrake(const T& publish) :
+    AutoBrake(IServiceBus& bus) :
     speed_mps{},
-    collision_threshold_s{ 5 },
-    publish{ publish } { }
-    
-    void observe(const SpeedUpdate& x) {
-        speed_mps = x.velocity_mps;
-    }
-    
-    
-    void observe(const CarDetected& x) {
-        const auto relative_velocity_mps = speed_mps - x.velocity_mps;
-        const auto time_to_collision_s = x.distance_m / relative_velocity_mps;
-        if (time_to_collision_s > 0 &&
-            time_to_collision_s <= collision_threshold_s) {
-            publish(BrakeCommand{ time_to_collision_s });
-        }
+    collision_threshold_s{ 5 }
+    {
+        bus.subscribe([this](const SpeedUpdate& update) {
+            speed_mps = update.velocity_mps;
+        });
+        bus.subscribe([this, &bus](const CarDetected& update) {
+            const auto relative_velocity_mps = speed_mps - update.velocity_mps;
+            const auto time_to_collision_s = update.distance_m / relative_velocity_mps;
+            if (time_to_collision_s > 0 &&
+                time_to_collision_s <= collision_threshold_s) {
+                bus.publish(BrakeCommand{ time_to_collision_s });
+            }
+        });
     }
     
     void set_collision_threshold_s(double s) {
@@ -59,21 +68,8 @@ struct AutoBrake {
 private:
     double collision_threshold_s;
     double speed_mps;
-    const T& publish;
 };
 
-
-// * Service Bus refactor * //
-
-using SpeedUpdateCallback = std::function<void(const SpeedUpdate&)>;
-using CarDetectedCallback = std::function<void(const CarDetected&)>;
-
-struct IServiceBus {
-    virtual ~IServiceBus() = default;
-    virtual void publish(const BrakeCommand&) = 0;
-    virtual void subscribe(SpeedUpdateCallback) = 0;
-    virtual void subscribe(CarDetectedCallback) = 0;
-};
 
 
 struct MockServiceBus : IServiceBus {
@@ -99,8 +95,6 @@ struct MockServiceBus : IServiceBus {
 
 // * Test set up * //
 
-AutoBrake default_auto_brake{ [](const BrakeCommand&) {} };
-
 
 // * Test functions * //
 
@@ -108,16 +102,22 @@ void set_up() {
 }
 
 void test_initial_speed_is_zero() {
-    assert_that(default_auto_brake.get_speed_mps() == 0L, "speed not equal to 0");
+    MockServiceBus bus{};
+    AutoBrake auto_brake{ bus };
+    assert_that(auto_brake.get_speed_mps() == 0L, "speed not equal to 0");
 }
 
 void test_initial_sensitivity_is_five() {
-    assert_that(default_auto_brake.get_collision_threshold_s() == 5L, "initial sensitivity is not 5");
+    MockServiceBus bus{};
+    AutoBrake auto_brake{ bus };
+    assert_that(auto_brake.get_collision_threshold_s() == 5L, "initial sensitivity is not 5");
 }
 
 void test_sensitivity_greater_than_one() {
+    MockServiceBus bus{};
+    AutoBrake auto_brake{ bus };
     try {
-        default_auto_brake.set_collision_threshold_s(0.5L);
+        auto_brake.set_collision_threshold_s(0.5L);
     } catch (const std::exception&) {
         return;
     }
@@ -125,38 +125,32 @@ void test_sensitivity_greater_than_one() {
 }
 
 void test_speed_is_saved() {
-    default_auto_brake.observe(SpeedUpdate{ 100L });
-    assert_that(100L == default_auto_brake.get_speed_mps(), "speed not saved to 100");
-    default_auto_brake.observe(SpeedUpdate{ 50L });
-    assert_that(50L == default_auto_brake.get_speed_mps(), "speed not saved to 50");
-    default_auto_brake.observe(SpeedUpdate{ 0L });
-    assert_that(0L == default_auto_brake.get_speed_mps(), "speed not saved to 0");
+    MockServiceBus bus{};
+    AutoBrake auto_brake{ bus };
+    bus.su_callback(SpeedUpdate{ 100L });
+    assert_that(100L == auto_brake.get_speed_mps(), "speed not saved to 100");
+    bus.su_callback(SpeedUpdate{ 50L });
+    assert_that(50L == auto_brake.get_speed_mps(), "speed not saved to 50");
+    bus.su_callback(SpeedUpdate{ 0L });
+    assert_that(0L == auto_brake.get_speed_mps(), "speed not saved to 0");
 }
 
 void test_alert_when_imminent() {
-    int brake_commands_published{};
-    AutoBrake auto_brake{
-        [&brake_commands_published](const BrakeCommand&) {
-            brake_commands_published++;
-        }
-    };
+    MockServiceBus bus{};
+    AutoBrake auto_brake{ bus };
     auto_brake.set_collision_threshold_s(10L);
-    auto_brake.observe(SpeedUpdate{ 100L });
-    auto_brake.observe(CarDetected{ 99L, 0L });
-    assert_that(brake_commands_published == 1, "brake commands published not equal to 1");
+    bus.su_callback(SpeedUpdate{ 100L });
+    bus.cd_callback(CarDetected{ 99L, 0L });
+    assert_that(bus.commands_published == 1, "brake commands published not equal to 1");
 }
 
 void test_no_alert_when_not_imminent() {
-    int brake_commands_published{};
-    AutoBrake auto_brake{
-        [&brake_commands_published](const BrakeCommand&) {
-            brake_commands_published++;
-        }
-    };
+    MockServiceBus bus{};
+    AutoBrake auto_brake{ bus };
     auto_brake.set_collision_threshold_s(2L);
-    auto_brake.observe(SpeedUpdate{ 100L });
-    auto_brake.observe(CarDetected{ 999L, 50L });
-    assert_that(brake_commands_published == 0, "brake commands published not equal to 0");
+    bus.su_callback(SpeedUpdate{ 100L });
+    bus.cd_callback(CarDetected{ 999L, 50L });
+    assert_that(bus.commands_published == 0, "brake commands published not equal to 0");
 }
 
 void run_all_tests() {
