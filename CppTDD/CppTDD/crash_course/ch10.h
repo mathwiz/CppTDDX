@@ -95,11 +95,11 @@ struct MockServiceBus : IServiceBus {
 
 // * Test set up * //
 
-
-// * Test functions * //
-
 void set_up() {
 }
+
+
+// * Test functions * //
 
 void test_initial_speed_is_zero() {
     MockServiceBus bus{};
