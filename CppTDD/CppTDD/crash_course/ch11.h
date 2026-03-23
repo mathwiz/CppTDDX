@@ -7,6 +7,14 @@
 
 #include "unit_test.h"
 
+void set_up() {
+}
+
+void run_all_tests() {
+    set_up();
+    run_test(set_up, "nil");
+}
+
 void ex11_all() {
-    printf("ch 11");
+    run_all_tests();
 }
