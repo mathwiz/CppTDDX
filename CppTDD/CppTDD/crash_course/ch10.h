@@ -108,8 +108,21 @@ void test_alert_when_imminent() {
     };
     auto_brake.set_collision_threshold_s(10L);
     auto_brake.observe(SpeedUpdate{ 100L });
-    auto_brake.observe(CarDetected{ 100L, 0L });
+    auto_brake.observe(CarDetected{ 99L, 0L });
     assert_that(brake_commands_published == 1, "brake commands published not equal to 1");
+}
+
+void test_no_alert_when_not_imminent() {
+    int brake_commands_published{};
+    AutoBrake auto_brake{
+        [&brake_commands_published](const BrakeCommand&) {
+            brake_commands_published++;
+        }
+    };
+    auto_brake.set_collision_threshold_s(2L);
+    auto_brake.observe(SpeedUpdate{ 100L });
+    auto_brake.observe(CarDetected{ 999L, 50L });
+    assert_that(brake_commands_published == 0, "brake commands published not equal to 0");
 }
 
 void run_all_tests() {
@@ -119,6 +132,7 @@ void run_all_tests() {
     run_test(test_sensitivity_greater_than_one, "sensitivity greater than 1");
     run_test(test_speed_is_saved, "speed is saved");
     run_test(test_alert_when_imminent, "alert when imminent");
+    run_test(test_no_alert_when_not_imminent, "no alert when not imminent");
 }
 
 
