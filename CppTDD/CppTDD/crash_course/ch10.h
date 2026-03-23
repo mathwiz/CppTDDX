@@ -37,7 +37,15 @@ struct AutoBrake {
     }
     
     
-    void observe(const CarDetected&) { }
+    void observe(const CarDetected& x) {
+        const auto relative_velocity_mps = speed_mps - x.velocity_mps;
+        const auto time_to_collision_s = x.distance_m / relative_velocity_mps;
+        if (time_to_collision_s > 0 &&
+            time_to_collision_s <= collision_threshold_s) {
+            publish(BrakeCommand{ time_to_collision_s });
+        }
+    }
+    
     void set_collision_threshold_s(double s) {
         if (s < 1) throw std::runtime_error{ "collision_threshold less than 1" };
         collision_threshold_s = s;
@@ -91,12 +99,26 @@ void test_speed_is_saved() {
     assert_that(0L == default_auto_brake.get_speed_mps(), "speed not saved to 0");
 }
 
+void test_alert_when_imminent() {
+    int brake_commands_published{};
+    AutoBrake auto_brake{
+        [&brake_commands_published](const BrakeCommand&) {
+            brake_commands_published++;
+        }
+    };
+    auto_brake.set_collision_threshold_s(10L);
+    auto_brake.observe(SpeedUpdate{ 100L });
+    auto_brake.observe(CarDetected{ 100L, 0L });
+    assert_that(brake_commands_published == 1, "brake commands published not equal to 1");
+}
+
 void run_all_tests() {
     set_up();
     run_test(test_initial_speed_is_zero, "initial speed is 0");
     run_test(test_initial_sensitivity_is_five, "initial sensitivity is 5");
     run_test(test_sensitivity_greater_than_one, "sensitivity greater than 1");
     run_test(test_speed_is_saved, "speed is saved");
+    run_test(test_alert_when_imminent, "alert when imminent");
 }
 
 
