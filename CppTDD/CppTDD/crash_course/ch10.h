@@ -63,6 +63,40 @@ private:
 };
 
 
+// * Service Bus refactor * //
+
+using SpeedUpdateCallback = std::function<void(const SpeedUpdate&)>;
+using CarDetectedCallback = std::function<void(const CarDetected&)>;
+
+struct IServiceBus {
+    virtual ~IServiceBus() = default;
+    virtual void publish(const BrakeCommand&) = 0;
+    virtual void subscribe(SpeedUpdateCallback) = 0;
+    virtual void subscribe(CarDetectedCallback) = 0;
+};
+
+
+struct MockServiceBus : IServiceBus {
+    void publish(const BrakeCommand& cmd) override {
+        commands_published++;
+        last_command = cmd;
+    }
+    
+    void subscribe(SpeedUpdateCallback callback) override {
+        su_callback = callback;
+    }
+    
+    void subscribe(CarDetectedCallback callback) override {
+        cd_callback = callback;
+    }
+    
+    BrakeCommand last_command{};
+    int commands_published{};
+    SpeedUpdateCallback su_callback;
+    CarDetectedCallback cd_callback;
+};
+
+
 // * Test set up * //
 
 AutoBrake default_auto_brake{ [](const BrakeCommand&) {} };
@@ -147,6 +181,6 @@ void ex10_6() {
     test_initial_speed_is_zero();
 }
 
-void ex10_8() {
+void ex10_all() {
     run_all_tests();
 }
