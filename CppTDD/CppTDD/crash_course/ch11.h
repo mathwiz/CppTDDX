@@ -28,18 +28,22 @@ int DeadMenOfDunharrow::oaths_to_fulfill{};
 
 using UniqueOathbreakers = std::unique_ptr<DeadMenOfDunharrow>;
 
-auto my_ptr = std::make_unique<int>(808);
-std::unique_ptr<int> my_ptr2{ new int{ 811 } };
 
+
+void implicit_bool_conversion() {
+    
+}
 
 // * Testing * //
 
 void set_up() {
+    auto my_ptr = std::make_unique<int>(808);
+    std::unique_ptr<int> my_ptr2{ new int{ 811 } };
 }
 
 void run_all_tests() {
     set_up();
-    run_test(set_up, "nil");
+    run_test(implicit_bool_conversion, "implicit_bool_conversion");
 }
 
 void ex11_all() {
