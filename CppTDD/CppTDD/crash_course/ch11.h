@@ -29,6 +29,15 @@ int DeadMenOfDunharrow::oaths_to_fulfill{};
 
 using UniqueOathbreakers = std::unique_ptr<DeadMenOfDunharrow>;
 
+using FileGuard = std::unique_ptr<FILE, int(*)(FILE*)>;
+
+void say_hello(FileGuard file) {
+    fprintf(file.get(), "HELLO DAVE");
+}
+
+// * Testing * //
+
+
 void bool_conversion_when_full() {
     UniqueOathbreakers aragorn{ new DeadMenOfDunharrow{} };
     assert_that(static_cast<bool>(aragorn), "pointer exists");
@@ -114,7 +123,14 @@ void deleters() {
     };
 }
 
-// * Testing * //
+int file_handles() {
+    auto file = fopen("HAL9000", "w");
+    if (!file) return errno;
+    FileGuard file_guard{ file, fclose };
+    say_hello(std::move(file_guard));
+    return 0;
+}
+
 
 void set_up() {
     auto my_ptr = std::make_unique<int>(808);
