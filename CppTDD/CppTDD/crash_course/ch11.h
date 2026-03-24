@@ -52,6 +52,18 @@ void pointer_semantics() {
     assert_that((*aragorn).message == message, "operator*");
     assert_that((aragorn)->message == message, "operator->");
     assert_that(aragorn.get() != nullptr, "get()");
+    UniqueOathbreakers legolas{};
+    assert_that(legolas == nullptr, "empty");
+}
+
+void swapping() {
+    auto message1 = "First";
+    auto message2 = "Second";
+    UniqueOathbreakers aragorn{ new DeadMenOfDunharrow{ message1 } };
+    UniqueOathbreakers legolas{ new DeadMenOfDunharrow{ message2 }};
+    aragorn.swap(legolas);
+    assert_that(legolas->message = message1, "second after swap");
+    assert_that(aragorn->message = message2, "first after swap");
 }
 
 // * Testing * //
@@ -67,6 +79,7 @@ void run_all_tests() {
     run_test(bool_conversion_when_empty, "bool_conversion_when_empty");
     run_test(raii_wrapper, "raii_wrapper");
     run_test(pointer_semantics, "pointer_semantics");
+    run_test(swapping, "swapping");
 }
 
 void ex11_all() {
