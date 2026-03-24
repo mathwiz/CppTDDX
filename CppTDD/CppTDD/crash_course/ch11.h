@@ -5,6 +5,7 @@
 //  Created by Yohan Lee on 3/23/26.
 //
 
+#include <cstdio>
 #include <memory>
 
 #include "unit_test.h"
@@ -102,6 +103,17 @@ void unique_arrays() {
     assert_that(squares[2] == 9, "index 2");
 }
 
+void deleters() {
+    auto my_deleter = [](int* x) {
+        printf("Deleting an int at %p.\n", x);
+        delete x;
+    };
+    std::unique_ptr<int, decltype(my_deleter)> my_up {
+        new int,
+        my_deleter
+    };
+}
+
 // * Testing * //
 
 void set_up() {
@@ -120,6 +132,7 @@ void run_all_tests() {
     run_test(exclusive_ownership, "exclusive_ownership");
     run_test(assignment, "assignment");
     run_test(unique_arrays, "unique_arrays");
+    run_test(deleters, "deleters");
 }
 
 void ex11_all() {
