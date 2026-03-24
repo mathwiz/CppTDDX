@@ -28,10 +28,14 @@ int DeadMenOfDunharrow::oaths_to_fulfill{};
 
 using UniqueOathbreakers = std::unique_ptr<DeadMenOfDunharrow>;
 
+void bool_conversion_when_full() {
+    UniqueOathbreakers aragorn{ new DeadMenOfDunharrow{} };
+    assert_that(static_cast<bool>(aragorn), "pointer exists");
+}
 
-
-void implicit_bool_conversion() {
-    
+void bool_conversion_when_empty() {
+    UniqueOathbreakers aragorn;
+    assert_that(!static_cast<bool>(aragorn), "pointer does not exist");
 }
 
 // * Testing * //
@@ -43,7 +47,8 @@ void set_up() {
 
 void run_all_tests() {
     set_up();
-    run_test(implicit_bool_conversion, "implicit_bool_conversion");
+    run_test(bool_conversion_when_full, "bool_conversion_when_full");
+    run_test(bool_conversion_when_empty, "bool_conversion_when_empty");
 }
 
 void ex11_all() {
