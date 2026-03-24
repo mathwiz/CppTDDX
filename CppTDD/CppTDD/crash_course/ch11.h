@@ -46,6 +46,14 @@ void raii_wrapper() {
     assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 2, "now two?");
 }
 
+void pointer_semantics() {
+    auto message = "The way is shut";
+    UniqueOathbreakers aragorn{ new DeadMenOfDunharrow{ message } };
+    assert_that((*aragorn).message == message, "operator*");
+    assert_that((aragorn)->message == message, "operator->");
+    assert_that(aragorn.get() != nullptr, "get()");
+}
+
 // * Testing * //
 
 void set_up() {
@@ -58,6 +66,7 @@ void run_all_tests() {
     run_test(bool_conversion_when_full, "bool_conversion_when_full");
     run_test(bool_conversion_when_empty, "bool_conversion_when_empty");
     run_test(raii_wrapper, "raii_wrapper");
+    run_test(pointer_semantics, "pointer_semantics");
 }
 
 void ex11_all() {
