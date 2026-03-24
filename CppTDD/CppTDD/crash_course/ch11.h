@@ -66,6 +66,24 @@ void swapping() {
     assert_that(aragorn->message = message2, "first after swap");
 }
 
+void reset() {
+    auto message = "Weird, it is";
+    UniqueOathbreakers aragorn{ new DeadMenOfDunharrow{ } };
+    assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 1, "now one");
+    aragorn.reset();
+    assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 0, "back to zero?");
+    auto new_dead_men = new DeadMenOfDunharrow{ message };
+    assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 1, "back to one?");
+    aragorn.reset(new_dead_men);
+    assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 1, "why still one?");
+    assert_that(aragorn->message = new_dead_men->message, "why?");
+    assert_that(aragorn.get() == new_dead_men, "get()");
+}
+
+void exclusive_ownership() {
+    
+}
+
 // * Testing * //
 
 void set_up() {
@@ -80,6 +98,8 @@ void run_all_tests() {
     run_test(raii_wrapper, "raii_wrapper");
     run_test(pointer_semantics, "pointer_semantics");
     run_test(swapping, "swapping");
+    run_test(reset, "reset");
+    run_test(exclusive_ownership, "exclusive_ownership");
 }
 
 void ex11_all() {
