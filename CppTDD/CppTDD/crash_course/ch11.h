@@ -81,7 +81,17 @@ void reset() {
 }
 
 void exclusive_ownership() {
-    
+    auto aragorn = std::make_unique<DeadMenOfDunharrow>();
+    auto son_of_aragorn{ std::move(aragorn) };
+    assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 1, "one");
+}
+
+void assignment() {
+    auto aragorn = std::make_unique<DeadMenOfDunharrow>();
+    auto son_of_aragorn = std::make_unique<DeadMenOfDunharrow>();
+    assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 2, "now two");
+    son_of_aragorn = std::move(aragorn);
+    assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 1, "back to one");
 }
 
 // * Testing * //
@@ -100,6 +110,7 @@ void run_all_tests() {
     run_test(swapping, "swapping");
     run_test(reset, "reset");
     run_test(exclusive_ownership, "exclusive_ownership");
+    run_test(assignment, "assignment");
 }
 
 void ex11_all() {
