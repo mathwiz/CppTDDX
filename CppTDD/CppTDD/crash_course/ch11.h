@@ -38,6 +38,14 @@ void bool_conversion_when_empty() {
     assert_that(!static_cast<bool>(aragorn), "pointer does not exist");
 }
 
+void raii_wrapper() {
+    assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 0, "zero before;");
+    UniqueOathbreakers aragorn{ new DeadMenOfDunharrow{} };
+    assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 1, "now one");
+    UniqueOathbreakers legolas{ new DeadMenOfDunharrow{} };
+    assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 2, "now two?");
+}
+
 // * Testing * //
 
 void set_up() {
@@ -49,6 +57,7 @@ void run_all_tests() {
     set_up();
     run_test(bool_conversion_when_full, "bool_conversion_when_full");
     run_test(bool_conversion_when_empty, "bool_conversion_when_empty");
+    run_test(raii_wrapper, "raii_wrapper");
 }
 
 void ex11_all() {
