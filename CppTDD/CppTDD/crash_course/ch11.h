@@ -26,7 +26,10 @@ struct DeadMenOfDunharrow {
 
 int DeadMenOfDunharrow::oaths_to_fulfill{};
 
-//using UniqueOathbreakers = std::unique_ptr<DeadMenOfDunharrow>;
+using UniqueOathbreakers = std::unique_ptr<DeadMenOfDunharrow>;
+
+auto my_ptr = std::make_unique<int>(808);
+std::unique_ptr<int> my_ptr2{ new int{ 811 } };
 
 
 // * Testing * //
