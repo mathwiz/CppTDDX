@@ -94,6 +94,14 @@ void assignment() {
     assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 1, "back to one");
 }
 
+void unique_arrays() {
+    std::unique_ptr<int[]> squares{ new int[5]{ -1, 4, 9, 16, 25 } };
+    squares[0] = 1;
+    assert_that(squares[0] == 1, "index 0");
+    assert_that(squares[1] == 4, "index 1");
+    assert_that(squares[2] == 9, "index 2");
+}
+
 // * Testing * //
 
 void set_up() {
@@ -111,6 +119,7 @@ void run_all_tests() {
     run_test(reset, "reset");
     run_test(exclusive_ownership, "exclusive_ownership");
     run_test(assignment, "assignment");
+    run_test(unique_arrays, "unique_arrays");
 }
 
 void ex11_all() {
