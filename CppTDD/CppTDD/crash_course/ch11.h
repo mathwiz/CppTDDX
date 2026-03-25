@@ -133,8 +133,10 @@ int file_handles() {
 
 
 void set_up() {
-    auto my_ptr = std::make_unique<int>(808);
-    std::unique_ptr<int> my_ptr2{ new int{ 811 } };
+    auto u_ptr = std::make_unique<int>(808);
+    std::unique_ptr<int> u_ptr2{ new int{ 811 } };
+    auto s_ptr = std::make_shared<int>(808);
+    std::shared_ptr<int> s_ptr2{ new int{ 811 } };
 }
 
 void run_all_tests() {
