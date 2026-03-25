@@ -137,6 +137,11 @@ void set_up() {
     std::unique_ptr<int> u_ptr2{ new int{ 811 } };
     auto s_ptr = std::make_shared<int>(808);
     std::shared_ptr<int> s_ptr2{ new int{ 811 } };
+    std::shared_ptr<int> shared_with_constructor_deleter_allocator{
+        new int{ 10 },
+        [](int* x) { delete x; },
+        std::allocator<int>{}
+    };
 }
 
 void run_all_tests() {
