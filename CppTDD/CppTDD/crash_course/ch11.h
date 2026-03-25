@@ -142,6 +142,8 @@ void set_up() {
         [](int* x) { delete x; },
         std::allocator<int>{}
     };
+    auto shared_with_custom_allocator =
+    std::allocate_shared<int>(std::allocator<int>{}, 10);
 }
 
 void run_all_tests() {
