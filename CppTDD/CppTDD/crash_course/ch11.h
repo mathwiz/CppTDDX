@@ -144,12 +144,21 @@ void shared_are_transferable() {
     assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 1, "assignment, and original gets discarded");
 }
 
+void weak_pointer_semantics() {
+    auto message = "The way is shut";
+    auto aragorn = std::make_shared<DeadMenOfDunharrow>(message);
+    std::weak_ptr<DeadMenOfDunharrow> legolas{ aragorn };
+    auto sh_ptr = legolas.lock();
+    assert_that(sh_ptr->message == message, "shared ptr->");
+    assert_that(sh_ptr.use_count() == 2, "use count");
+}
+
 
 void set_up() {
     auto u_ptr = std::make_unique<int>(808);
-    std::unique_ptr<int> u_ptr2{ new int{ 811 } };
-    auto s_ptr = std::make_shared<int>(808);
-    std::shared_ptr<int> s_ptr2{ new int{ 811 } };
+    std::unique_ptr<int> u_ptr2{ new int{ 909 } };
+    auto s_ptr = std::make_shared<int>(818);
+    std::shared_ptr<int> s_ptr2{ new int{ 919 } };
     std::shared_ptr<int> shared_with_constructor_deleter_allocator{
         new int{ 10 },
         [](int* x) { delete x; },
@@ -157,6 +166,8 @@ void set_up() {
     };
     auto shared_with_custom_allocator =
     std::allocate_shared<int>(std::allocator<int>{}, 10);
+    auto sp = std::make_shared<int>(828);
+    std::weak_ptr<int> wp{ sp };
 }
 
 void run_all_tests() {
@@ -172,6 +183,7 @@ void run_all_tests() {
     run_test(unique_arrays, "unique_arrays");
     run_test(deleters, "deleters");
     run_test(shared_are_transferable, "shared_are_transferable");
+    run_test(weak_pointer_semantics, "weak_pointer_semantics");
 }
 
 void ex11_all() {
