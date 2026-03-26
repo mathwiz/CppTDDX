@@ -28,11 +28,20 @@ struct DeadMenOfDunharrow {
 int DeadMenOfDunharrow::oaths_to_fulfill{};
 
 using UniqueOathbreakers = std::unique_ptr<DeadMenOfDunharrow>;
+using SharedOathbreakers = std::shared_ptr<DeadMenOfDunharrow>;
 
 using FileGuard = std::unique_ptr<FILE, int(*)(FILE*)>;
 
 void say_hello(FileGuard file) {
     fprintf(file.get(), "HELLO DAVE");
+}
+
+int file_handles() {
+    auto file = fopen("HAL9000", "w");
+    if (!file) return errno;
+    FileGuard file_guard{ file, fclose };
+    say_hello(std::move(file_guard));
+    return 0;
 }
 
 // * Testing * //
@@ -121,14 +130,6 @@ void deleters() {
         new int,
         my_deleter
     };
-}
-
-int file_handles() {
-    auto file = fopen("HAL9000", "w");
-    if (!file) return errno;
-    FileGuard file_guard{ file, fclose };
-    say_hello(std::move(file_guard));
-    return 0;
 }
 
 
