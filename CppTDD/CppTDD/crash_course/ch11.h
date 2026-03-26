@@ -7,6 +7,7 @@
 
 #include <cstdio>
 #include <memory>
+#include <new>
 
 #include "unit_test.h"
 
@@ -43,6 +44,42 @@ int file_handles() {
     say_hello(std::move(file_guard));
     return 0;
 }
+
+// * a custom allocator * //
+
+static size_t n_allocated, n_deallocated;
+
+template <typename T>
+struct MyAllocator {
+    using value_type = T;
+    
+    MyAllocator() noexcept { }
+    
+    template <typename U>
+    MyAllocator(const MyAllocator<U>&) noexcept { }
+    
+    T* allocate(size_t n) {
+        auto p = operator new(sizeof(T) * n);
+        ++n_allocated;
+        return static_cast<T*>(p);
+    }
+    
+    void deallocate(T* p, size_t n) {
+        operator delete(p);
+        ++n_deallocated;
+    }
+};
+
+template <typename T1, typename T2>
+bool operator==(const MyAllocator<T1>&, const MyAllocator<T2>&) {
+    return true;
+}
+
+template <typename T1, typename T2>
+bool operator!=(const MyAllocator<T1>&, const MyAllocator<T2>&) {
+    return false;
+}
+
 
 // * Testing * //
 
@@ -153,6 +190,14 @@ void weak_pointer_semantics() {
     assert_that(sh_ptr.use_count() == 2, "use count");
 }
 
+void custom_allocator() {
+    auto message = "The way is shut";
+    MyAllocator<DeadMenOfDunharrow> alloc;
+    {
+        
+    }
+}
+
 
 void set_up() {
     auto u_ptr = std::make_unique<int>(808);
@@ -184,6 +229,7 @@ void run_all_tests() {
     run_test(deleters, "deleters");
     run_test(shared_are_transferable, "shared_are_transferable");
     run_test(weak_pointer_semantics, "weak_pointer_semantics");
+    run_test(custom_allocator, "custom_allocator");
 }
 
 void ex11_all() {
