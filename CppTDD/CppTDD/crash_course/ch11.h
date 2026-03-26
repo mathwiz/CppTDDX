@@ -194,8 +194,13 @@ void custom_allocator() {
     auto message = "The way is shut";
     MyAllocator<DeadMenOfDunharrow> alloc;
     {
-        
+        auto aragorn = std::allocate_shared<DeadMenOfDunharrow>(alloc, message);
+        assert_that(aragorn->message == message, "message");
+        assert_that(n_allocated == 1, "1 allocated");
+        assert_that(n_deallocated == 0, "0 deallocated");
     }
+    assert_that(n_allocated == 1, "1 allocated outside");
+    assert_that(n_deallocated == 1, "1 deallocated outside");
 }
 
 
