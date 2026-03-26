@@ -132,6 +132,18 @@ void deleters() {
     };
 }
 
+void shared_are_transferable() {
+    auto aragorn = std::make_shared<DeadMenOfDunharrow>();
+    auto son_of_aragorn{ aragorn };
+    assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 1, "creation");
+    son_of_aragorn = aragorn;
+    assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 1, "assignment");
+    auto son_of_aragorn2 = std::make_shared<DeadMenOfDunharrow>();
+    assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 2, "assignment, and original gets discarded");
+    son_of_aragorn2 = aragorn;
+    assert_that(DeadMenOfDunharrow::oaths_to_fulfill == 1, "assignment, and original gets discarded");
+}
+
 
 void set_up() {
     auto u_ptr = std::make_unique<int>(808);
@@ -159,6 +171,7 @@ void run_all_tests() {
     run_test(assignment, "assignment");
     run_test(unique_arrays, "unique_arrays");
     run_test(deleters, "deleters");
+    run_test(shared_are_transferable, "shared_are_transferable");
 }
 
 void ex11_all() {
