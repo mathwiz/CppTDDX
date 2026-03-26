@@ -47,7 +47,6 @@ void set_up() {
 }
 
 void run_all_tests() {
-    set_up();
     run_test(optional, "optional");
 }
 
