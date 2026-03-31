@@ -39,6 +39,12 @@ struct EscapeCapsule {
     double weight_kg;
 };
 
+struct BugblatterBeast {
+    BugblatterBeast() : is_ravenous{ true }, weight_kg{ 20'000 } { }
+    bool is_ravenous;
+    double weight_kg;
+};
+
 
 // * testing * //
 
@@ -93,6 +99,26 @@ void test_any() {
     }
 }
 
+void test_variant() {
+    std::variant<BugblatterBeast, EscapeCapsule> my_variant;
+    assert_that(my_variant.index() == 0, "index 0 exists");
+    
+    my_variant.emplace<EscapeCapsule>(600);
+    auto capsule = std::get<EscapeCapsule>(my_variant);
+    assert_value(capsule.weight_kg, 600.0, 0.01, "double comparison");
+    assert_value(std::get<1>(my_variant).weight_kg, 600.0, 0.01, "double comparison");
+
+    try {
+        std::get<0>(my_variant);
+        assert_that(false, "should not get here");
+    } catch (std::bad_variant_access e) {
+        assert_that(true, "expected exception");
+    }
+    
+    auto lbs = std::visit([](auto& x) { return 2.2 * x.weight_kg; }, my_variant);
+    assert_value(lbs, 1320.0, 0.01, "apply callable to variant");
+}
+
 void set_up() {
 
 }
@@ -102,6 +128,7 @@ void run_all_tests() {
     run_test(test_pair, "test_pair");
     run_test(test_tuple, "test_tuple");
     run_test(test_any, "test_any");
+    run_test(test_variant, "test_variant");
 }
 
 void ex12_all() {
