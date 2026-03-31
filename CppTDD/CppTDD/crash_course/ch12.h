@@ -8,6 +8,7 @@
 #include <optional>
 #include <any>
 #include <variant>
+#include <chrono>
 
 #include "unit_test.h"
 
@@ -101,7 +102,7 @@ void test_any() {
 
 void test_variant() {
     std::variant<BugblatterBeast, EscapeCapsule> my_variant;
-    assert_that(my_variant.index() == 0, "index 0 exists");
+    assert_that(my_variant.index() == 0, "index 0");
     
     my_variant.emplace<EscapeCapsule>(600);
     auto capsule = std::get<EscapeCapsule>(my_variant);
@@ -119,6 +120,23 @@ void test_variant() {
     assert_value(lbs, 1320.0, 0.01, "apply callable to variant");
 }
 
+void test_chrono() {
+    auto sys_now = std::chrono::system_clock::now();
+    auto hi_res_now = std::chrono::high_resolution_clock::now();
+    auto steady_now = std::chrono::steady_clock::now();
+    assert_that(sys_now.time_since_epoch().count() > 0, "system clock");
+    assert_that(hi_res_now.time_since_epoch().count() > 0, "high resolution clock");
+    assert_that(steady_now.time_since_epoch().count() > 0, "steady clock");
+    
+    using namespace std::literals::chrono_literals;
+    auto one_s = std::chrono::seconds(1);
+    auto thousands_ms = 1000ms;
+    assert_that(one_s == thousands_ms, "chrono literals");
+    
+    auto billion_ns_as_s = duration_cast<std::chrono::seconds>(2'000'000'000ns);
+    assert_that(billion_ns_as_s.count() == 2, "duration cast");
+}
+
 void set_up() {
 
 }
@@ -129,6 +147,7 @@ void run_all_tests() {
     run_test(test_tuple, "test_tuple");
     run_test(test_any, "test_any");
     run_test(test_variant, "test_variant");
+    run_test(test_chrono, "test_chrono");
 }
 
 void ex12_all() {
