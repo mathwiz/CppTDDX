@@ -9,6 +9,7 @@
 #include <any>
 #include <variant>
 #include <chrono>
+#include <thread>
 
 #include "unit_test.h"
 
@@ -137,6 +138,15 @@ void test_chrono() {
     assert_that(billion_ns_as_s.count() == 2, "duration cast");
 }
 
+void test_sleep() {
+    using namespace std::literals::chrono_literals;
+    
+    auto start = std::chrono::system_clock::now();
+    std::this_thread::sleep_for(100ms);
+    auto end = std::chrono::system_clock::now();
+    assert_that(end - start >= 100ms, "time delay");
+}
+
 void set_up() {
 
 }
@@ -148,6 +158,7 @@ void run_all_tests() {
     run_test(test_any, "test_any");
     run_test(test_variant, "test_variant");
     run_test(test_chrono, "test_chrono");
+    run_test(test_sleep, "test_sleep");
 }
 
 void ex12_all() {
