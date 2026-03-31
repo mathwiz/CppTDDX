@@ -54,6 +54,10 @@ void test_pair() {
     std::pair<Socialite, Valet> inimitable_duo{ bertie, reginald };
     assert_that(inimitable_duo.first.name == bertie.name, "first");
     assert_that(inimitable_duo.second.name == reginald.name, "second");
+
+    auto& [master, servant] = inimitable_duo;
+    assert_that(master.name == bertie.name, "structured binding 1");
+    assert_that(servant.name == reginald.name, "structured binding 2");
 }
 
 void set_up() {
