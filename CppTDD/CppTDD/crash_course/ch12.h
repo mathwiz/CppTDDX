@@ -22,6 +22,13 @@ std::optional<TheMatrix> take(Pill pill) {
     return std::nullopt;
 }
 
+struct Socialite { const char* name; };
+
+struct Valet { const char* name; };
+
+Socialite bertie{ "Wilberforce" };
+Valet reginald{ "Jeeves" };
+
 
 // * testing * //
 
@@ -44,15 +51,18 @@ void test_optional() {
 
 
 void test_pair() {
-    
+    std::pair<Socialite, Valet> inimitable_duo{ bertie, reginald };
+    assert_that(inimitable_duo.first.name == bertie.name, "first");
+    assert_that(inimitable_duo.second.name == reginald.name, "second");
 }
 
 void set_up() {
-    
+
 }
 
 void run_all_tests() {
     run_test(test_optional, "test_optional");
+    run_test(test_pair, "test_pair");
 }
 
 void ex12_all() {
