@@ -26,8 +26,11 @@ struct Socialite { const char* name; };
 
 struct Valet { const char* name; };
 
+struct Acquaintance { const char* name; };
+
 Socialite bertie{ "Wilberforce" };
 Valet reginald{ "Jeeves" };
+Acquaintance tuppence{ "Hildebrand" };
 
 
 // * testing * //
@@ -49,7 +52,6 @@ void test_optional() {
     }
 }
 
-
 void test_pair() {
     std::pair<Socialite, Valet> inimitable_duo{ bertie, reginald };
     assert_that(inimitable_duo.first.name == bertie.name, "first");
@@ -60,6 +62,17 @@ void test_pair() {
     assert_that(servant.name == reginald.name, "structured binding 2");
 }
 
+void test_tuple() {
+    using Trio = std::tuple<Socialite, Valet, Acquaintance>;
+    Trio truculent_trio{ bertie, reginald, tuppence };
+
+    auto& bertie_ref = std::get<0>(truculent_trio);
+    assert_that(bertie_ref.name == bertie.name, "bertie");
+
+    auto& tuppy_ref = std::get<Acquaintance>(truculent_trio);
+    assert_that(tuppy_ref.name == tuppence.name, "bertie");
+}
+
 void set_up() {
 
 }
@@ -67,6 +80,7 @@ void set_up() {
 void run_all_tests() {
     run_test(test_optional, "test_optional");
     run_test(test_pair, "test_pair");
+    run_test(test_tuple, "test_tuple");
 }
 
 void ex12_all() {
