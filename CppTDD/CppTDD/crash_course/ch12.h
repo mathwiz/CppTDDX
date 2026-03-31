@@ -25,7 +25,7 @@ std::optional<TheMatrix> take(Pill pill) {
 
 // * testing * //
 
-void optional() {
+void test_optional() {
     if (auto matrix_opt = take(Pill::Blue)) {
         assert_that(matrix_opt->iteration == 3, "optional ref");
         auto& matrix = matrix_opt.value();
@@ -42,12 +42,17 @@ void optional() {
     }
 }
 
+
+void test_pair() {
+    
+}
+
 void set_up() {
     
 }
 
 void run_all_tests() {
-    run_test(optional, "optional");
+    run_test(test_optional, "test_optional");
 }
 
 void ex12_all() {
