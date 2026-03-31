@@ -10,6 +10,7 @@
 #include <variant>
 #include <chrono>
 #include <thread>
+#include <complex>
 
 #include "unit_test.h"
 
@@ -173,6 +174,13 @@ void test_stopwatch() {
     printf("Took %gns per division.\n", time_per_division);
 }
 
+void test_complex() {
+    using cmplx = std::complex<double>;
+    cmplx a{0.5, 14.13};
+    assert_value(std::real(a), 0.5, 0.00001, "real");
+    assert_value(std::imag(a), 14.13, 0.00001, "imaginary");
+}
+
 void set_up() {
 
 }
@@ -186,6 +194,7 @@ void run_all_tests() {
     run_test(test_chrono, "test_chrono");
     run_test(test_sleep, "test_sleep");
     run_test(test_stopwatch, "test_stopwatch");
+    run_test(test_complex, "test_complex");
 }
 
 void ex12_all() {
