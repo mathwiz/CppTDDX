@@ -47,6 +47,18 @@ struct BugblatterBeast {
     double weight_kg;
 };
 
+struct Stopwatch {
+    Stopwatch(std::chrono::nanoseconds& result)
+    : result{ result },
+    start{ std::chrono::high_resolution_clock::now() } { }
+    
+    ~Stopwatch() {
+        result = std::chrono::high_resolution_clock::now() - start;
+    }
+private:
+    std::chrono::nanoseconds& result;
+    const std::chrono::time_point<std::chrono::high_resolution_clock> start;
+};
 
 // * testing * //
 
@@ -147,6 +159,20 @@ void test_sleep() {
     assert_that(end - start >= 100ms, "time delay");
 }
 
+void test_stopwatch() {
+    const size_t n = 1'000'000;
+    std::chrono::nanoseconds elapsed;
+    {
+        Stopwatch stopwatch{ elapsed };
+        volatile double result{ 1.23e45 };
+        for (double i = 1; i < n; i++) {
+            result /= i;
+        }
+    }
+    auto time_per_division = elapsed.count() / double{ n };
+    printf("Took %gns per division.\n", time_per_division);
+}
+
 void set_up() {
 
 }
@@ -159,6 +185,7 @@ void run_all_tests() {
     run_test(test_variant, "test_variant");
     run_test(test_chrono, "test_chrono");
     run_test(test_sleep, "test_sleep");
+    run_test(test_stopwatch, "test_stopwatch");
 }
 
 void ex12_all() {
