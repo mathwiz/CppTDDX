@@ -6,6 +6,8 @@
 //
 
 #include <optional>
+#include <any>
+#include <variant>
 
 #include "unit_test.h"
 
@@ -31,6 +33,11 @@ struct Acquaintance { const char* name; };
 Socialite bertie{ "Wilberforce" };
 Valet reginald{ "Jeeves" };
 Acquaintance tuppence{ "Hildebrand" };
+
+struct EscapeCapsule {
+    EscapeCapsule(double x) : weight_kg{ x } { }
+    double weight_kg;
+};
 
 
 // * testing * //
@@ -73,6 +80,19 @@ void test_tuple() {
     assert_that(tuppy_ref.name == tuppence.name, "bertie");
 }
 
+void test_any() {
+    std::any my_any;
+    my_any.emplace<EscapeCapsule>(600);
+    auto capsule = std::any_cast<EscapeCapsule>(my_any);
+    assert_value(capsule.weight_kg, 600.0, 0.01, "double comparison");
+    try {
+        std::any_cast<double>(my_any);
+        assert_that(false, "should not get here");
+    } catch (std::bad_any_cast e) {
+        assert_that(true, "expected exception");
+    }
+}
+
 void set_up() {
 
 }
@@ -81,6 +101,7 @@ void run_all_tests() {
     run_test(test_optional, "test_optional");
     run_test(test_pair, "test_pair");
     run_test(test_tuple, "test_tuple");
+    run_test(test_any, "test_any");
 }
 
 void ex12_all() {
