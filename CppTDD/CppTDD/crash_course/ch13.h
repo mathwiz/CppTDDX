@@ -91,6 +91,15 @@ void test_iterators() {
     assert_that(iter == e.end(), "end");
 }
 
+void test_array_range() {
+    std::array<int, 5> e{ 1, 2, 3, 4, 5 };
+    int sum{};
+    for (const auto x : e) {
+        sum += x;
+    }
+    assert_that(sum == 15, "ranged sum");
+}
+
 void set_up() {
 }
 
@@ -101,5 +110,6 @@ void run_all_tests() {
     run_test(test_array_data, "test_array_data");
     run_test(test_iterator_empty, "test_iterator_empty");
     run_test(test_iterators, "test_iterators");
+    run_test(test_array_range, "test_array_range");
 }
 
