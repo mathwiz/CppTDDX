@@ -189,6 +189,11 @@ void test_pseudorandom() {
     printf("%d\n", mt_engine());
 }
 
+void test_random() {
+    std::random_device rd_engine{};
+    printf("%d\n", rd_engine());
+}
+
 void set_up() {
 }
 
@@ -203,7 +208,7 @@ void run_all_tests() {
     //run_test(test_stopwatch, "test_stopwatch");
     run_test(test_complex, "test_complex");
     //run_test(test_pseudorandom, "test_pseudorandom");
-    run_test(test_pseudorandom, "test_pseudorandom");
+    //run_test(test_random, "test_random");
 }
 
 void ex12_all() {
