@@ -61,6 +61,16 @@ void test_array_ends() {
     assert_that(fib[3] == fib.back(), "get with back");
 }
 
+void test_array_data() {
+    std::array<char, 9> color{ 'o', 'c', 't', 'a', 'r', 'i', 'n', 'e' };
+    const auto* color_ptr = color.data();
+    
+    assert_that(*color_ptr == color[0], "index 0");
+    assert_that(color_ptr == &color.front(), "front ref");
+    assert_that(color_ptr == &color.at(0), "at ref");
+    assert_that(color_ptr == &color[0], "index 0 ref");
+}
+
 void set_up() {
 }
 
@@ -68,5 +78,6 @@ void run_all_tests() {
     run_test(test_static_array, "test_static_array");
     run_test(test_array_access, "test_array_access");
     run_test(test_array_ends, "test_array_ends");
+    run_test(test_array_data, "test_array_data");
 }
 
