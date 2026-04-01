@@ -183,6 +183,7 @@ void test_complex() {
 }
 
 void test_pseudorandom() {
+    //Mersenne twister is consistent for seed
     std::mt19937 mt_engine{ 91586 };
     printf("%d\n", mt_engine());
     printf("%d\n", mt_engine());
@@ -192,6 +193,16 @@ void test_pseudorandom() {
 void test_random() {
     std::random_device rd_engine{};
     printf("%d\n", rd_engine());
+}
+
+void test_randomdist() {
+    std::mt19937_64 mt_engine{ 102787 };
+    std::uniform_int_distribution<int> int_d{ 0, 10 };
+    const size_t n{ 32 };
+    for (size_t i{}; i < n; i++) {
+        printf("%d ", int_d(mt_engine));
+    }
+    printf("\n");
 }
 
 void set_up() {
@@ -209,6 +220,7 @@ void run_all_tests() {
     run_test(test_complex, "test_complex");
     //run_test(test_pseudorandom, "test_pseudorandom");
     //run_test(test_random, "test_random");
+    //run_test(test_randomdist, "test_randomdist");
 }
 
 void ex12_all() {
