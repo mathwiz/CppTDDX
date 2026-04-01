@@ -15,10 +15,10 @@ std::array<int, 10> static_array;
 // Tests
 
 void test_static_array() {
-    assert_that(static_array[0] == 0, "initialization");
+    assert_that(static_array[0] == 0, "initialized to 0");
     
     std::array<int, 10> local;
-    assert_that(local[0] != 0, "why?");
+    assert_that(local[0] != 0, "not initialized to 0");
     
     std::array<int, 10> local2{ 1, 1, 2, 3 };
     assert_that(local2[0] == 1, "0");
