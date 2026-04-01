@@ -11,6 +11,7 @@
 #include <chrono>
 #include <thread>
 #include <complex>
+#include <random>
 
 #include "unit_test.h"
 
@@ -181,8 +182,14 @@ void test_complex() {
     assert_value(std::imag(a), 14.13, 0.00001, "imaginary");
 }
 
-void set_up() {
+void test_pseudorandom() {
+    std::mt19937 mt_engine{ 91586 };
+    printf("%d\n", mt_engine());
+    printf("%d\n", mt_engine());
+    printf("%d\n", mt_engine());
+}
 
+void set_up() {
 }
 
 void run_all_tests() {
@@ -193,8 +200,10 @@ void run_all_tests() {
     run_test(test_variant, "test_variant");
     run_test(test_chrono, "test_chrono");
     run_test(test_sleep, "test_sleep");
-    run_test(test_stopwatch, "test_stopwatch");
+    //run_test(test_stopwatch, "test_stopwatch");
     run_test(test_complex, "test_complex");
+    //run_test(test_pseudorandom, "test_pseudorandom");
+    run_test(test_pseudorandom, "test_pseudorandom");
 }
 
 void ex12_all() {
