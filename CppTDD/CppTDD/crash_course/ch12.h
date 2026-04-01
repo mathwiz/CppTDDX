@@ -13,6 +13,7 @@
 #include <complex>
 #include <random>
 #include <limits>
+#include <ratio>
 
 #include "unit_test.h"
 
@@ -212,6 +213,14 @@ void test_limits() {
     printf("underflow: %d\n", lim - 1);
 }
 
+void test_ratio() {
+    using a = std::ratio<3, 4>;
+    using b = std::ratio<6, 12>;
+    using c = std::ratio_multiply<a, b>;
+    assert_that(c::num == 3, "numerator");
+    assert_that(c::den == 8, "denominator");
+}
+
 void set_up() {
 }
 
@@ -229,6 +238,7 @@ void run_all_tests() {
     //run_test(test_random, "test_random");
     //run_test(test_randomdist, "test_randomdist");
     //run_test(test_limits, "test_limits");
+    run_test(test_ratio, "test_ratio");
 }
 
 void ex12_all() {
