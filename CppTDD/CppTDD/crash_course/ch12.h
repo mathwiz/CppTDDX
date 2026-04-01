@@ -12,6 +12,7 @@
 #include <thread>
 #include <complex>
 #include <random>
+#include <limits>
 
 #include "unit_test.h"
 
@@ -205,6 +206,12 @@ void test_randomdist() {
     printf("\n");
 }
 
+void test_limits() {
+    auto lim = std::numeric_limits<int>::min();
+    printf("  minimum: %d\n", lim);
+    printf("underflow: %d\n", lim - 1);
+}
+
 void set_up() {
 }
 
@@ -221,6 +228,7 @@ void run_all_tests() {
     //run_test(test_pseudorandom, "test_pseudorandom");
     //run_test(test_random, "test_random");
     //run_test(test_randomdist, "test_randomdist");
+    //run_test(test_limits, "test_limits");
 }
 
 void ex12_all() {
