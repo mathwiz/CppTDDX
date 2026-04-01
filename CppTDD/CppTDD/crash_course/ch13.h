@@ -49,11 +49,24 @@ void test_array_access() {
     assert_that(fib[2] == 2, "set with get");
 }
 
+void test_array_ends() {
+    std::array<int, 4> fib{ 0, 1, 2, 0 };
+
+    fib.front() = 1;
+    assert_that(fib[0] == 1, "set with front");
+    assert_that(fib[0] == fib.front(), "get with front");
+
+    fib.back() = 3;
+    assert_that(fib[3] == 3, "set with back");
+    assert_that(fib[3] == fib.back(), "get with back");
+}
+
 void set_up() {
 }
 
 void run_all_tests() {
     run_test(test_static_array, "test_static_array");
     run_test(test_array_access, "test_array_access");
+    run_test(test_array_ends, "test_array_ends");
 }
 
