@@ -7,14 +7,14 @@
 
 #include <iostream>
 
-#include "ch12.h"
+#include "ch13.h"
 
 int handle_args(int argc, const char * argv[]);
 
 
 int main(int argc, const char * argv[]) {
     handle_args(argc, argv);
-    ex12_all();
+    run_all_tests();
     return EXIT_SUCCESS;
 }
 
