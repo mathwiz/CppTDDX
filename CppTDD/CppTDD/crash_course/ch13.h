@@ -76,6 +76,21 @@ void test_iterator_empty() {
     assert_that(e.begin() == e.end(), "begin equals end");
 }
 
+void test_iterators() {
+    std::array<int, 3> e{ 1, 2, 3 };
+    auto iter = e.begin();
+    assert_that(*iter == 1, "1");
+    assert_that(iter != e.end(), "not end 1");
+    iter++;
+    assert_that(*iter == 2, "2");
+    assert_that(iter != e.end(), "not end 2");
+    iter++;
+    assert_that(*iter == 3, "3");
+    assert_that(iter != e.end(), "not end 3");
+    iter++;
+    assert_that(iter == e.end(), "end");
+}
+
 void set_up() {
 }
 
@@ -85,5 +100,6 @@ void run_all_tests() {
     run_test(test_array_ends, "test_array_ends");
     run_test(test_array_data, "test_array_data");
     run_test(test_iterator_empty, "test_iterator_empty");
+    run_test(test_iterators, "test_iterators");
 }
 
