@@ -71,6 +71,11 @@ void test_array_data() {
     assert_that(color_ptr == &color[0], "index 0 ref");
 }
 
+void test_iterator_empty() {
+    std::array<int, 0> e{};
+    assert_that(e.begin() == e.end(), "begin equals end");
+}
+
 void set_up() {
 }
 
@@ -79,5 +84,6 @@ void run_all_tests() {
     run_test(test_array_access, "test_array_access");
     run_test(test_array_ends, "test_array_ends");
     run_test(test_array_data, "test_array_data");
+    run_test(test_iterator_empty, "test_iterator_empty");
 }
 
