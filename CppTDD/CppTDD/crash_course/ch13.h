@@ -126,6 +126,14 @@ void test_vector_from_iterator() {
     assert_that(vec.size() == fib.size(), "size");
 }
 
+void test_vector_assign() {
+    std::vector<int> message{ 1, 2, 3, 4, 5, 6, 7 };
+    assert_that(message[6] == 7, "last");
+    message.assign({ 11, 12, 13, 14, 15, 16 });
+    assert_that(message[5] = 16, "last");
+    assert_that(message.size() == 6, "now one less");
+}
+
 void set_up() {
 }
 
@@ -140,5 +148,6 @@ void run_all_tests() {
     run_test(test_vector_construction, "test_vector_construction");
     run_test(test_vector_fill_constructor, "test_vector_fill_constructor");
     run_test(test_vector_from_iterator, "test_vector_from_iterator");
+    run_test(test_vector_assign, "test_vector_assign");
 }
 
