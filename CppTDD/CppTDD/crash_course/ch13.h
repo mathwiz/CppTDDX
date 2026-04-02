@@ -7,6 +7,7 @@
 
 #include <array>
 #include <vector>
+#include <utility>
 
 #include "unit_test.h"
 
@@ -150,6 +151,18 @@ void test_vector_push_back() {
     assert_that(ones.size() == 4, "one larger");
 }
 
+void test_vector_emplace() {
+    std::vector<std::pair<int, int>> factors;
+    factors.emplace_back(2, 30);
+    factors.emplace_back(3, 20);
+    factors.emplace_back(4, 15);
+    factors.emplace(factors.begin(), 1, 60);
+    assert_that(factors[0].first == 1, "first");
+    assert_that(factors[0].second == 60, "second");
+    assert_that(factors[3].first == 4, "first");
+    assert_that(factors[3].second == 15, "second");
+}
+
 void set_up() {
 }
 
@@ -167,5 +180,6 @@ void run_all_tests() {
     run_test(test_vector_assign, "test_vector_assign");
     run_test(test_vector_insert, "test_vector_insert");
     run_test(test_vector_push_back, "test_vector_push_back");
+    run_test(test_vector_emplace, "test_vector_emplace");
 }
 
