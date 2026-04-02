@@ -6,6 +6,7 @@
 //
 
 #include <array>
+#include <vector>
 
 #include "unit_test.h"
 
@@ -100,6 +101,24 @@ void test_array_range() {
     assert_that(sum == 15, "ranged sum");
 }
 
+void test_vector_construction() {
+    std::vector<const char*> vec;
+    assert_that(vec.empty(), "default");
+    
+    std::vector<int> fib{ 1, 1, 2, 3, 5 };
+    assert_that(fib[4] == 5, "braced initialization");
+}
+
+void test_vector_supports() {
+    std::vector<int> five_nine{ 5, 9 };
+    assert_that(five_nine[0] == 5, "braced 0");
+    assert_that(five_nine[1] == 9, "braced 1");
+    
+    std::vector<int> five_nines(5, 9);
+    assert_that(five_nines[0] == 9, "constructor 0");
+    assert_that(five_nines[4] == 9, "constructor 4");
+}
+
 void set_up() {
 }
 
@@ -111,5 +130,7 @@ void run_all_tests() {
     run_test(test_iterator_empty, "test_iterator_empty");
     run_test(test_iterators, "test_iterators");
     run_test(test_array_range, "test_array_range");
+    run_test(test_vector_construction, "test_vector_construction");
+    run_test(test_vector_supports, "test_vector_supports");
 }
 
