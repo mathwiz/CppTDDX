@@ -177,6 +177,7 @@ void test_vector_growth() {
     kb_store.emplace_back();
     kb_store.emplace_back();
     kb_store.emplace_back();
+    assert_that(!kb_store.empty(), "not empty");
     assert_that(kb_store.size() == 3, "size");
     
     kb_store.shrink_to_fit();
