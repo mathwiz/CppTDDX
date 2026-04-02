@@ -5,6 +5,7 @@
 //  Created by Yohan Lee on 4/1/26.
 //
 
+#include <cstdint>
 #include <array>
 #include <vector>
 #include <utility>
@@ -163,6 +164,29 @@ void test_vector_emplace() {
     assert_that(factors[3].second == 15, "second");
 }
 
+void test_vector_growth() {
+    std::vector<std::array<uint8_t, 1024>> kb_store;
+    assert_that(kb_store.max_size() > 0, "max size");
+    assert_that(kb_store.empty(), "empty");
+    
+    size_t elements{ 1024 };
+    kb_store.reserve(elements);
+    assert_that(kb_store.empty(), "empty");
+    assert_that(kb_store.capacity() == elements, "capacity");
+    
+    kb_store.emplace_back();
+    kb_store.emplace_back();
+    kb_store.emplace_back();
+    assert_that(kb_store.size() == 3, "size");
+    
+    kb_store.shrink_to_fit();
+    assert_that(kb_store.capacity() >= 3, "capacity");
+
+    kb_store.clear();
+    assert_that(kb_store.empty(), "empty");
+    assert_that(kb_store.capacity() >= 3, "capacity");
+}
+
 void set_up() {
 }
 
@@ -181,5 +205,6 @@ void run_all_tests() {
     run_test(test_vector_insert, "test_vector_insert");
     run_test(test_vector_push_back, "test_vector_push_back");
     run_test(test_vector_emplace, "test_vector_emplace");
+    run_test(test_vector_growth, "test_vector_growth");
 }
 
