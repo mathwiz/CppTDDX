@@ -134,6 +134,15 @@ void test_vector_assign() {
     assert_that(message.size() == 6, "now one less");
 }
 
+void test_vector_insert() {
+    std::vector<int> ones(5, 1);
+    auto third = ones.begin() + 2;
+    ones.insert(third, 2);
+    assert_that(ones[0] == 1, "0");
+    assert_that(ones[2] == 2, "2");
+    assert_that(ones.size() == 6, "one larger");
+}
+
 void set_up() {
 }
 
@@ -149,5 +158,6 @@ void run_all_tests() {
     run_test(test_vector_fill_constructor, "test_vector_fill_constructor");
     run_test(test_vector_from_iterator, "test_vector_from_iterator");
     run_test(test_vector_assign, "test_vector_assign");
+    run_test(test_vector_insert, "test_vector_insert");
 }
 
