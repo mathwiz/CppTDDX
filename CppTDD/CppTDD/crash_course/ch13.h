@@ -143,6 +143,13 @@ void test_vector_insert() {
     assert_that(ones.size() == 6, "one larger");
 }
 
+void test_vector_push_back() {
+    std::vector<int> ones(3, 1);
+    ones.push_back(10);
+    assert_that(ones[3] == 10, "at end");
+    assert_that(ones.size() == 4, "one larger");
+}
+
 void set_up() {
 }
 
@@ -159,5 +166,6 @@ void run_all_tests() {
     run_test(test_vector_from_iterator, "test_vector_from_iterator");
     run_test(test_vector_assign, "test_vector_assign");
     run_test(test_vector_insert, "test_vector_insert");
+    run_test(test_vector_push_back, "test_vector_push_back");
 }
 
