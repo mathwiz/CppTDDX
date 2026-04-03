@@ -317,6 +317,19 @@ void test_set_adding() {
     assert_that(fib.find(21) != fib.end(), "3");
 }
 
+void test_set_removing() {
+    std::set<int> fib{ 1, 1, 2, 3, 5, 8, 13, 21 };
+    fib.erase(8);
+    assert_that(fib.find(8) == fib.end(), "1");
+    fib.clear();
+    assert_that(fib.find(13) == fib.end(), "2");
+    assert_that(fib.find(21) == fib.end(), "3");
+}
+
+void test_multiset() {
+    
+}
+
 void set_up() {
 }
 
@@ -345,5 +358,6 @@ void run_all_tests() {
     run_test(test_set, "test_set");
     run_test(test_set_access, "test_set_access");
     run_test(test_set_adding, "test_set_adding");
+    run_test(test_set_removing, "test_set_removing");
 }
 
