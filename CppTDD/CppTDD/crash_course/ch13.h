@@ -251,6 +251,23 @@ void test_queue() {
     assert_that(que.empty(), "6");
 }
 
+void test_priority_queue() {
+    std::priority_queue<double> que;
+    que.push(1.0); //1.0
+    que.push(2.0); //2.0 1.0
+    que.push(1.5); //2.0 1.5 1.0
+    assert_value(que.top(), 2.0, 0.0001, "1");
+    que.pop();     //1.5 1.0
+    que.push(1.1); //1.5 1.1 1.0
+    assert_value(que.top(), 1.5, 0.0001, "2");
+    que.pop();     //1.1 1.0
+    assert_value(que.top(), 1.1, 0.0001, "3");
+    que.pop();     //1.0
+    assert_value(que.top(), 1.0, 0.0001, "4");
+    que.pop();     //
+    assert_that(que.empty(), "5");
+}
+
 void set_up() {
 }
 
@@ -274,5 +291,6 @@ void run_all_tests() {
     run_test(test_list, "test_list");
     run_test(test_stack, "test_stack");
     run_test(test_queue, "test_queue");
+    run_test(test_priority_queue, "test_priority_queue");
 }
 
