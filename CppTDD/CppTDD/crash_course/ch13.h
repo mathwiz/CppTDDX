@@ -13,6 +13,7 @@
 #include <list>
 #include <stack>
 #include <bitset>
+#include <set>
 
 #include "unit_test.h"
 
@@ -280,6 +281,32 @@ void test_bitset() {
     assert_that(bits == bits2, "6");
 }
 
+void test_set() {
+    std::set<int> empty;
+    assert_that(empty.empty(), "1");
+    std::set<int> fib{ 1, 1, 2, 3, 5 };
+    assert_that(fib.size() == 4, "2");
+    auto fib_copy(fib);
+    assert_that(fib_copy.size() == 4, "3");
+    auto fib_moved(std::move(fib));
+    assert_that(fib_moved.size() == 4, "4");
+}
+
+void test_set_access() {
+    std::set<int> fib{ 1, 1, 2, 3, 5 };
+    assert_that(*fib.find(3) == 3, "1");
+    assert_that(fib.find(100) == fib.end(), "2");
+    assert_that(fib.count(3) == 1, "3");
+    assert_that(fib.count(100) == 0, "4");
+    auto it_l = fib.lower_bound(3);
+    assert_that(*it_l == 3, "5");
+    auto it_u = fib.upper_bound(3);
+    assert_that(*it_u == 5, "6");
+    auto it_pair = fib.equal_range(3);
+    assert_that(*it_pair.first == 3, "7");
+    assert_that(*it_pair.second == 5, "8");
+}
+
 void set_up() {
 }
 
@@ -305,5 +332,7 @@ void run_all_tests() {
     run_test(test_queue, "test_queue");
     run_test(test_priority_queue, "test_priority_queue");
     run_test(test_bitset, "test_bitset");
+    run_test(test_set, "test_set");
+    run_test(test_set_access, "test_set_access");
 }
 
