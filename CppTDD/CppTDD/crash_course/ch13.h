@@ -10,6 +10,7 @@
 #include <vector>
 #include <utility>
 #include <deque>
+#include <list>
 
 #include "unit_test.h"
 
@@ -204,6 +205,23 @@ void test_deque() {
     assert_that(d[3] == 'd', "5");
 }
 
+void test_list() {
+    std::list<int> odds{ 11, 22, 33, 44, 55, 66, 77, 88, 99 };
+    odds.remove_if([](int x) { return x % 2 == 0; });
+    auto iter = odds.begin();
+    assert_that(*iter == 11, "1");
+    iter++;
+    assert_that(*iter == 33, "2");
+    iter++;
+    assert_that(*iter == 55, "3");
+    iter++;
+    assert_that(*iter == 77, "4");
+    iter++;
+    assert_that(*iter == 99, "5");
+    iter++;
+    assert_that(iter == odds.end(), "6");
+}
+
 void set_up() {
 }
 
@@ -224,5 +242,6 @@ void run_all_tests() {
     run_test(test_vector_emplace, "test_vector_emplace");
     run_test(test_vector_growth, "test_vector_growth");
     run_test(test_deque, "test_deque");
+    run_test(test_list, "test_list");
 }
 
