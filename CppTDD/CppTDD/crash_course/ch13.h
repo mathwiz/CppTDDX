@@ -12,6 +12,7 @@
 #include <deque>
 #include <list>
 #include <stack>
+#include <bitset>
 
 #include "unit_test.h"
 
@@ -268,6 +269,16 @@ void test_priority_queue() {
     assert_that(que.empty(), "5");
 }
 
+void test_bitset() {
+    std::bitset<4> bits{ 0b0101 };
+    std::bitset<4> bits2("0101");
+    assert_that(bits[0] == true, "1");
+    assert_that(bits[1] == false, "2");
+    assert_that(bits[2] == true, "3");
+    assert_that(bits[3] == false, "4");
+    assert_that(bits == bits2, "5");
+}
+
 void set_up() {
 }
 
@@ -292,5 +303,6 @@ void run_all_tests() {
     run_test(test_stack, "test_stack");
     run_test(test_queue, "test_queue");
     run_test(test_priority_queue, "test_priority_queue");
+    run_test(test_bitset, "test_bitset");
 }
 
