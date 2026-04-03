@@ -9,6 +9,7 @@
 #include <array>
 #include <vector>
 #include <utility>
+#include <deque>
 
 #include "unit_test.h"
 
@@ -188,6 +189,18 @@ void test_vector_growth() {
     assert_that(kb_store.capacity() >= 3, "capacity");
 }
 
+void test_deque() {
+    std::deque<char> d;
+    d.push_front('b');
+    d.push_back('c');
+    d.push_front('a');
+    d.push_back('d');
+    assert_that(d[0] == 'a', "deque");
+    assert_that(d[1] == 'b', "deque");
+    assert_that(d[2] == 'c', "deque");
+    assert_that(d[3] == 'd', "deque");
+}
+
 void set_up() {
 }
 
@@ -207,5 +220,6 @@ void run_all_tests() {
     run_test(test_vector_push_back, "test_vector_push_back");
     run_test(test_vector_emplace, "test_vector_emplace");
     run_test(test_vector_growth, "test_vector_growth");
+    run_test(test_deque, "test_deque");
 }
 
