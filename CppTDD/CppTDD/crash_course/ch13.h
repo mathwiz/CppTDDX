@@ -270,13 +270,14 @@ void test_priority_queue() {
 }
 
 void test_bitset() {
-    std::bitset<4> bits{ 0b0101 };
-    std::bitset<4> bits2("0101");
-    assert_that(bits[0] == true, "1");
-    assert_that(bits[1] == false, "2");
-    assert_that(bits[2] == true, "3");
-    assert_that(bits[3] == false, "4");
-    assert_that(bits == bits2, "5");
+    std::bitset<5> bits{ 0b11010 };
+    std::bitset<5> bits2( "11010");
+    assert_that(bits[0] == false, "1");
+    assert_that(bits[1] == true, "2");
+    assert_that(bits.test(2) == false, "3");
+    assert_that(bits.test(3) == true, "4");
+    assert_that(bits.test(4) == true, "5");
+    assert_that(bits == bits2, "6");
 }
 
 void set_up() {
