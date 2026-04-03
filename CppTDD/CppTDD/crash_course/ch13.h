@@ -193,12 +193,15 @@ void test_deque() {
     std::deque<char> d;
     d.push_front('b');
     d.push_back('c');
-    d.push_front('a');
+    d.push_front('z');
+    assert_that(d[0] == 'z', "1");
     d.push_back('d');
-    assert_that(d[0] == 'a', "deque");
-    assert_that(d[1] == 'b', "deque");
-    assert_that(d[2] == 'c', "deque");
-    assert_that(d[3] == 'd', "deque");
+    d.pop_front();
+    d.push_front('a');
+    assert_that(d[0] == 'a', "2");
+    assert_that(d[1] == 'b', "3");
+    assert_that(d[2] == 'c', "4");
+    assert_that(d[3] == 'd', "5");
 }
 
 void set_up() {
