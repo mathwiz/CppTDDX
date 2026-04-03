@@ -15,6 +15,7 @@
 #include <bitset>
 #include <set>
 #include <functional>
+#include <unordered_set>
 
 #include "unit_test.h"
 
@@ -349,6 +350,13 @@ void test_hash() {
     assert_that(!long_equal_to(42, 43), "4");
 }
 
+void test_unordered_set() {
+    std::unordered_set<unsigned long> sheep(100);
+    assert_that(sheep.bucket_count() >= 100, "1");
+    assert_that(sheep.bucket_count() <= sheep.max_bucket_count(), "2");
+    assert_value(sheep.max_load_factor(), 1.0, 0.0001, "3");
+}
+
 void set_up() {
 }
 
@@ -380,5 +388,6 @@ void run_all_tests() {
     run_test(test_set_removing, "test_set_removing");
     run_test(test_multiset, "test_multiset");
     run_test(test_hash, "test_hash");
+    run_test(test_unordered_set, "test_unordered_set");
 }
 
