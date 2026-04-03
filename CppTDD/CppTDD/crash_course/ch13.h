@@ -344,6 +344,9 @@ void test_hash() {
     auto hash_code_42 = hasher(42);
     assert_that(hash_code_42 == hasher(42), "1");
     assert_that(hash_code_42 != hasher(43), "2");
+    std::equal_to<long> long_equal_to;
+    assert_that(long_equal_to(42, 42), "3");
+    assert_that(!long_equal_to(42, 43), "4");
 }
 
 void set_up() {
