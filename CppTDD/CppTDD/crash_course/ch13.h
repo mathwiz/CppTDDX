@@ -307,6 +307,16 @@ void test_set_access() {
     assert_that(*it_pair.second == 5, "8");
 }
 
+void test_set_adding() {
+    std::set<int> fib{ 1, 1, 2, 3, 5 };
+    fib.insert(8);
+    assert_that(fib.find(8) != fib.end(), "1");
+    fib.emplace(13);
+    assert_that(fib.find(13) != fib.end(), "2");
+    fib.emplace_hint(fib.end(), 21);
+    assert_that(fib.find(21) != fib.end(), "3");
+}
+
 void set_up() {
 }
 
@@ -334,5 +344,6 @@ void run_all_tests() {
     run_test(test_bitset, "test_bitset");
     run_test(test_set, "test_set");
     run_test(test_set_access, "test_set_access");
+    run_test(test_set_adding, "test_set_adding");
 }
 
