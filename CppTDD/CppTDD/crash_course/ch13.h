@@ -14,6 +14,7 @@
 #include <stack>
 #include <bitset>
 #include <set>
+#include <functional>
 
 #include "unit_test.h"
 
@@ -338,6 +339,13 @@ void test_multiset() {
     assert_that(begin == end, "5");
 }
 
+void test_hash() {
+    std::hash<long> hasher;
+    auto hash_code_42 = hasher(42);
+    assert_that(hash_code_42 == hasher(42), "1");
+    assert_that(hash_code_42 != hasher(43), "2");
+}
+
 void set_up() {
 }
 
@@ -368,5 +376,6 @@ void run_all_tests() {
     run_test(test_set_adding, "test_set_adding");
     run_test(test_set_removing, "test_set_removing");
     run_test(test_multiset, "test_multiset");
+    run_test(test_hash, "test_hash");
 }
 
