@@ -236,6 +236,21 @@ void test_stack() {
     assert_that(stk.empty(), "4");
 }
 
+void test_queue() {
+    std::deque<int> deq{ 1, 2 };
+    std::queue<int> que(deq);
+    assert_that(que.front() == 1, "1");
+    assert_that(que.back() == 2, "2");
+    que.pop();
+    que.push(3);
+    assert_that(que.front() == 2, "3");
+    assert_that(que.back() == 3, "4");
+    que.pop();
+    assert_that(que.front() == 3, "5");
+    que.pop();
+    assert_that(que.empty(), "6");
+}
+
 void set_up() {
 }
 
@@ -258,5 +273,6 @@ void run_all_tests() {
     run_test(test_deque, "test_deque");
     run_test(test_list, "test_list");
     run_test(test_stack, "test_stack");
+    run_test(test_queue, "test_queue");
 }
 
