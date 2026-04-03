@@ -11,6 +11,7 @@
 #include <utility>
 #include <deque>
 #include <list>
+#include <stack>
 
 #include "unit_test.h"
 
@@ -222,6 +223,19 @@ void test_list() {
     assert_that(iter == odds.end(), "6");
 }
 
+void test_stack() {
+    std::vector<int> vec{ 1, 3 };
+    std::stack<int, decltype(vec)> stk(vec);
+    assert_that(stk.top() == 3, "1");
+    stk.pop();
+    stk.push(2);
+    assert_that(stk.top() == 2, "2");
+    stk.pop();
+    assert_that(stk.top() == 1, "3");
+    stk.pop();
+    assert_that(stk.empty(), "4");
+}
+
 void set_up() {
 }
 
@@ -243,5 +257,6 @@ void run_all_tests() {
     run_test(test_vector_growth, "test_vector_growth");
     run_test(test_deque, "test_deque");
     run_test(test_list, "test_list");
+    run_test(test_stack, "test_stack");
 }
 
