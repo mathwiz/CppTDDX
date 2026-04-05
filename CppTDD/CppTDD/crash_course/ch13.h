@@ -17,10 +17,42 @@
 #include <functional>
 #include <unordered_set>
 #include <map>
+#include <cmath>
+#include <stdexcept>
+#include <initializer_list>
 
 #include "unit_test.h"
 
 std::array<int, 10> static_array;
+
+size_t square_root(size_t x) {
+    const auto result = static_cast<size_t>(sqrt(x));
+    if (result * result != x) throw std::logic_error{ "Not a perfect square" };
+    return result;
+}
+
+template <typename T>
+struct SquareMatrix {
+    SquareMatrix(std::initializer_list<T> val)
+    : dim{ square_root(val.size()) },
+    data(dim, std::vector<T>{}) {
+        auto itr = val.begin();
+        for (size_t row{}; row < dim; row++) {
+            data[row].assign(itr, itr+dim);
+            itr += dim;
+        }
+    }
+    
+    T& at(size_t row, size_t col) {
+        if (row >= dim || col >= dim)
+            throw std::out_of_range{ "Index invalid" };
+        return data[row][col];
+    }
+    
+    const size_t dim;
+private:
+    std::vector<std::vector<T>> data;
+};
 
 
 // Tests
@@ -436,6 +468,21 @@ void test_multimap() {
     assert_that(itr == end, "5");
 }
 
+void test_initializer_list() {
+    SquareMatrix<int> mat {
+        1, 2, 3, 4,
+        5, 0, 7, 8,
+        9, 10, 11, 12,
+        13, 14, 15, 16,
+    };
+    
+    assert_that(mat.dim == 4, "1");
+    assert_that(mat.at(1, 1) == 0, "2");
+    mat.at(1, 1) = 6;
+    assert_that(mat.at(1, 1) == 6, "3");
+    assert_that(mat.at(3, 3) == 16, "4");
+}
+
 void set_up() {
 }
 
@@ -471,5 +518,6 @@ void run_all_tests() {
     run_test(test_map, "test_map");
     run_test(test_map_mutation, "test_map_mutation");
     run_test(test_multimap, "test_multimap");
+    run_test(test_initializer_list, "test_initializer_list");
 }
 
