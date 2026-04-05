@@ -419,6 +419,23 @@ void test_map_mutation() {
     assert_that(pub_year.empty(), "13");
 }
 
+void test_multimap() {
+    std::array<char, 64> preamble { "We the People of the United States" };
+    std::multimap<char, size_t> indices;
+    for (size_t i{}; i < preamble.size(); i++)
+        indices.emplace(preamble[i], i);
+    
+    assert_that(indices.count('t') == 5, "1");
+    assert_that(indices.count('W') == 1, "2");
+    
+    auto [itr, end] = indices.equal_range('o');
+    assert_that(itr->second == 9, "3");
+    itr++;
+    assert_that(itr->second == 14, "4");
+    itr++;
+    assert_that(itr == end, "5");
+}
+
 void set_up() {
 }
 
@@ -453,5 +470,6 @@ void run_all_tests() {
     run_test(test_unordered_set, "test_unordered_set");
     run_test(test_map, "test_map");
     run_test(test_map_mutation, "test_map_mutation");
+    run_test(test_multimap, "test_multimap");
 }
 
