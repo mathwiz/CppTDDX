@@ -16,6 +16,7 @@
 #include <set>
 #include <functional>
 #include <unordered_set>
+#include <map>
 
 #include "unit_test.h"
 
@@ -365,6 +366,18 @@ void test_unordered_set() {
     assert_that(sheep.load_factor() <= 1.0, "5");
 }
 
+void test_map() {
+    std::map<const char*, int> empty;
+    assert_that(empty.empty(), "1");
+    
+    std::map<const char*, int> pub_year {
+        { "1984", 1949 },
+        { "Animal Farm", 1945},
+        { "Brave New World", 1932 },
+        { "A Clockwork Orange", 1962 },
+    };
+}
+
 void set_up() {
 }
 
@@ -397,5 +410,6 @@ void run_all_tests() {
     run_test(test_multiset, "test_multiset");
     run_test(test_hash, "test_hash");
     run_test(test_unordered_set, "test_unordered_set");
+    run_test(test_map, "test_map");
 }
 
