@@ -377,6 +377,17 @@ void test_map() {
         { "A Clockwork Orange", 1962 },
     };
     assert_that(pub_year.size() == 4, "2");
+    assert_that(pub_year["Animal Farm"] == 1945, "3");
+    assert_that(pub_year.at("Animal Farm") == 1945, "4");
+    pub_year["Camp of the Saints"] = 1965;
+    assert_that(pub_year["Camp of the Saints"] == 1965, "5");
+    assert_that(pub_year["The Hunger Games"] == 0, "6");
+    try {
+        auto year = pub_year.at("The Hunger Games");
+        assert_that(year == 0, "should not get here");
+    } catch (std::out_of_range e) {
+        assert_that(true, "expected exception");
+    }
 }
 
 void set_up() {
