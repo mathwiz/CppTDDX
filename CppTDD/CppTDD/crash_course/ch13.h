@@ -380,7 +380,7 @@ void test_map() {
     assert_that(pub_year["Animal Farm"] == 1945, "3");
     assert_that(pub_year.at("Animal Farm") == 1945, "4");
     pub_year["Camp of the Saints"] = 1965;
-    assert_that(pub_year["Camp of the Saints"] == 1965, "5");
+    assert_that(pub_year["Camp of the Saints"] == 1973, "5");
     assert_that(pub_year["The Hunger Games"] == 0, "6");
     try {
         auto year = pub_year.at("The Hunger Games");
