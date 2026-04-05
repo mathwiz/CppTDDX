@@ -403,7 +403,13 @@ void test_map_mutation() {
     assert_that(strcmp(itr->first, "A Clockwork Orange") == 0, "3");
     assert_that(itr->second == 1962, "4");
     assert_that(!is_new, "5");
-    assert_that(pub_year.size() == 2, "2");
+    assert_that(pub_year.size() == 2, "6");
+    
+    auto [itr2, is_new2] = pub_year.insert_or_assign("A Clockwork Orange", 2000);
+    assert_that(strcmp(itr2->first, "A Clockwork Orange") == 0, "7");
+    assert_that(itr2->second == 2000, "8");
+    assert_that(!is_new2, "9");
+    assert_that(pub_year.size() == 2, "10");
 }
 
 void set_up() {
