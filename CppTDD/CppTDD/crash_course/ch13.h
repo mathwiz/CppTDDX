@@ -376,6 +376,7 @@ void test_map() {
         { "Brave New World", 1932 },
         { "A Clockwork Orange", 1962 },
     };
+    assert_that(pub_year.size() == 4, "2");
 }
 
 void set_up() {
