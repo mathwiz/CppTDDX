@@ -355,6 +355,14 @@ void test_unordered_set() {
     assert_that(sheep.bucket_count() >= 100, "1");
     assert_that(sheep.bucket_count() <= sheep.max_bucket_count(), "2");
     assert_value(sheep.max_load_factor(), 1.0, 0.0001, "3");
+    
+    sheep.reserve(100'000);
+    sheep.insert(0);
+    assert_that(sheep.load_factor() <= 0.00001, "4");
+    
+    while (sheep.size() < 100'000)
+        sheep.insert(sheep.size());
+    assert_that(sheep.load_factor() <= 1.0, "5");
 }
 
 void set_up() {
