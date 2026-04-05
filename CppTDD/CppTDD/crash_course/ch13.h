@@ -410,6 +410,13 @@ void test_map_mutation() {
     assert_that(itr2->second == 2000, "8");
     assert_that(!is_new2, "9");
     assert_that(pub_year.size() == 2, "10");
+    
+    pub_year.erase("1984");
+    assert_that(pub_year.size() == 1, "11");
+    assert_that(pub_year.find("1984") == pub_year.end(), "12");
+    
+    pub_year.clear();
+    assert_that(pub_year.empty(), "13");
 }
 
 void set_up() {
