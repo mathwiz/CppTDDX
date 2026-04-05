@@ -379,7 +379,7 @@ void test_map() {
     assert_that(pub_year.size() == 4, "2");
     assert_that(pub_year["Animal Farm"] == 1945, "3");
     assert_that(pub_year.at("Animal Farm") == 1945, "4");
-    pub_year["Camp of the Saints"] = 1965;
+    pub_year["Camp of the Saints"] = 1973;
     assert_that(pub_year["Camp of the Saints"] == 1973, "5");
     assert_that(pub_year["The Hunger Games"] == 0, "6");
     try {
@@ -388,6 +388,22 @@ void test_map() {
     } catch (std::out_of_range e) {
         assert_that(true, "expected exception");
     }
+}
+
+void test_map_mutation() {
+    std::map<const char*, int> pub_year;
+    pub_year.insert({ "1984", 1949 });
+    assert_that(pub_year.size() == 1, "1");
+    
+    std::pair<const char*, int> burgess{ "A Clockwork Orange", 1962 };
+    pub_year.insert(burgess);
+    assert_that(pub_year.size() == 2, "2");
+    
+    auto [itr, is_new] = pub_year.insert({ "A Clockwork Orange", 2000 });
+    assert_that(strcmp(itr->first, "A Clockwork Orange") == 0, "3");
+    assert_that(itr->second == 1962, "4");
+    assert_that(!is_new, "5");
+    assert_that(pub_year.size() == 2, "2");
 }
 
 void set_up() {
@@ -423,5 +439,6 @@ void run_all_tests() {
     run_test(test_hash, "test_hash");
     run_test(test_unordered_set, "test_unordered_set");
     run_test(test_map, "test_map");
+    run_test(test_map_mutation, "test_map_mutation");
 }
 
