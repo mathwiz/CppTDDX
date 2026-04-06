@@ -92,6 +92,23 @@ void test_mutable_iterators() {
     assert_that(iter[1] == 0, "2");
 }
 
+void test_iterator_advance() {
+    const std::vector<int> data{
+        1, 2, 3, 4,
+        5, 6, 7, 8,
+        9, 10, 11, 12,
+        13, 14, 15, 16,
+    };
+    auto iter = data.begin();
+    assert_that(*iter == 1, "1");
+    std::advance(iter, 4);
+    assert_that(*iter == 5, "2");
+    std::advance(iter, 4);
+    assert_that(*iter == 9, "3");
+    std::advance(iter, -8);
+    assert_that(*iter == 1, "4");
+}
+
 void run_all_tests() {
     run_test(test_output_iterators, "test_output_iterators");
     run_test(test_input_iterators, "test_input_iterators");
@@ -99,4 +116,5 @@ void run_all_tests() {
     run_test(test_bidirectional_iterators, "test_bidirectional_iterators");
     run_test(test_random_access_iterators, "test_random_access_iterators");
     run_test(test_mutable_iterators, "test_mutable_iterators");
+    run_test(test_iterator_advance, "test_iterator_advance");
 }
