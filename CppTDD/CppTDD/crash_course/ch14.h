@@ -84,10 +84,19 @@ void test_random_access_iterators() {
     assert_that((easy_as.cend() - iter) == 2, "3");
 }
 
+void test_mutable_iterators() {
+    std::deque<int> easy_as{ 1, 2, 3 };
+    auto iter = easy_as.begin();
+    assert_that(iter[0] == 1, "1");
+    iter[1] = 0;
+    assert_that(iter[1] == 0, "2");
+}
+
 void run_all_tests() {
     run_test(test_output_iterators, "test_output_iterators");
     run_test(test_input_iterators, "test_input_iterators");
     run_test(test_forward_iterators, "test_forward_iterators");
     run_test(test_bidirectional_iterators, "test_bidirectional_iterators");
     run_test(test_random_access_iterators, "test_random_access_iterators");
+    run_test(test_mutable_iterators, "test_mutable_iterators");
 }
