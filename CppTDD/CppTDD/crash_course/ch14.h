@@ -48,7 +48,22 @@ void test_input_iterators() {
     assert_that(iter == easy_as.end(), "4");
 }
 
+void test_forward_iterators() {
+    const std::forward_list<int> easy_as{ 1, 2, 3 };
+    auto iter = easy_as.begin();
+    auto iter2{ iter };
+    int sum{};
+    while (iter != easy_as.end())
+        sum += *(iter++);
+    
+    while (iter2 != easy_as.end())
+        sum += *(iter2++);
+
+    assert_that(sum == 12, "1");
+}
+
 void run_all_tests() {
     run_test(test_output_iterators, "test_output_iterators");
     run_test(test_input_iterators, "test_input_iterators");
+    run_test(test_forward_iterators, "test_forward_iterators");
 }
