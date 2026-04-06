@@ -9,6 +9,7 @@
 #include <deque>
 #include <forward_list>
 #include <list>
+#include <vector>
 
 #include "unit_test.h"
 
@@ -74,9 +75,19 @@ void test_bidirectional_iterators() {
     assert_that(iter == easy_as.cbegin(), "4");
 }
 
+void test_random_access_iterators() {
+    const std::vector<int> easy_as{ 1, 2, 3 };
+    auto iter = easy_as.begin();
+    assert_that(iter[0] == 1, "1");
+    ++iter;
+    assert_that(*(easy_as.cbegin() + 2) == 3, "2");
+    assert_that((easy_as.cend() - iter) == 2, "3");
+}
+
 void run_all_tests() {
     run_test(test_output_iterators, "test_output_iterators");
     run_test(test_input_iterators, "test_input_iterators");
     run_test(test_forward_iterators, "test_forward_iterators");
     run_test(test_bidirectional_iterators, "test_bidirectional_iterators");
+    run_test(test_random_access_iterators, "test_random_access_iterators");
 }
