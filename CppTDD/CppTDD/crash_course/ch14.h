@@ -5,15 +5,16 @@
 //  Created by Yohan Lee on 4/6/26.
 //
 
-#include <deque>
 #include <iterator>
+#include <deque>
+#include <forward_list>
 
 #include "unit_test.h"
 
 
 // * Testing * //
 
-void test_insert() {
+void test_output_iterators() {
     std::deque<int> dq;
     auto back_ins = std::back_inserter(dq);
     *back_ins = 2; // 2
@@ -35,6 +36,19 @@ void test_insert() {
     assert_that(dq[3] == 4, "4");
 }
 
+void test_input_iterators() {
+    const std::forward_list<int> easy_as{ 1, 2, 3 };
+    auto iter = easy_as.begin();
+    assert_that(*iter == 1, "1");
+    ++iter;
+    assert_that(*iter == 2, "2");
+    ++iter;
+    assert_that(*iter == 3, "3");
+    ++iter;
+    assert_that(iter == easy_as.end(), "4");
+}
+
 void run_all_tests() {
-    run_test(test_insert, "test_insert");
+    run_test(test_output_iterators, "test_output_iterators");
+    run_test(test_input_iterators, "test_input_iterators");
 }
