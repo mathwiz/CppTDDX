@@ -8,6 +8,7 @@
 #include <iterator>
 #include <deque>
 #include <forward_list>
+#include <list>
 
 #include "unit_test.h"
 
@@ -62,8 +63,20 @@ void test_forward_iterators() {
     assert_that(sum == 12, "1");
 }
 
+void test_bidirectional_iterators() {
+    const std::list<int> easy_as{ 1, 2, 3 };
+    auto iter = easy_as.begin();
+    assert_that(*iter == 1, "1");
+    ++iter;
+    assert_that(*iter == 2, "2");
+    --iter;
+    assert_that(*iter == 1, "3");
+    assert_that(iter == easy_as.cbegin(), "4");
+}
+
 void run_all_tests() {
     run_test(test_output_iterators, "test_output_iterators");
     run_test(test_input_iterators, "test_input_iterators");
     run_test(test_forward_iterators, "test_forward_iterators");
+    run_test(test_bidirectional_iterators, "test_bidirectional_iterators");
 }
