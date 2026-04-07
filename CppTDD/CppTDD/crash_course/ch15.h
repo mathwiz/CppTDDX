@@ -16,6 +16,10 @@ void test_constructing() {
     assert_that(cheese.empty(), "1");
     std::string motor_club(3, 'A');
     assert_that(motor_club == "AAA", "2");
+    
+    auto word = "gobbledygook";
+    assert_that(std::string(word) == "gobbledygook", "3");
+    assert_that(std::string(word, 6) == "gobble", "4");
 }
 
 void run_all_tests() {
