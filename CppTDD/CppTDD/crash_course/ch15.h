@@ -106,6 +106,18 @@ void test_replace() {
     assert_that(word == "institution", "1");
     word.replace(2, 6, "vers");
     assert_that(word == "inversion", "2");
+    
+    std::string shamp("shamp");
+    shamp.resize(4);
+    assert_that(shamp == "sham", "3");
+    shamp.append("p");
+    shamp.resize(7, 'o');
+    assert_that(shamp == "shampoo", "4");
+
+    std::string hobbits("hobbits");
+    assert_that(hobbits.substr() == "hobbits", "5");
+    assert_that(hobbits.substr(3) == "bits", "6");
+    assert_that(hobbits.substr(3, 3) == "bit", "7");
 }
 
 void run_all_tests() {
