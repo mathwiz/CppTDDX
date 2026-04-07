@@ -70,6 +70,20 @@ void test_comparision() {
     assert_that(word > "Allusion"s, "6");
 }
 
+void test_append() {
+    std::string word("butt");
+    word.push_back('e');
+    assert_that(word == "butte", "1");
+    word += "rfinger";
+    assert_that(word == "butterfinger", "2");
+    word.append(1, 's');
+    assert_that(word == "butterfingers", "3");
+    assert_that(std::string(word, 0, 4).append("stockings", 5) == "buttstock", "4");
+    std::string other("onset");
+    word.append(other.begin(), other.begin() + 2);
+    assert_that(word == "butterfingerson", "5");
+}
+
 void run_all_tests() {
     run_test(test_constructing, "test_constructing");
     run_test(test_constructing2, "test_constructing2");
@@ -77,4 +91,5 @@ void run_all_tests() {
     run_test(test_c_string, "test_c_string");
     run_test(test_c_string2, "test_c_string2");
     run_test(test_comparision, "test_comparision");
+    run_test(test_append, "test_append");
 }
