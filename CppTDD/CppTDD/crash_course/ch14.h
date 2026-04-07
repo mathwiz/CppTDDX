@@ -13,6 +13,15 @@
 
 #include "unit_test.h"
 
+struct Movable {
+    Movable(int n) : identifier{ n } {}
+    Movable(Movable&& m) {
+        identifier = m.identifier;
+        m.identifier = -1;
+    }
+    int identifier;
+};
+
 
 // * Testing * //
 
@@ -152,6 +161,25 @@ void test_swap() {
     assert_that(data[2] == 1, "3");
 }
 
+void test_move() {
+    std::vector<Movable> donor;
+    donor.emplace_back(1);
+    donor.emplace_back(2);
+    donor.emplace_back(3);
+    
+    std::vector<Movable> recipient{
+        std::make_move_iterator(donor.begin()),
+        std::make_move_iterator(donor.end())
+    };
+
+    assert_that(donor[0].identifier == -1, "1");
+    assert_that(donor[1].identifier == -1, "2");
+    assert_that(donor[2].identifier == -1, "3");
+    assert_that(recipient[0].identifier == 1, "4");
+    assert_that(recipient[1].identifier == 2, "5");
+    assert_that(recipient[2].identifier == 3, "6");
+}
+
 void run_all_tests() {
     run_test(test_output_iterators, "test_output_iterators");
     run_test(test_input_iterators, "test_input_iterators");
@@ -163,4 +191,5 @@ void run_all_tests() {
     run_test(test_iterator_next_prev, "test_iterator_next_prev");
     run_test(test_iterator_distance, "test_iterator_distance");
     run_test(test_swap, "test_swap");
+    run_test(test_move, "test_move");
 }
