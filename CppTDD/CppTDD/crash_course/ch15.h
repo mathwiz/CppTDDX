@@ -84,6 +84,20 @@ void test_append() {
     assert_that(word == "butterfingerson", "5");
 }
 
+void test_remove() {
+    std::string word("therein");
+    word.pop_back();
+    word.pop_back();
+    assert_that(word == "there", "1");
+    word.clear();
+    assert_that(word == "", "2");
+    word.append("therein");
+    word.erase(word.begin(), word.begin() + 3);
+    assert_that(word == "rein", "3");
+    word.erase(1, 2);
+    assert_that(word == "rn", "4");
+}
+
 void run_all_tests() {
     run_test(test_constructing, "test_constructing");
     run_test(test_constructing2, "test_constructing2");
@@ -92,4 +106,5 @@ void run_all_tests() {
     run_test(test_c_string2, "test_c_string2");
     run_test(test_comparision, "test_comparision");
     run_test(test_append, "test_append");
+    run_test(test_remove, "test_remove");
 }
