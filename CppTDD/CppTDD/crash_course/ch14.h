@@ -186,6 +186,13 @@ void test_reverse_iterator_adapter() {
     assert_that(easy_as[0] == 1, "1");
     assert_that(easy_as[1] == 2, "2");
     assert_that(easy_as[2] == 3, "3");
+    
+    auto begin = std::make_reverse_iterator(original.cend());
+    auto end = std::make_reverse_iterator(original.cbegin());
+    std::vector<int> easy_again{ begin, end };
+    assert_that(easy_again[0] == 1, "4");
+    assert_that(easy_again[1] == 2, "5");
+    assert_that(easy_again[2] == 3, "6");
 }
 
 void run_all_tests() {
