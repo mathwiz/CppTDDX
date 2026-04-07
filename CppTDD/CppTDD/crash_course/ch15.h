@@ -22,6 +22,16 @@ void test_constructing() {
     assert_that(std::string(word, 6) == "gobble", "4");
 }
 
+void test_constructing2() {
+    std::string word("catawampus");
+    assert_that(word == "catawampus", "1");
+    assert_that(std::string(std::move(word)) == "catawampus", "2");
+    std::string word2("catawampus2");
+    assert_that(std::string(word2, 0, 3) == "cat", "3");
+    assert_that(std::string(word2, 4, 6) == "wampus", "4");
+}
+
 void run_all_tests() {
     run_test(test_constructing, "test_constructing");
+    run_test(test_constructing2, "test_constructing2");
 }
