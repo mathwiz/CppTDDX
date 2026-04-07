@@ -144,6 +144,14 @@ void test_iterator_distance() {
     assert_that(std::distance(fifth, eighth) == 3, "3");
 }
 
+void test_swap() {
+    std::vector<int> data{ 1, 2, 3 };
+    std::iter_swap(data.begin(), std::next(data.begin(), 2));
+    assert_that(data[0] == 3, "1");
+    assert_that(data[1] == 2, "2");
+    assert_that(data[2] == 1, "3");
+}
+
 void run_all_tests() {
     run_test(test_output_iterators, "test_output_iterators");
     run_test(test_input_iterators, "test_input_iterators");
@@ -154,4 +162,5 @@ void run_all_tests() {
     run_test(test_iterator_advance, "test_iterator_advance");
     run_test(test_iterator_next_prev, "test_iterator_next_prev");
     run_test(test_iterator_distance, "test_iterator_distance");
+    run_test(test_swap, "test_swap");
 }
