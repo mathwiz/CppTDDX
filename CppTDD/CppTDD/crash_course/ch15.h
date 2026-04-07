@@ -42,8 +42,18 @@ void test_constructing3() {
     assert_that(std::string(literal, 11, 4) == "now!", "3");
 }
 
+void test_c_string() {
+    std::string word("inconfessable");
+    auto cstr = word.c_str();
+    assert_that(cstr[0] == 'i', "1");
+    assert_that(cstr[1] == 'n', "2");
+    assert_that(cstr[word.length() - 1] == 'e', "3");
+    assert_that(cstr[word.length()] == '\0', "4");
+}
+
 void run_all_tests() {
     run_test(test_constructing, "test_constructing");
     run_test(test_constructing2, "test_constructing2");
     run_test(test_constructing3, "test_constructing3");
+    run_test(test_c_string, "test_c_string");
 }
