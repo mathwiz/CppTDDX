@@ -98,6 +98,16 @@ void test_remove() {
     assert_that(word == "rn", "4");
 }
 
+void test_replace() {
+    std::string word("substitution");
+    std::string other("innuendo");
+    word.replace(word.begin(), word.begin() + 3,
+                 other.begin(), other.begin() + 2);
+    assert_that(word == "institution", "1");
+    word.replace(2, 6, "vers");
+    assert_that(word == "inversion", "2");
+}
+
 void run_all_tests() {
     run_test(test_constructing, "test_constructing");
     run_test(test_constructing2, "test_constructing2");
@@ -107,4 +117,5 @@ void run_all_tests() {
     run_test(test_comparision, "test_comparision");
     run_test(test_append, "test_append");
     run_test(test_remove, "test_remove");
+    run_test(test_replace, "test_replace");
 }
