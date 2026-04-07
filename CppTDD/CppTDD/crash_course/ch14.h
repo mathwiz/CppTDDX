@@ -161,7 +161,7 @@ void test_swap() {
     assert_that(data[2] == 1, "3");
 }
 
-void test_move() {
+void test_move_iterator_adapter() {
     std::vector<Movable> donor;
     donor.emplace_back(1);
     donor.emplace_back(2);
@@ -180,6 +180,14 @@ void test_move() {
     assert_that(recipient[2].identifier == 3, "6");
 }
 
+void test_reverse_iterator_adapter() {
+    std::list<int> original{ 3, 2, 1 };
+    std::vector<int> easy_as{ original.crbegin(), original.crend() };
+    assert_that(easy_as[0] == 1, "1");
+    assert_that(easy_as[1] == 2, "2");
+    assert_that(easy_as[2] == 3, "3");
+}
+
 void run_all_tests() {
     run_test(test_output_iterators, "test_output_iterators");
     run_test(test_input_iterators, "test_input_iterators");
@@ -191,5 +199,6 @@ void run_all_tests() {
     run_test(test_iterator_next_prev, "test_iterator_next_prev");
     run_test(test_iterator_distance, "test_iterator_distance");
     run_test(test_swap, "test_swap");
-    run_test(test_move, "test_move");
+    run_test(test_move_iterator_adapter, "test_move_iterator_adapter");
+    run_test(test_reverse_iterator_adapter, "test_reverse_iterator_adapter");
 }
