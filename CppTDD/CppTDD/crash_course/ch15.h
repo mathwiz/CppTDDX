@@ -33,7 +33,17 @@ void test_constructing2() {
     assert_that(std::string(word2, 4, 6) == "wampus", "5");
 }
 
+void test_constructing3() {
+    std::string word("stop at embedded\0null");
+    assert_that(word == "stop at embedded", "1");
+    using namespace std::string_literals;
+    auto literal = "don't stop\0now!"s;
+    assert_that(literal.length() == 15, "2");
+    assert_that(std::string(literal, 11, 4) == "now!", "3");
+}
+
 void run_all_tests() {
     run_test(test_constructing, "test_constructing");
     run_test(test_constructing2, "test_constructing2");
+    run_test(test_constructing3, "test_constructing3");
 }
