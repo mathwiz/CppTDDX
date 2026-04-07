@@ -6,6 +6,7 @@
 //
 
 #include <string>
+#include <cstdio>
 
 #include "unit_test.h"
 
@@ -51,9 +52,29 @@ void test_c_string() {
     assert_that(cstr[word.length()] == '\0', "4");
 }
 
+void test_c_string2() {
+    std::string word("consciousness");
+    printf("c_str: %s at %p\n", word.c_str(), word.c_str());
+    printf(" data: %s at %p\n", word.data(), word.data());
+    assert_that(true, "no test");
+}
+
+void test_comparision() {
+    using namespace std::literals::string_literals;
+    std::string word("allusion");
+    assert_that(word == "allusion", "1");
+    assert_that(word == "allusion"s, "2");
+    assert_that(word != "Allusion"s, "3");
+    assert_that(word < "illusion", "4");
+    assert_that(word < "illusion"s, "5");
+    assert_that(word > "Allusion"s, "6");
+}
+
 void run_all_tests() {
     run_test(test_constructing, "test_constructing");
     run_test(test_constructing2, "test_constructing2");
     run_test(test_constructing3, "test_constructing3");
     run_test(test_c_string, "test_c_string");
+    run_test(test_c_string2, "test_c_string2");
+    run_test(test_comparision, "test_comparision");
 }
