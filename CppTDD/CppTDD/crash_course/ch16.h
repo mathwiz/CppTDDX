@@ -54,13 +54,18 @@ void test_extraction() {
 }
 
 void test_status() {
+    cin.exceptions(istream::badbit);
     string word;
     size_t count{};
     cout << "Start typing words (RET then ctrl-D to stop):\n";
-    while (cin >> word)
-        count++;
+    try {
+        while (cin >> word)
+            count++;
+        cout << "Discovered " << count << " words.\n";
+    } catch (const exception& e) {
+        cerr << "Error occurred reading from stdin: " << e.what();
+    }
     
-    cout << "Discovered " << count << " words.\n";
 }
 
 void run_all_tests() {
