@@ -59,7 +59,7 @@ void test_c_string2() {
     assert_that(true, "no test");
 }
 
-void test_comparision() {
+void test_comparison() {
     using namespace std::literals::string_literals;
     std::string word("allusion");
     assert_that(word == "allusion", "1");
@@ -160,13 +160,25 @@ void test_search4() {
     assert_that(word.find_last_of('x') == std::string::npos, "5");
 }
 
+void test_conversion() {
+    using namespace std::literals::string_literals;
+    assert_that("8675309"s == std::to_string(8675309), "1");
+    assert_that(L"90210"s == std::to_wstring(90210), "2");
+    
+    assert_that(8675309 == std::stoi("8675309"), "3");
+    size_t last_character{};
+    assert_that(0x1e == std::stoul("0x1e"s, &last_character, 16), "4");
+    assert_that(last_character == 4, "5");
+    assert_value(std::stod("3.14"), 3.14, 0.001, "6");
+}
+
 void run_all_tests() {
     run_test(test_constructing, "test_constructing");
     run_test(test_constructing2, "test_constructing2");
     run_test(test_constructing3, "test_constructing3");
     run_test(test_c_string, "test_c_string");
     run_test(test_c_string2, "test_c_string2");
-    run_test(test_comparision, "test_comparision");
+    run_test(test_comparison, "test_comparison");
     run_test(test_append, "test_append");
     run_test(test_remove, "test_remove");
     run_test(test_replace, "test_replace");
@@ -174,4 +186,5 @@ void run_all_tests() {
     run_test(test_search2, "test_search2");
     run_test(test_search3, "test_search3");
     run_test(test_search4, "test_search4");
+    run_test(test_conversion, "test_conversion");
 }
