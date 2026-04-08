@@ -150,6 +150,16 @@ void test_search3() {
     assert_that(word.find_first_of('x') == std::string::npos, "5");
 }
 
+void test_search4() {
+    using namespace std::literals::string_literals;
+    std::string word("pizzazzezz pez");
+    assert_that(word.find_last_of("pi"s) == 11, "1");
+    assert_that(word.find_first_not_of("za"s, 3) == 7, "2");
+    assert_that(word.find_first_not_of("piza") == 7, "3");
+    assert_that(word.find_last_of('e') == 12, "4");
+    assert_that(word.find_last_of('x') == std::string::npos, "5");
+}
+
 void run_all_tests() {
     run_test(test_constructing, "test_constructing");
     run_test(test_constructing2, "test_constructing2");
@@ -163,4 +173,5 @@ void run_all_tests() {
     run_test(test_search, "test_search");
     run_test(test_search2, "test_search2");
     run_test(test_search3, "test_search3");
+    run_test(test_search4, "test_search4");
 }
