@@ -13,6 +13,7 @@
 
 using namespace std;
 using namespace std::filesystem;
+using namespace std::chrono;
 
 void describe(const path& p) {
     cout << boolalpha << "Path: " << p << endl;
@@ -22,6 +23,16 @@ void describe(const path& p) {
     } catch (const exception& e) {
         cerr << "Exception: " << e.what() << endl;
     }
+}
+
+void write_info(const path& p) {
+    if (!exists(p)) {
+        cout << p << " does not exist." << endl;
+        return;
+    }
+    const auto last_write = last_write_time(p).time_since_epoch();
+    const auto in_hours = duration_cast<hours>(last_write).count();
+    cout << p << "\t" << in_hours << "\t" << file_size(p) << endl;
 }
 
 void test_path() {
@@ -89,11 +100,56 @@ void test_path_inspection() {
     describe(nix_path);
 }
 
+void test_path_manipulation() {
+    path win_path{ R"(C:/Windows/System32/kernel32.dll)" };
+    describe(win_path);
+    win_path.remove_filename();
+    describe(win_path);
+    
+    path nix_path{ R"(/bin/bash)" };
+    describe(nix_path);
+    nix_path.remove_filename();
+    describe(nix_path);
+}
+
+void test_path_manipulation2() {
+    const path win_path{ R"(./CppTDD)" };
+    const auto readme_path = temp_directory_path() / "REAMDE";
+    try {
+        write_info(win_path);
+        write_info(readme_path);
+
+        cout
+        << "Copying " << win_path.filename()
+        << " to " << readme_path.filename()
+        << endl;
+        copy_file(win_path, readme_path);
+        write_info(readme_path);
+
+        cout
+        << "Resizing " << readme_path.filename()
+        << endl;
+        resize_file(readme_path, 1024);
+        write_info(readme_path);
+
+        cout
+        << "Removing " << readme_path.filename()
+        << endl;
+        remove(readme_path);
+        write_info(readme_path);
+
+    } catch (const exception& e) {
+        cerr << "Error: " << e.what();
+    }
+}
+
 void run_all_tests() {
     //run_test(test_path, "test_path");
     //run_test(test_path_decomposition, "test_path_decomposition");
     //run_test(test_path_modification, "test_path_modification");
     //run_test(test_path_composition, "test_path_composition");
-    run_test(test_path_inspection, "test_path_inspection");
+    //run_test(test_path_inspection, "test_path_inspection");
+    //run_test(test_path_manipulation, "test_path_manipulation");
+    run_test(test_path_manipulation2, "test_path_manipulation2");
 }
 
