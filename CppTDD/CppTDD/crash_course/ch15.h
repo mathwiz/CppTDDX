@@ -210,6 +210,10 @@ void test_regex() {
     assert_that(results[1] == "NJ", "4");
     assert_that(results[2] == "08562", "5");
     assert_that(results[3] == "-1234", "6");
+    
+    std::string iomega("zip drive");
+    const auto matched_iomega = std::regex_match(iomega, results, zip_regex);
+    assert_that(!matched_iomega, "7");
 }
 
 void run_all_tests() {
