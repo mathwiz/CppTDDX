@@ -48,9 +48,29 @@ void test_path_modification() {
     cout << "Is empty: " << boolalpha << my_path.empty() << endl;
 }
 
+void test_path_composition() {
+    try {
+        const auto temp = temp_directory_path();
+        const auto rel = relative(temp);
+        cout << boolalpha
+        << "Temporary dir path: " << temp
+        << "\nTemporary dir absolute: " << temp.is_absolute()
+        << "\nCurrent path: " << current_path()
+        << "\nTemporary dir's relative path: " << rel
+        << "\nRelative dir absolute: " << rel.is_absolute()
+        << "\nChanging current dir to temp.";
+        
+        current_path(temp);
+        cout << "\nCurrent dir: " << current_path() << endl;
+    } catch (const exception& e) {
+        cerr << "Error: " << e.what();
+    }
+}
+
 void run_all_tests() {
-    run_test(test_path, "test_path");
+    //run_test(test_path, "test_path");
     //run_test(test_path_decomposition, "test_path_decomposition");
-    run_test(test_path_modification, "test_path_modification");
+    //run_test(test_path_modification, "test_path_modification");
+    run_test(test_path_composition, "test_path_composition");
 }
 
