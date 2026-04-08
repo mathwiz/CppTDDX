@@ -30,8 +30,31 @@ void test_chaining() {
     cout << bits << '\n' << string1 << '\n' << num << "s\n";
 }
 
+void test_extration() {
+    double x, y;
+    cout << "X: ";
+    cin >> x;
+    cout << "Y: ";
+    cin >> y;
+    
+    string op;
+    cout << "operation (+-*/): ";
+    cin >> op;
+    if (op == "+")
+        cout << x + y;
+    else if (op == "-")
+        cout << x - y;
+    else if (op == "*")
+        cout << x * y;
+    else if (op == "/")
+        cout << x / y;
+    else
+        cout << "bad operation: " << op;
+    cout << "\n";
+}
 
 void run_all_tests() {
     //run_test(test_insertion, "test_insertion");
-    run_test(test_chaining, "test_chaining");
+    //run_test(test_chaining, "test_chaining");
+    run_test(test_extration, "test_extration");
 }
