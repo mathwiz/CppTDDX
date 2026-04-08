@@ -39,8 +39,19 @@ template <typename T>
 istream& operator>>(istream& s, deque<T>& t) {
     T element;
     while (s >> element)
-        t.emplace_back(move(element));
+        t.emplace_back(std::move(element));
     return s;
+}
+
+ifstream open(const char* path, ios_base::openmode mode = ios_base::in) {
+    ifstream file{ path, mode };
+    if (!file.is_open()) {
+        string err{ "Unable to open file " };
+        err.append(path);
+        throw runtime_error{ err };
+    }
+    file.exceptions(ifstream::badbit);
+    return file;
 }
 
 bitset<8> bits{ "01110011" };
@@ -185,7 +196,8 @@ void test_output_file_stream() {
 }
 
 void test_input_file_stream() {
-    ifstream file{ "numbers.txt" };
+    //ifstream file{ "numbers.txt" };
+    ifstream file = open("numbers.txt", ios::in);
     auto max = numeric_limits<int>::min();
     int value;
     while (file >> value)
@@ -205,5 +217,5 @@ void run_all_tests() {
     //run_test(test_input_string, "test_input_string");
     //run_test(test_io_string, "test_io_string");
     //run_test(test_output_file_stream, "test_output_file_stream");
-    run_test(test_input_file_stream, "test_input_file_stream");
+    //run_test(test_input_file_stream, "test_input_file_stream");
 }
