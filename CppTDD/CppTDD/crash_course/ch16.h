@@ -53,8 +53,19 @@ void test_extraction() {
     cout << "\n";
 }
 
+void test_status() {
+    string word;
+    size_t count{};
+    cout << "Start typing words (RET then ctrl-D to stop):\n";
+    while (cin >> word)
+        count++;
+    
+    cout << "Discovered " << count << " words.\n";
+}
+
 void run_all_tests() {
     //run_test(test_insertion, "test_insertion");
     //run_test(test_chaining, "test_chaining");
-    run_test(test_extraction, "test_extraction");
+    //run_test(test_extraction, "test_extraction");
+    run_test(test_status, "test_status");
 }
