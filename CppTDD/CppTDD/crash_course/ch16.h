@@ -9,11 +9,12 @@
 
 using namespace std;
 
+bitset<8> bits{ "01110011" };
+string s("Say hello to my lil' fren'!");
+size_t num{ 111 };
+
 
 void test_insertion() {
-    bitset<8> bits{ "01110011" };
-    string s("Say hello to my lil' fren'!");
-    size_t num{ 111 };
     cout << bits;
     cout << '\n';
     cout << s;
@@ -22,7 +23,12 @@ void test_insertion() {
     cout << "s\n";
 }
 
+void test_chaining() {
+    cout << bits << '\n' << s << '\n' << num << "s\n";
+}
+
 
 void run_all_tests() {
-    run_test(test_insertion, "test_insertion");
+    //run_test(test_insertion, "test_insertion");
+    run_test(test_chaining, "test_chaining");
 }
