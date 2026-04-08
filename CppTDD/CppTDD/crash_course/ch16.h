@@ -12,6 +12,7 @@
 #include <deque>
 #include <sstream>
 #include <fstream>
+#include <limits>
 
 #include "unit_test.h"
 
@@ -23,6 +24,8 @@ using stringstream = basic_stringstream<char>;
 using wstringstream = basic_stringstream<wchar_t>;
 using ofstream = basic_ofstream<char>;
 using wofstream = basic_ofstream<wchar_t>;
+using ifstream = basic_ifstream<char>;
+using wifstream = basic_ifstream<wchar_t>;
 
 template <typename T>
 ostream& operator<<(ostream& s, vector<T> v) {
@@ -181,6 +184,15 @@ void test_output_file_stream() {
     file << "Lunchtime, " << 2 << "x so." << endl;
 }
 
+void test_input_file_stream() {
+    ifstream file{ "numbers.txt" };
+    auto max = numeric_limits<int>::min();
+    int value;
+    while (file >> value)
+        max = max < value ? value : max;
+    cout << "Max found was " << max << endl;
+}
+
 void run_all_tests() {
     //run_test(test_insertion, "test_insertion");
     //run_test(test_chaining, "test_chaining");
@@ -192,5 +204,6 @@ void run_all_tests() {
     //run_test(test_output_string, "test_output_string");
     //run_test(test_input_string, "test_input_string");
     //run_test(test_io_string, "test_io_string");
-    run_test(test_output_file_stream, "test_output_file_stream");
+    //run_test(test_output_file_stream, "test_output_file_stream");
+    run_test(test_input_file_stream, "test_input_file_stream");
 }
