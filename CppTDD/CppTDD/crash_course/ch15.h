@@ -7,6 +7,7 @@
 
 #include <string>
 #include <cstdio>
+#include <regex>
 
 #include "unit_test.h"
 
@@ -197,6 +198,20 @@ void test_string_view() {
     assert_that(view_from_constructor == "dext", "8");
 }
 
+void test_regex() {
+    std::regex zip_regex{ R"((\w{2})?(\d{5})(-\d{4})?)" };
+    assert_that(zip_regex.mark_count() == 3, "1");
+    std::smatch results;
+    std::string nj("NJ08562-1234");
+    
+    const auto matched = std::regex_match(nj, results, zip_regex);
+    assert_that(matched, "2");
+    assert_that(results[0] == "NJ08562-1234", "3");
+    assert_that(results[1] == "NJ", "4");
+    assert_that(results[2] == "08562", "5");
+    assert_that(results[3] == "-1234", "6");
+}
+
 void run_all_tests() {
     run_test(test_constructing, "test_constructing");
     run_test(test_constructing2, "test_constructing2");
@@ -213,4 +228,5 @@ void run_all_tests() {
     run_test(test_search4, "test_search4");
     run_test(test_conversion, "test_conversion");
     run_test(test_string_view, "test_string_view");
+    run_test(test_regex, "test_regex");
 }
