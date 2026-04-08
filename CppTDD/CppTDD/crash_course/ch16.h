@@ -30,7 +30,7 @@ void test_chaining() {
     cout << bits << '\n' << string1 << '\n' << num << "s\n";
 }
 
-void test_extration() {
+void test_extraction() {
     double x, y;
     cout << "X: ";
     cin >> x;
@@ -56,5 +56,5 @@ void test_extration() {
 void run_all_tests() {
     //run_test(test_insertion, "test_insertion");
     //run_test(test_chaining, "test_chaining");
-    run_test(test_extration, "test_extration");
+    run_test(test_extraction, "test_extraction");
 }
