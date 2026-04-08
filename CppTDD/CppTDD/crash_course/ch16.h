@@ -4,27 +4,30 @@
 //
 //  Created by Yohan Lee on 4/8/26.
 //
+#include <iostream>
+#include <string>
+#include <bitset>
 
 #include "unit_test.h"
 
 using namespace std;
 
 bitset<8> bits{ "01110011" };
-string s("Say hello to my lil' fren'!");
+string string1("Say hello to my lil' fren'!");
 size_t num{ 111 };
 
 
 void test_insertion() {
     cout << bits;
     cout << '\n';
-    cout << s;
+    cout << string1;
     cout << '\n';
     cout << num;
     cout << "s\n";
 }
 
 void test_chaining() {
-    cout << bits << '\n' << s << '\n' << num << "s\n";
+    cout << bits << '\n' << string1 << '\n' << num << "s\n";
 }
 
 
