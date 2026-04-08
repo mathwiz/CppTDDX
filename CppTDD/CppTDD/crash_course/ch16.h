@@ -18,6 +18,8 @@ using namespace std;
 
 using ostringstream = basic_ostringstream<char>;
 using wostringstream = basic_ostringstream<wchar_t>;
+using stringstream = basic_stringstream<char>;
+using wstringstream = basic_stringstream<wchar_t>;
 
 template <typename T>
 ostream& operator<<(ostream& s, vector<T> v) {
@@ -159,6 +161,17 @@ void test_input_string() {
     assert_that(!(ss >> d), "4");
 }
 
+void test_io_string() {
+    stringstream ss;
+    ss << "Zed's dead";
+    string who;
+    ss >> who;
+    int what;
+    ss >> hex >> what;
+    assert_that(who == "Zed's", "1");
+    assert_that(what == 0xdead, "2");
+}
+
 void run_all_tests() {
     //run_test(test_insertion, "test_insertion");
     //run_test(test_chaining, "test_chaining");
@@ -168,5 +181,6 @@ void run_all_tests() {
     //run_test(test_insertion_user_defined, "test_vector_user_defined");
     //run_test(test_extraction_user_defined, "test_extraction_user_defined");
     //run_test(test_output_string, "test_output_string");
-    run_test(test_input_string, "test_input_string");
+    //run_test(test_input_string, "test_input_string");
+    run_test(test_io_string, "test_io_string");
 }
