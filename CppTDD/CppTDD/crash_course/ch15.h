@@ -183,12 +183,18 @@ void test_string_view() {
     assert_that(view == "ambidextrous", "4");
     
     auto c_string = "gauche";
-    std::string_view c_view(c_string);
-    assert_that(c_view == "gauche", "5");
+    std::string_view view_from_c_string(c_string);
+    assert_that(view_from_c_string == "gauche", "5");
 
     auto c_string2 = "sinister";
     std::string_view view_from_c_string_and_length(c_string2, 3);
     assert_that(view_from_c_string_and_length == "sin", "6");
+    
+    std::string_view view_from_constructor("ambidextrous");
+    view_from_constructor.remove_prefix(4);
+    assert_that(view_from_constructor == "dextrous", "7");
+    view_from_constructor.remove_suffix(4);
+    assert_that(view_from_constructor == "dext", "8");
 }
 
 void run_all_tests() {
