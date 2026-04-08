@@ -14,6 +14,16 @@
 using namespace std;
 using namespace std::filesystem;
 
+void describe(const path& p) {
+    cout << boolalpha << "Path: " << p << endl;
+    try {
+        cout << "Is directory: " << is_directory(p) << endl;
+        cout << "Is regular file: " << is_regular_file(p) << endl;
+    } catch (const exception& e) {
+        cerr << "Exception: " << e.what() << endl;
+    }
+}
+
 void test_path() {
     path empty;
     path shadow{ "/etc/shadow" };
@@ -67,10 +77,23 @@ void test_path_composition() {
     }
 }
 
+void test_path_inspection() {
+    path win_path{ R"(C:/Windows/System32/kernel32.dll)" };
+    describe(win_path);
+    win_path.remove_filename();
+    describe(win_path);
+    
+    path nix_path{ R"(/bin/bash)" };
+    describe(nix_path);
+    nix_path.remove_filename();
+    describe(nix_path);
+}
+
 void run_all_tests() {
     //run_test(test_path, "test_path");
     //run_test(test_path_decomposition, "test_path_decomposition");
     //run_test(test_path_modification, "test_path_modification");
-    run_test(test_path_composition, "test_path_composition");
+    //run_test(test_path_composition, "test_path_composition");
+    run_test(test_path_inspection, "test_path_inspection");
 }
 
