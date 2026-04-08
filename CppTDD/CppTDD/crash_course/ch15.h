@@ -172,6 +172,25 @@ void test_conversion() {
     assert_value(std::stod("3.14"), 3.14, 0.001, "6");
 }
 
+void test_string_view() {
+    std::string_view empty;
+    assert_that(empty.data() == nullptr, "1");
+    assert_that(empty.size() == 0, "2");
+    assert_that(empty.empty(), "3");
+    
+    std::string word("ambidextrous");
+    std::string_view view(word);
+    assert_that(view == "ambidextrous", "4");
+    
+    auto c_string = "gauche";
+    std::string_view c_view(c_string);
+    assert_that(c_view == "gauche", "5");
+
+    auto c_string2 = "sinister";
+    std::string_view view_from_c_string_and_length(c_string2, 3);
+    assert_that(view_from_c_string_and_length == "sin", "6");
+}
+
 void run_all_tests() {
     run_test(test_constructing, "test_constructing");
     run_test(test_constructing2, "test_constructing2");
@@ -187,4 +206,5 @@ void run_all_tests() {
     run_test(test_search3, "test_search3");
     run_test(test_search4, "test_search4");
     run_test(test_conversion, "test_conversion");
+    run_test(test_string_view, "test_string_view");
 }
