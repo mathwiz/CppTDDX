@@ -9,6 +9,7 @@
 #include <bitset>
 #include <iomanip>
 #include <vector>
+#include <deque>
 
 #include "unit_test.h"
 
@@ -19,6 +20,14 @@ ostream& operator<<(ostream& s, vector<T> v) {
     s << "Size: " << v.size() << " Capacity: " << v.capacity() << " Elements:\n";
     for (const auto& element : v)
         s << element << "\n";
+    return s;
+}
+
+template <typename T>
+istream& operator>>(istream& s, deque<T>& t) {
+    T element;
+    while (s >> element)
+        t.emplace_back(move(element));
     return s;
 }
 
@@ -94,7 +103,7 @@ void test_manipulators() {
     << endl;
 }
 
-void test_vector_user_defined() {
+void test_insertion_user_defined() {
     const vector<string> characters{
         "Harry Potter", "Hermione Granger", "Ron Weasley", "Draco Malfoy"
     };
@@ -105,11 +114,24 @@ void test_vector_user_defined() {
     cout << boolalpha << bits << endl;
 }
 
+void test_extraction_user_defined() {
+    cout << "Enter integers separated by whitespace (RET and ctrl-D to end):\n";
+    deque<int> numbers;
+    cin >> numbers;
+    int sum{};
+    cout << "Cumulative sum:\n";
+    for (const auto& element : numbers) {
+        sum += element;
+    }
+    cout << sum << endl;
+}
+
 void run_all_tests() {
     //run_test(test_insertion, "test_insertion");
     //run_test(test_chaining, "test_chaining");
     //run_test(test_extraction, "test_extraction");
     //run_test(test_status, "test_status");
     //run_test(test_manipulators, "test_manipulators");
-    run_test(test_vector_user_defined, "test_vector_user_defined");
+    //run_test(test_insertion_user_defined, "test_vector_user_defined");
+    run_test(test_extraction_user_defined, "test_extraction_user_defined");
 }
