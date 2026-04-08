@@ -215,6 +215,13 @@ void test_output_stream_buffer() {
     *iter = '\n';
 }
 
+void test_input_stream_buffer() {
+    istreambuf_iterator<char> iter{ cin.rdbuf() }, end{};
+    cout << "Name (RET and ctrl-D to end): ";
+    const string name{ iter, end };
+    cout << "\nGoodbye, " << name;
+}
+
 void run_all_tests() {
     //run_test(test_insertion, "test_insertion");
     //run_test(test_chaining, "test_chaining");
@@ -228,5 +235,6 @@ void run_all_tests() {
     //run_test(test_io_string, "test_io_string");
     //run_test(test_output_file_stream, "test_output_file_stream");
     //run_test(test_input_file_stream, "test_input_file_stream");
-    run_test(test_output_stream_buffer, "test_output_stream_buffer");
+    //run_test(test_output_stream_buffer, "test_output_stream_buffer");
+    run_test(test_input_stream_buffer, "test_input_stream_buffer");
 }
