@@ -13,6 +13,7 @@
 #include <sstream>
 #include <fstream>
 #include <limits>
+#include <iterator>
 
 #include "unit_test.h"
 
@@ -205,6 +206,15 @@ void test_input_file_stream() {
     cout << "Max found was " << max << endl;
 }
 
+void test_output_stream_buffer() {
+    ostreambuf_iterator<char> iter{ cout };
+    *iter = 'H';
+    ++iter;
+    *iter = 'i';
+    ++iter;
+    *iter = '\n';
+}
+
 void run_all_tests() {
     //run_test(test_insertion, "test_insertion");
     //run_test(test_chaining, "test_chaining");
@@ -218,4 +228,5 @@ void run_all_tests() {
     //run_test(test_io_string, "test_io_string");
     //run_test(test_output_file_stream, "test_output_file_stream");
     //run_test(test_input_file_stream, "test_input_file_stream");
+    run_test(test_output_stream_buffer, "test_output_stream_buffer");
 }
