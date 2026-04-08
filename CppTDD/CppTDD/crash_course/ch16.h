@@ -8,10 +8,19 @@
 #include <string>
 #include <bitset>
 #include <iomanip>
+#include <vector>
 
 #include "unit_test.h"
 
 using namespace std;
+
+template <typename T>
+ostream& operator<<(ostream& s, vector<T> v) {
+    s << "Size: " << v.size() << " Capacity: " << v.capacity() << " Elements:\n";
+    for (const auto& element : v)
+        s << element << "\n";
+    return s;
+}
 
 bitset<8> bits{ "01110011" };
 string string1("Say hello to my lil' fren'!");
@@ -85,10 +94,22 @@ void test_manipulators() {
     << endl;
 }
 
+void test_vector_user_defined() {
+    const vector<string> characters{
+        "Harry Potter", "Hermione Granger", "Ron Weasley", "Draco Malfoy"
+    };
+    cout << characters << endl;
+    const vector<bool> bits{
+        true, false, true,
+    };
+    cout << boolalpha << bits << endl;
+}
+
 void run_all_tests() {
     //run_test(test_insertion, "test_insertion");
     //run_test(test_chaining, "test_chaining");
     //run_test(test_extraction, "test_extraction");
     //run_test(test_status, "test_status");
-    run_test(test_manipulators, "test_manipulators");
+    //run_test(test_manipulators, "test_manipulators");
+    run_test(test_vector_user_defined, "test_vector_user_defined");
 }
