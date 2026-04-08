@@ -10,5 +10,16 @@
 
 #include "unit_test.h"
 
-void run_all_tests() {
+using namespace std::filesystem;
+
+void test_path() {
+    path empty;
+    path shadow{ "/etc/shadow" };
+    assert_that(empty.empty(), "1");
+    assert_that(shadow == std::string{ "/etc/shadow" }, "2");
 }
+
+void run_all_tests() {
+    run_test(test_path, "test_path");
+}
+
