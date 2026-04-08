@@ -228,6 +228,14 @@ void test_regex_search() {
     assert_that(search_matched, "3");
 }
 
+void test_regex_replace() {
+    std::regex regex{ "[aeiou]" };
+    std::string text{"the quick brown fox jumped over the lazy dog."};
+    
+    const auto result = std::regex_replace(text, regex, "_");
+    assert_that(result == "th_ q__ck br_wn f_x j_mp_d _v_r th_ l_zy d_g.", "1");
+}
+
 void run_all_tests() {
     run_test(test_constructing, "test_constructing");
     run_test(test_constructing2, "test_constructing2");
@@ -246,4 +254,5 @@ void run_all_tests() {
     run_test(test_string_view, "test_string_view");
     run_test(test_regex, "test_regex");
     run_test(test_regex_search, "test_regex_search");
+    run_test(test_regex_replace, "test_regex_replace");
 }
