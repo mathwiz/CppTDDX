@@ -10,10 +10,14 @@
 #include <iomanip>
 #include <vector>
 #include <deque>
+#include <sstream>
 
 #include "unit_test.h"
 
 using namespace std;
+
+using ostringstream = basic_ostringstream<char>;
+using wostringstream = basic_ostringstream<wchar_t>;
 
 template <typename T>
 ostream& operator<<(ostream& s, vector<T> v) {
@@ -126,6 +130,21 @@ void test_extraction_user_defined() {
     cout << sum << endl;
 }
 
+void test_output_string() {
+    string s1("By Grabthar's hammer, ");
+    string s2("by the suns of Worvan. ");
+    string s3("You shall be avenged.");
+    ostringstream ss;
+    ss << s1 << s2 << s3;
+    const auto lazarus = ss.str();
+    assert_that(lazarus == s1.append(s2).append(s3), "1");
+
+    string s4("I am Groot!");
+    ss.str(s4);
+    const auto groot = ss.str();
+    assert_that(groot == s4, "2");
+}
+
 void run_all_tests() {
     //run_test(test_insertion, "test_insertion");
     //run_test(test_chaining, "test_chaining");
@@ -133,5 +152,6 @@ void run_all_tests() {
     //run_test(test_status, "test_status");
     //run_test(test_manipulators, "test_manipulators");
     //run_test(test_insertion_user_defined, "test_vector_user_defined");
-    run_test(test_extraction_user_defined, "test_extraction_user_defined");
+    //run_test(test_extraction_user_defined, "test_extraction_user_defined");
+    run_test(test_output_string, "test_output_string");
 }
