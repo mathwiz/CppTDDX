@@ -14,6 +14,7 @@
 #include <fstream>
 #include <limits>
 #include <iterator>
+#include <exception>
 
 #include "unit_test.h"
 
@@ -222,6 +223,20 @@ void test_input_stream_buffer() {
     cout << "\nGoodbye, " << name;
 }
 
+void test_random_access() {
+    try {
+        auto file = open("numbers.txt");
+        cout << "Contents:\n" << file.rdbuf() << endl;
+        file.seekg(0);
+        cout << "Contents after seekg(0):\n" << file.rdbuf() << endl;
+        file.seekg(-4, ios_base::end);
+        cout << "tellg() after seekg(-4, ios_base::end): " << file.tellg() << endl;
+        cout << "Contents after seekg(-4, ios_base::end): " << file.rdbuf() << endl;
+    } catch (const exception& e) {
+        cerr << e.what();
+    }
+}
+
 void run_all_tests() {
     //run_test(test_insertion, "test_insertion");
     //run_test(test_chaining, "test_chaining");
@@ -236,5 +251,6 @@ void run_all_tests() {
     //run_test(test_output_file_stream, "test_output_file_stream");
     //run_test(test_input_file_stream, "test_input_file_stream");
     //run_test(test_output_stream_buffer, "test_output_stream_buffer");
-    run_test(test_input_stream_buffer, "test_input_stream_buffer");
+    //run_test(test_input_stream_buffer, "test_input_stream_buffer");
+    run_test(test_random_access, "test_random_access");
 }
