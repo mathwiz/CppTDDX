@@ -145,6 +145,20 @@ void test_output_string() {
     assert_that(groot == s4, "2");
 }
 
+void test_input_string() {
+    string numbers("1 2.23 6");
+    istringstream ss{ numbers };
+    int a;
+    float b, c, d;
+    ss >> a;
+    ss >> b;
+    ss >> c;
+    assert_that(a == 1, "1");
+    assert_value(b, 2.23, 0.001, "2");
+    assert_value(c, 6.0, 0.001, "3");
+    assert_that(!(ss >> d), "4");
+}
+
 void run_all_tests() {
     //run_test(test_insertion, "test_insertion");
     //run_test(test_chaining, "test_chaining");
@@ -153,5 +167,6 @@ void run_all_tests() {
     //run_test(test_manipulators, "test_manipulators");
     //run_test(test_insertion_user_defined, "test_vector_user_defined");
     //run_test(test_extraction_user_defined, "test_extraction_user_defined");
-    run_test(test_output_string, "test_output_string");
+    //run_test(test_output_string, "test_output_string");
+    run_test(test_input_string, "test_input_string");
 }
