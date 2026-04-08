@@ -35,8 +35,22 @@ void test_path_decomposition() {
     << endl;
 }
 
+void test_path_modification() {
+    path my_path{ R"(C:/Windows/System32/kernel32.dll)" };
+    cout << my_path << endl;
+    my_path.make_preferred();
+    cout << my_path << endl;
+    my_path.replace_filename("wind32kfull.sys");
+    cout << my_path << endl;
+    my_path.remove_filename();
+    cout << my_path << endl;
+    my_path.clear();
+    cout << "Is empty: " << boolalpha << my_path.empty() << endl;
+}
+
 void run_all_tests() {
     run_test(test_path, "test_path");
-    run_test(test_path_decomposition, "test_path_decomposition");
+    //run_test(test_path_decomposition, "test_path_decomposition");
+    run_test(test_path_modification, "test_path_modification");
 }
 
