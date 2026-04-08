@@ -216,6 +216,18 @@ void test_regex() {
     assert_that(!matched_iomega, "7");
 }
 
+void test_regex_search() {
+    std::regex zip_regex{ R"((\w{2})?(\d{5})(-\d{4})?)" };
+    assert_that(zip_regex.mark_count() == 3, "1");
+    std::smatch results;
+    std::string nj("NJ08562-1234 is a zip code");
+    
+    const auto matched = std::regex_match(nj, zip_regex);
+    assert_that(!matched, "2");
+    const auto search_matched = std::regex_search(nj, zip_regex);
+    assert_that(search_matched, "3");
+}
+
 void run_all_tests() {
     run_test(test_constructing, "test_constructing");
     run_test(test_constructing2, "test_constructing2");
@@ -233,4 +245,5 @@ void run_all_tests() {
     run_test(test_conversion, "test_conversion");
     run_test(test_string_view, "test_string_view");
     run_test(test_regex, "test_regex");
+    run_test(test_regex_search, "test_regex_search");
 }
