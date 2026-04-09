@@ -34,6 +34,21 @@ const auto starts_with_c_pred =
     return word[0] == 'C' || word[0] == 'c';
 };
 
+const auto len_1_pred =
+[](const auto& word) {
+    return word.length() == 1;
+};
+
+const auto len_2_pred =
+[](const auto& word) {
+    return word.length() == 2;
+};
+
+const auto len_3_pred =
+[](const auto& word) {
+    return word.length() == 3;
+};
+
 const auto len_4_pred =
 [](const auto& word) {
     return word.length() == 4;
@@ -55,12 +70,17 @@ void test_all_of() {
 }
 
 void test_any_of() {
-
     assert_that(!any_of(words.cbegin(), words.cend(), starts_with_b_pred), "1");
     assert_that(any_of(words.cbegin(), words.cend(), len_6_pred), "2");
 }
 
+void test_none_of() {
+    assert_that(none_of(words.cbegin(), words.cend(), starts_with_b_pred), "1");
+    assert_that(none_of(words.cbegin(), words.cend(), len_1_pred), "2");
+}
+
 void run_all_tests() {
+    run_test(test_none_of, "test_none_of");
     run_test(test_any_of, "test_any_of");
     run_test(test_all_of, "test_all_of");
 }
