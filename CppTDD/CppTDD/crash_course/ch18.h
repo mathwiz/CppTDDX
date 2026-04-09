@@ -33,6 +33,12 @@ const auto starts_with_a_pred =
     return word[0] == 'A' || word[0] == 'a';
 };
 
+const auto starts_with_cap_a_pred =
+[](const auto& word) {
+    if (word.empty()) return false;
+    return word[0] == 'A';
+};
+
 const auto starts_with_b_pred =
 [](const auto& word) {
     if (word.empty()) return false;
@@ -114,7 +120,17 @@ void test_for_each2() {
     cout << results << endl;
 }
 
+void test_find() {
+    const auto f1 = find(words.cbegin(), words.cend(), "Alan");
+    assert_that("Alan" == *f1, "1");
+    const auto f2 = find_if(words.cbegin(), words.cend(), len_4_pred);
+    assert_that("Alan" == *f2, "2");
+    const auto f3 = find_if_not(words.cbegin(), words.cend(), len_6_pred);
+    assert_that("alligator" == *f3, "3");
+}
+
 void run_all_tests() {
+    run_test(test_find, "test_find");
     //test_for_each2();
     run_test(test_for_each, "test_for_each");
     run_test(test_none_of, "test_none_of");
