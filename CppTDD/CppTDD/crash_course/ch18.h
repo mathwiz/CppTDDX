@@ -6,9 +6,31 @@
 //
 
 #include <algorithm>
+#include <execution>
+#include <string>
+#include <vector>
 
 #include "unit_test.h"
 
+using namespace std;
+
+vector<string> words{ "Auntie", "Anne's", "alligator", "Alan", "aegis" };
+
+void test_all_of() {
+    const auto starts_with_a_pred =
+    [](const auto& word) {
+        if (word.empty()) return false;
+        return word[0] == 'A' || word[0] == 'a';
+    };
+    const auto len_6_pred =
+    [](const auto& word) {
+        return word.length() == 6;
+    };
+    
+    assert_that(all_of(words.cbegin(), words.cend(), starts_with_a_pred), "1");
+    assert_that(!all_of(words.cbegin(), words.cend(), len_6_pred), "2");
+}
 
 void run_all_tests() {
+    run_test(test_all_of, "test_all_of");
 }
