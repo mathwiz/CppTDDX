@@ -11,6 +11,7 @@
 #include <vector>
 #include <iostream>
 #include <numeric>
+#include <functional>
 
 
 #include "unit_test.h"
