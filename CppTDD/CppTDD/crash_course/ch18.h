@@ -28,6 +28,22 @@ const auto starts_with_b_pred =
     return word[0] == 'B' || word[0] == 'b';
 };
 
+const auto starts_with_c_pred =
+[](const auto& word) {
+    if (word.empty()) return false;
+    return word[0] == 'C' || word[0] == 'c';
+};
+
+const auto len_4_pred =
+[](const auto& word) {
+    return word.length() == 4;
+};
+
+const auto len_5_pred =
+[](const auto& word) {
+    return word.length() == 5;
+};
+
 const auto len_6_pred =
 [](const auto& word) {
     return word.length() == 6;
