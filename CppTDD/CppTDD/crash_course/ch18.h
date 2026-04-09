@@ -144,7 +144,21 @@ void test_equal() {
     assert_that(r1, "1");
 }
 
+void test_transform() {
+    vector<string> results;
+    const auto append_star =
+    [](string word) {
+        string elem(word);
+        elem.push_back('*');
+        return elem;
+    };
+
+    transform(words.cbegin(), words.cend(), back_inserter(results), append_star);
+    cout << results << endl;
+}
+
 void run_all_tests() {
+    //test_transform();
     run_test(test_equal, "test_equal");
     run_test(test_count, "test_count");
     run_test(test_find, "test_find");
