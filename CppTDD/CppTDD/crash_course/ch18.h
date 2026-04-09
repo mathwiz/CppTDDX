@@ -163,7 +163,15 @@ void test_sort() {
     cout << nums << endl;
 }
 
+void test_binary_search() {
+    vector<int> nums{ 3, 8, 2, 6, 1, 21, 11 };
+    sort(nums.begin(), nums.end());
+    assert_that(binary_search(nums.begin(), nums.end(), 6), "1");
+    assert_that(!binary_search(nums.begin(), nums.end(), 7), "2");
+}
+
 void run_all_tests() {
+    run_test(test_binary_search, "test_binary_search");
     //test_sort();
     //test_transform();
     run_test(test_equal, "test_equal");
