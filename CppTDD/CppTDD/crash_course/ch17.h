@@ -8,6 +8,7 @@
 #include <string>
 #include <filesystem>
 #include <iostream>
+#include <iomanip>
 
 #include "unit_test.h"
 
@@ -20,6 +21,25 @@ void describe(const path& p) {
     try {
         cout << "Is directory: " << is_directory(p) << endl;
         cout << "Is regular file: " << is_regular_file(p) << endl;
+    } catch (const exception& e) {
+        cerr << "Exception: " << e.what() << endl;
+    }
+}
+
+void describe(const directory_entry& entry) {
+    try {
+        if (entry.is_directory()) {
+            cout << "            *";
+        } else {
+            cout << setw(12) << entry.file_size();
+        }
+
+        const auto last_write = last_write_time(entry).time_since_epoch();
+        const auto in_secs = duration_cast<seconds>(last_write).count();
+        cout
+        << setw(12) << in_secs
+        << " " << entry.path().filename().string()
+        << endl;
     } catch (const exception& e) {
         cerr << "Exception: " << e.what() << endl;
     }
@@ -143,6 +163,15 @@ void test_path_manipulation2() {
     }
 }
 
+void test_directory_entries() {
+    const path sys_path{ "." };
+    cout
+    << "Size          Last Write  Name\n"
+    << "------------  ----------  ------------" << endl;
+    for (const auto& entry : directory_iterator{ sys_path })
+        describe(entry);
+}
+
 void run_all_tests() {
     //run_test(test_path, "test_path");
     //run_test(test_path_decomposition, "test_path_decomposition");
@@ -150,6 +179,7 @@ void run_all_tests() {
     //run_test(test_path_composition, "test_path_composition");
     //run_test(test_path_inspection, "test_path_inspection");
     //run_test(test_path_manipulation, "test_path_manipulation");
-    run_test(test_path_manipulation2, "test_path_manipulation2");
+    //run_test(test_path_manipulation2, "test_path_manipulation2");
+    run_test(test_directory_entries, "test_directory_entries");
 }
 
