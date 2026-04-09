@@ -129,7 +129,17 @@ void test_find() {
     assert_that("alligator" == *f3, "3");
 }
 
+void test_count() {
+    const auto f1 = count(words.cbegin(), words.cend(), "Alan");
+    assert_that(1 == f1, "1");
+    const auto f2 = count_if(words.cbegin(), words.cend(), len_6_pred);
+    assert_that(2 == f2, "2");
+    const auto f3 = count_if(words.cbegin(), words.cend(), starts_with_cap_a_pred);
+    assert_that(3 == f3, "3");
+}
+
 void run_all_tests() {
+    run_test(test_count, "test_count");
     run_test(test_find, "test_find");
     //test_for_each2();
     run_test(test_for_each, "test_for_each");
