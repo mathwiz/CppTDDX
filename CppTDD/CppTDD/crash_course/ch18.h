@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <numeric>
 
 
 #include "unit_test.h"
@@ -176,7 +177,21 @@ void test_extrema() {
     assert_that(*max_element(nums.begin(), nums.end()) == 21, "2");
 }
 
+void test_accumulate() {
+    vector<int> nums{ 1, 2, 3, 4 };
+    assert_that(accumulate(nums.begin(), nums.end(), -1, plus<>()) == 9, "1");
+    assert_that(accumulate(nums.begin(), nums.end(), 2, multiplies<>()) == 48, "2");
+}
+
+void test_reduce() {
+    vector<int> nums{ 1, 2, 3 };
+    assert_that(reduce(nums.begin(), nums.end(), 0, minus<>()) == -6, "1");
+    assert_that(reduce(nums.begin(), nums.end(), 24, divides<>()) == 4, "2");
+}
+
 void run_all_tests() {
+    run_test(test_reduce, "test_reduce");
+    run_test(test_accumulate, "test_accumulate");
     run_test(test_extrema, "test_extrema");
     run_test(test_binary_search, "test_binary_search");
     //test_sort();
