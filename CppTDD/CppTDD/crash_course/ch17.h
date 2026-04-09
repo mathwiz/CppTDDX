@@ -29,7 +29,7 @@ void describe(const path& p) {
 void describe(const directory_entry& entry) {
     try {
         if (entry.is_directory()) {
-            cout << "            *";
+            cout << "           *";
         } else {
             cout << setw(12) << entry.file_size();
         }
@@ -172,6 +172,15 @@ void test_directory_entries() {
         describe(entry);
 }
 
+void test_directory_entries_recursive() {
+    const path sys_path{ "./.." };
+    cout
+    << "Size          Last Write Name\n"
+    << "------------  ---------- ------------" << endl;
+    for (const auto& entry : recursive_directory_iterator{ sys_path })
+        describe(entry);
+}
+
 void run_all_tests() {
     //run_test(test_path, "test_path");
     //run_test(test_path_decomposition, "test_path_decomposition");
@@ -180,6 +189,7 @@ void run_all_tests() {
     //run_test(test_path_inspection, "test_path_inspection");
     //run_test(test_path_manipulation, "test_path_manipulation");
     //run_test(test_path_manipulation2, "test_path_manipulation2");
-    run_test(test_directory_entries, "test_directory_entries");
+    //run_test(test_directory_entries, "test_directory_entries");
+    run_test(test_directory_entries_recursive, "test_directory_entries_recursive");
 }
 
