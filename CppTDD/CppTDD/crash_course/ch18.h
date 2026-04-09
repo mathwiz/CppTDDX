@@ -18,9 +18,8 @@ using namespace std;
 
 template <typename T>
 ostream& operator<<(ostream& s, vector<T> v) {
-    s << "Size: " << v.size() << " Capacity: " << v.capacity() << " Elements:\n";
     for (const auto& element : v)
-        s << element << "\n";
+        s << element << ", ";
     return s;
 }
 
@@ -102,7 +101,21 @@ void test_for_each() {
     assert_that(3 == num_As, "1");
 }
 
+void test_for_each2() {
+    vector<string> results;
+    const auto append_star =
+    [&results](const auto& word) {
+        string elem(word);
+        elem.push_back('*');
+        results.push_back(elem);
+    };
+
+    for_each(words.cbegin(), words.cend(), append_star);
+    cout << results << endl;
+}
+
 void run_all_tests() {
+    //test_for_each2();
     run_test(test_for_each, "test_for_each");
     run_test(test_none_of, "test_none_of");
     run_test(test_any_of, "test_any_of");
