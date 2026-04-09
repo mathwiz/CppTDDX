@@ -9,10 +9,22 @@
 #include <execution>
 #include <string>
 #include <vector>
+#include <iostream>
+
 
 #include "unit_test.h"
 
 using namespace std;
+
+template <typename T>
+ostream& operator<<(ostream& s, vector<T> v) {
+    s << "Size: " << v.size() << " Capacity: " << v.capacity() << " Elements:\n";
+    for (const auto& element : v)
+        s << element << "\n";
+    return s;
+}
+
+// * Testing * //
 
 vector<string> words{ "Auntie", "Anne's", "alligator", "Alan", "aegis" };
 
@@ -79,7 +91,19 @@ void test_none_of() {
     assert_that(none_of(words.cbegin(), words.cend(), len_1_pred), "2");
 }
 
+void test_for_each() {
+    size_t num_As{};
+    const auto count_As =
+    [&num_As](const auto& word) {
+        if (!word.empty() && word[0] == 'A') ++num_As;
+    };
+
+    for_each(words.cbegin(), words.cend(), count_As);
+    assert_that(3 == num_As, "1");
+}
+
 void run_all_tests() {
+    run_test(test_for_each, "test_for_each");
     run_test(test_none_of, "test_none_of");
     run_test(test_any_of, "test_any_of");
     run_test(test_all_of, "test_all_of");
