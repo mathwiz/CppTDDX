@@ -138,7 +138,14 @@ void test_count() {
     assert_that(3 == f3, "3");
 }
 
+void test_equal() {
+    //same objects are always equal
+    const auto r1 = equal(words.cbegin(), words.cend(), words.cbegin(), words.cend());
+    assert_that(r1, "1");
+}
+
 void run_all_tests() {
+    run_test(test_equal, "test_equal");
     run_test(test_count, "test_count");
     run_test(test_find, "test_find");
     //test_for_each2();
