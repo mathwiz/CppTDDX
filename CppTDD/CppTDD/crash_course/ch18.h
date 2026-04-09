@@ -157,7 +157,14 @@ void test_transform() {
     cout << results << endl;
 }
 
+void test_sort() {
+    vector<int> nums{ 3, 8, 2, 6, 1, 21, 11 };
+    sort(nums.begin(), nums.end());
+    cout << nums << endl;
+}
+
 void run_all_tests() {
+    //test_sort();
     //test_transform();
     run_test(test_equal, "test_equal");
     run_test(test_count, "test_count");
