@@ -170,7 +170,14 @@ void test_binary_search() {
     assert_that(!binary_search(nums.begin(), nums.end(), 7), "2");
 }
 
+void test_extrema() {
+    vector<int> nums{ 3, 8, 2, 6, 1, 21, 11, -5 };
+    assert_that(*min_element(nums.begin(), nums.end()) == -5, "1");
+    assert_that(*max_element(nums.begin(), nums.end()) == 21, "2");
+}
+
 void run_all_tests() {
+    run_test(test_extrema, "test_extrema");
     run_test(test_binary_search, "test_binary_search");
     //test_sort();
     //test_transform();
