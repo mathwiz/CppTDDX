@@ -166,8 +166,8 @@ void test_path_manipulation2() {
 void test_directory_entries() {
     const path sys_path{ "." };
     cout
-    << "Size          Last Write  Name\n"
-    << "------------  ----------  ------------" << endl;
+    << "Size          Last Write Name\n"
+    << "------------  ---------- ------------" << endl;
     for (const auto& entry : directory_iterator{ sys_path })
         describe(entry);
 }
