@@ -158,6 +158,12 @@ void test_transform() {
     cout << results << endl;
 }
 
+void test_copy_if() {
+    vector<string> results;
+    copy_if(words.cbegin(), words.cend(), back_inserter(results), starts_with_cap_a_pred);
+    cout << results << endl;
+}
+
 void test_sort() {
     vector<int> nums{ 3, 8, 2, 6, 1, 21, 11 };
     sort(nums.begin(), nums.end());
@@ -195,6 +201,7 @@ void run_all_tests() {
     run_test(test_extrema, "test_extrema");
     run_test(test_binary_search, "test_binary_search");
     //test_sort();
+    //test_copy_if();
     //test_transform();
     run_test(test_equal, "test_equal");
     run_test(test_count, "test_count");
